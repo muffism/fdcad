@@ -1,0 +1,1489 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 9,
+  "variables": [
+    {
+      "name": "Grid",
+      "kind": "length",
+      "expr": "42mm",
+      "value": 42
+    },
+    {
+      "name": "Lip",
+      "kind": "length",
+      "expr": "1.2mm",
+      "value": 1.2
+    },
+    {
+      "name": "Base",
+      "kind": "length",
+      "expr": "5mm",
+      "value": 5
+    }
+  ],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Base Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 126,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 126,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 126,
+          "y": 84,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 126,
+          "y": 84,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": 84,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 0,
+          "y": 84,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 3",
+            "value": 126
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 2",
+            "value": 84
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Base",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=Base",
+          "value": 5
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Cell Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              63,
+              42,
+              5
+            ],
+            "area": 10584,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 74,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 1.2,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 40.8,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 40.8,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 40.8,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 40.8,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 1.2,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 1.2,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 1.2,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        },
+        {
+          "id": "e14",
+          "type": "point",
+          "x": 1.2,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e15",
+          "type": "point",
+          "x": 40.8,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e16",
+          "type": "line",
+          "p1": "e14",
+          "p2": "e15",
+          "construction": false
+        },
+        {
+          "id": "e17",
+          "type": "point",
+          "x": 40.8,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e18",
+          "type": "point",
+          "x": 40.8,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e19",
+          "type": "line",
+          "p1": "e17",
+          "p2": "e18",
+          "construction": false
+        },
+        {
+          "id": "e20",
+          "type": "point",
+          "x": 40.8,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e21",
+          "type": "point",
+          "x": 1.2,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e22",
+          "type": "line",
+          "p1": "e20",
+          "p2": "e21",
+          "construction": false
+        },
+        {
+          "id": "e23",
+          "type": "point",
+          "x": 1.2,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e24",
+          "type": "point",
+          "x": 1.2,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e25",
+          "type": "line",
+          "p1": "e23",
+          "p2": "e24",
+          "construction": false
+        },
+        {
+          "id": "e26",
+          "type": "point",
+          "x": 43.2,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e27",
+          "type": "point",
+          "x": 82.8,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e28",
+          "type": "line",
+          "p1": "e26",
+          "p2": "e27",
+          "construction": false
+        },
+        {
+          "id": "e29",
+          "type": "point",
+          "x": 82.8,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e30",
+          "type": "point",
+          "x": 82.8,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e31",
+          "type": "line",
+          "p1": "e29",
+          "p2": "e30",
+          "construction": false
+        },
+        {
+          "id": "e32",
+          "type": "point",
+          "x": 82.8,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e33",
+          "type": "point",
+          "x": 43.2,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e34",
+          "type": "line",
+          "p1": "e32",
+          "p2": "e33",
+          "construction": false
+        },
+        {
+          "id": "e35",
+          "type": "point",
+          "x": 43.2,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e36",
+          "type": "point",
+          "x": 43.2,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e37",
+          "type": "line",
+          "p1": "e35",
+          "p2": "e36",
+          "construction": false
+        },
+        {
+          "id": "e38",
+          "type": "point",
+          "x": 43.2,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e39",
+          "type": "point",
+          "x": 82.8,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e40",
+          "type": "line",
+          "p1": "e38",
+          "p2": "e39",
+          "construction": false
+        },
+        {
+          "id": "e41",
+          "type": "point",
+          "x": 82.8,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e42",
+          "type": "point",
+          "x": 82.8,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e43",
+          "type": "line",
+          "p1": "e41",
+          "p2": "e42",
+          "construction": false
+        },
+        {
+          "id": "e44",
+          "type": "point",
+          "x": 82.8,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e45",
+          "type": "point",
+          "x": 43.2,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e46",
+          "type": "line",
+          "p1": "e44",
+          "p2": "e45",
+          "construction": false
+        },
+        {
+          "id": "e47",
+          "type": "point",
+          "x": 43.2,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e48",
+          "type": "point",
+          "x": 43.2,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e49",
+          "type": "line",
+          "p1": "e47",
+          "p2": "e48",
+          "construction": false
+        },
+        {
+          "id": "e50",
+          "type": "point",
+          "x": 85.2,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e51",
+          "type": "point",
+          "x": 124.8,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e52",
+          "type": "line",
+          "p1": "e50",
+          "p2": "e51",
+          "construction": false
+        },
+        {
+          "id": "e53",
+          "type": "point",
+          "x": 124.8,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e54",
+          "type": "point",
+          "x": 124.8,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e55",
+          "type": "line",
+          "p1": "e53",
+          "p2": "e54",
+          "construction": false
+        },
+        {
+          "id": "e56",
+          "type": "point",
+          "x": 124.8,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e57",
+          "type": "point",
+          "x": 85.2,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e58",
+          "type": "line",
+          "p1": "e56",
+          "p2": "e57",
+          "construction": false
+        },
+        {
+          "id": "e59",
+          "type": "point",
+          "x": 85.2,
+          "y": 40.8,
+          "construction": false
+        },
+        {
+          "id": "e60",
+          "type": "point",
+          "x": 85.2,
+          "y": 1.2,
+          "construction": false
+        },
+        {
+          "id": "e61",
+          "type": "line",
+          "p1": "e59",
+          "p2": "e60",
+          "construction": false
+        },
+        {
+          "id": "e62",
+          "type": "point",
+          "x": 85.2,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e63",
+          "type": "point",
+          "x": 124.8,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e64",
+          "type": "line",
+          "p1": "e62",
+          "p2": "e63",
+          "construction": false
+        },
+        {
+          "id": "e65",
+          "type": "point",
+          "x": 124.8,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e66",
+          "type": "point",
+          "x": 124.8,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e67",
+          "type": "line",
+          "p1": "e65",
+          "p2": "e66",
+          "construction": false
+        },
+        {
+          "id": "e68",
+          "type": "point",
+          "x": 124.8,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e69",
+          "type": "point",
+          "x": 85.2,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e70",
+          "type": "line",
+          "p1": "e68",
+          "p2": "e69",
+          "construction": false
+        },
+        {
+          "id": "e71",
+          "type": "point",
+          "x": 85.2,
+          "y": 82.8,
+          "construction": false
+        },
+        {
+          "id": "e72",
+          "type": "point",
+          "x": 85.2,
+          "y": 43.2,
+          "construction": false
+        },
+        {
+          "id": "e73",
+          "type": "line",
+          "p1": "e71",
+          "p2": "e72",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e15",
+            "e17"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e16"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e18",
+            "e20"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e19"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e21",
+            "e23"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e22"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e24",
+            "e14"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e25"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e27",
+            "e29"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e28"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e30",
+            "e32"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e31"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e33",
+            "e35"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e34"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e36",
+            "e26"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e37"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e39",
+            "e41"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e40"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e42",
+            "e44"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e43"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e45",
+            "e47"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e46"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e48",
+            "e38"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e49"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e51",
+            "e53"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e52"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e54",
+            "e56"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e55"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e57",
+            "e59"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e58"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e60",
+            "e50"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e61"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e63",
+            "e65"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e64"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e66",
+            "e68"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e67"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e69",
+            "e71"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e70"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e72",
+            "e62"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e73"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d3",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Lip",
+            "value": 1.2
+          }
+        },
+        {
+          "id": "d4",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Lip",
+            "value": 1.2
+          }
+        },
+        {
+          "id": "d5",
+          "type": "distance",
+          "entities": [
+            "e16"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d6",
+          "type": "distance",
+          "entities": [
+            "e19"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d7",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e14"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Lip",
+            "value": 1.2
+          }
+        },
+        {
+          "id": "d8",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e14"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 1 + Lip",
+            "value": 43.2
+          }
+        },
+        {
+          "id": "d9",
+          "type": "distance",
+          "entities": [
+            "e28"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d10",
+          "type": "distance",
+          "entities": [
+            "e31"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d11",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e26"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 1 + Lip",
+            "value": 43.2
+          }
+        },
+        {
+          "id": "d12",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e26"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Lip",
+            "value": 1.2
+          }
+        },
+        {
+          "id": "d13",
+          "type": "distance",
+          "entities": [
+            "e40"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d14",
+          "type": "distance",
+          "entities": [
+            "e43"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d15",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e38"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 1 + Lip",
+            "value": 43.2
+          }
+        },
+        {
+          "id": "d16",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e38"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 1 + Lip",
+            "value": 43.2
+          }
+        },
+        {
+          "id": "d17",
+          "type": "distance",
+          "entities": [
+            "e52"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d18",
+          "type": "distance",
+          "entities": [
+            "e55"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d19",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e50"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 2 + Lip",
+            "value": 85.2
+          }
+        },
+        {
+          "id": "d20",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e50"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Lip",
+            "value": 1.2
+          }
+        },
+        {
+          "id": "d21",
+          "type": "distance",
+          "entities": [
+            "e64"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d22",
+          "type": "distance",
+          "entities": [
+            "e67"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid - 2 * Lip",
+            "value": 39.6
+          }
+        },
+        {
+          "id": "d23",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e62"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 2 + Lip",
+            "value": 85.2
+          }
+        },
+        {
+          "id": "d24",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e62"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Grid * 1 + Lip",
+            "value": 43.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Cells",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "3",
+          "value": 3
+        },
+        "reverse": true
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

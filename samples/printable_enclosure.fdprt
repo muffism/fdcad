@@ -1,0 +1,869 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 17,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Box Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 100,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 100,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 100,
+          "y": 70,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 100,
+          "y": 70,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": 70,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 0,
+          "y": 70,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "100",
+            "value": 100
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "70",
+            "value": 70
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Box",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "40",
+          "value": 40
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "shell",
+      "name": "Shell",
+      "suppressed": false,
+      "params": {
+        "thickness": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "faces": [
+          {
+            "kind": "face",
+            "name": "f6/cap/end",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                50,
+                35,
+                40
+              ],
+              "area": 7000,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f8",
+      "type": "lip_groove",
+      "name": "Lip",
+      "suppressed": false,
+      "params": {
+        "lip_width": {
+          "expr": "1",
+          "value": 1
+        },
+        "lip_height": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "lip_faces": [
+          {
+            "kind": "face",
+            "name": "f6/cap/end",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                50,
+                35,
+                40
+              ],
+              "area": 664,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f9",
+      "type": "mounting_boss",
+      "name": "Boss 1",
+      "suppressed": false,
+      "params": {
+        "boss_type": "screw_thread",
+        "boss_diameter": {
+          "expr": "9",
+          "value": 9
+        },
+        "boss_height": {
+          "expr": "10",
+          "value": 10
+        },
+        "hole_diameter": {
+          "expr": "2.5",
+          "value": 2.5
+        },
+        "hole_depth": {
+          "expr": "8",
+          "value": 8
+        },
+        "fin_count": {
+          "expr": "0",
+          "value": 0
+        },
+        "pos_x": {
+          "expr": "12",
+          "value": 12
+        },
+        "pos_y": {
+          "expr": "12",
+          "value": 12
+        },
+        "pos_z": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "face": [
+          {
+            "kind": "face",
+            "name": "f7/shell/f6/cap/start",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                50,
+                35,
+                2
+              ],
+              "area": 6336,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f10",
+      "type": "mounting_boss",
+      "name": "Boss 2",
+      "suppressed": false,
+      "params": {
+        "boss_type": "screw_thread",
+        "boss_diameter": {
+          "expr": "9",
+          "value": 9
+        },
+        "boss_height": {
+          "expr": "10",
+          "value": 10
+        },
+        "hole_diameter": {
+          "expr": "2.5",
+          "value": 2.5
+        },
+        "hole_depth": {
+          "expr": "8",
+          "value": 8
+        },
+        "fin_count": {
+          "expr": "0",
+          "value": 0
+        },
+        "pos_x": {
+          "expr": "88",
+          "value": 88
+        },
+        "pos_y": {
+          "expr": "12",
+          "value": 12
+        },
+        "pos_z": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "face": [
+          {
+            "kind": "face",
+            "name": "f7/shell/f6/cap/start",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                50,
+                35,
+                2
+              ],
+              "area": 6336,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f11",
+      "type": "mounting_boss",
+      "name": "Boss 3",
+      "suppressed": false,
+      "params": {
+        "boss_type": "screw_thread",
+        "boss_diameter": {
+          "expr": "9",
+          "value": 9
+        },
+        "boss_height": {
+          "expr": "10",
+          "value": 10
+        },
+        "hole_diameter": {
+          "expr": "2.5",
+          "value": 2.5
+        },
+        "hole_depth": {
+          "expr": "8",
+          "value": 8
+        },
+        "fin_count": {
+          "expr": "0",
+          "value": 0
+        },
+        "pos_x": {
+          "expr": "88",
+          "value": 88
+        },
+        "pos_y": {
+          "expr": "58",
+          "value": 58
+        },
+        "pos_z": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "face": [
+          {
+            "kind": "face",
+            "name": "f7/shell/f6/cap/start",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                50,
+                35,
+                2
+              ],
+              "area": 6336,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f12",
+      "type": "mounting_boss",
+      "name": "Boss 4",
+      "suppressed": false,
+      "params": {
+        "boss_type": "screw_thread",
+        "boss_diameter": {
+          "expr": "9",
+          "value": 9
+        },
+        "boss_height": {
+          "expr": "10",
+          "value": 10
+        },
+        "hole_diameter": {
+          "expr": "2.5",
+          "value": 2.5
+        },
+        "hole_depth": {
+          "expr": "8",
+          "value": 8
+        },
+        "fin_count": {
+          "expr": "0",
+          "value": 0
+        },
+        "pos_x": {
+          "expr": "12",
+          "value": 12
+        },
+        "pos_y": {
+          "expr": "58",
+          "value": 58
+        },
+        "pos_z": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "face": [
+          {
+            "kind": "face",
+            "name": "f7/shell/f6/cap/start",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                50,
+                35,
+                2
+              ],
+              "area": 6336,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f13",
+      "type": "sketch",
+      "name": "Insert Positions",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f9/boss/top",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              12,
+              12,
+              12
+            ],
+            "area": 58.708512714,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 5,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 12,
+          "y": 12,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 88,
+          "y": 12,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 88,
+          "y": 58,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 12,
+          "y": 58,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "fixed",
+          "entities": [
+            "e2"
+          ]
+        },
+        {
+          "type": "fixed",
+          "entities": [
+            "e3"
+          ]
+        },
+        {
+          "type": "fixed",
+          "entities": [
+            "e4"
+          ]
+        }
+      ],
+      "dimensions": []
+    },
+    {
+      "id": "f14",
+      "type": "hole",
+      "name": "M3 Insert",
+      "suppressed": false,
+      "params": {
+        "hole_type": "heat_set_insert",
+        "standard": "iso",
+        "size": "M3",
+        "end_condition": "blind",
+        "diameter": {
+          "expr": "4",
+          "value": 4
+        },
+        "depth": {
+          "expr": "5.7",
+          "value": 5.7
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f13"
+        }
+      }
+    },
+    {
+      "id": "f15",
+      "type": "snap_hook",
+      "name": "Snap Hook 1",
+      "suppressed": false,
+      "params": {
+        "body_height": {
+          "expr": "20",
+          "value": 20
+        },
+        "base_depth": {
+          "expr": "3",
+          "value": 3
+        },
+        "top_depth": {
+          "expr": "2",
+          "value": 2
+        },
+        "total_width": {
+          "expr": "8",
+          "value": 8
+        },
+        "overhang": {
+          "expr": "1.5",
+          "value": 1.5
+        },
+        "hook_height": {
+          "expr": "3",
+          "value": 3
+        },
+        "lip_height": {
+          "expr": "1",
+          "value": 1
+        },
+        "top_draft": {
+          "expr": "30",
+          "value": 0.523598775598
+        },
+        "pos_x": {
+          "expr": "35",
+          "value": 35
+        },
+        "pos_y": {
+          "expr": "35",
+          "value": 35
+        },
+        "pos_z": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "face": [
+          {
+            "kind": "face",
+            "name": "f7/shell/f6/cap/start",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                50,
+                35,
+                2
+              ],
+              "area": 6336,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f16",
+      "type": "snap_hook",
+      "name": "Snap Hook 2",
+      "suppressed": false,
+      "params": {
+        "body_height": {
+          "expr": "20",
+          "value": 20
+        },
+        "base_depth": {
+          "expr": "3",
+          "value": 3
+        },
+        "top_depth": {
+          "expr": "2",
+          "value": 2
+        },
+        "total_width": {
+          "expr": "8",
+          "value": 8
+        },
+        "overhang": {
+          "expr": "1.5",
+          "value": 1.5
+        },
+        "hook_height": {
+          "expr": "3",
+          "value": 3
+        },
+        "lip_height": {
+          "expr": "1",
+          "value": 1
+        },
+        "top_draft": {
+          "expr": "30",
+          "value": 0.523598775598
+        },
+        "pos_x": {
+          "expr": "65",
+          "value": 65
+        },
+        "pos_y": {
+          "expr": "35",
+          "value": 35
+        },
+        "pos_z": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "face": [
+          {
+            "kind": "face",
+            "name": "f7/shell/f6/cap/start",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                50,
+                35,
+                2
+              ],
+              "area": 6336,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

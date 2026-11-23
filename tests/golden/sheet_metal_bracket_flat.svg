@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="82mm" height="68.523893mm" viewBox="-1 -67.523893 82 68.523893">
+<g id="OUTLINE" fill="none" stroke="#000000" stroke-width="0.1">
+<path d="M 0 0 L 0 -66.523893"/>
+<path d="M 0 0 L 80 0"/>
+<path d="M 80 0 L 80 -66.523893"/>
+<path d="M 0 -66.523893 L 80 -66.523893"/>
+<circle cx="60" cy="-15" r="3"/>
+<circle cx="20" cy="-15" r="3"/>
+</g>
+<g id="BEND_LINES" fill="none" stroke="#C03030" stroke-width="0.1" stroke-dasharray="2 1">
+<path d="M 0 -38.261947 L 80 -38.261947"><title>Bend up 90 degrees</title></path>
+</g>
+<g id="BOUNDING_BOX" fill="none" stroke="#308030" stroke-width="0.1">
+<polygon points="0 0 80 0 80 -66.523893 0 -66.523893"/>
+</g>
+</svg>

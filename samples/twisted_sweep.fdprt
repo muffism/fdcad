@@ -1,0 +1,386 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 8,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Bar Section",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": -2,
+          "y": -4,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 2,
+          "y": -4,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 2,
+          "y": -4,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 2,
+          "y": 4,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 2,
+          "y": 4,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": -2,
+          "y": 4,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": -2,
+          "y": 4,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": -2,
+          "y": -4,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "4",
+            "value": 4
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "8",
+            "value": 8
+          }
+        },
+        {
+          "id": "d3",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "2",
+            "value": 2
+          }
+        },
+        {
+          "id": "d4",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "4",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "sketch",
+      "name": "Bar Path",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f4"
+        }
+      },
+      "next_entity": 5,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": -60,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "60",
+            "value": 60
+          }
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "type": "sweep",
+      "name": "Twisted Bar",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "twist": "angle",
+        "twist_angle": {
+          "expr": "90",
+          "value": 1.57079632679
+        }
+      },
+      "refs": {
+        "profile": {
+          "feature": "f5"
+        },
+        "path": {
+          "feature": "f6"
+        }
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

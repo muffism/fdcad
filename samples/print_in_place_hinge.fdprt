@@ -1,0 +1,967 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 19,
+  "variables": [
+    {
+      "name": "Gap",
+      "kind": "length",
+      "expr": "0.4mm",
+      "value": 0.4
+    },
+    {
+      "name": "Knuckle",
+      "kind": "length",
+      "expr": "10mm",
+      "value": 10
+    }
+  ],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Leaf A Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": -35,
+          "y": -1.5,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 0,
+          "y": -1.5,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 0,
+          "y": -1.5,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 0,
+          "y": 1.5,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 0,
+          "y": 1.5,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": -35,
+          "y": 1.5,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": -35,
+          "y": 1.5,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": -35,
+          "y": -1.5,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "35",
+            "value": 35
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "3",
+            "value": 3
+          }
+        },
+        {
+          "id": "d3",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "35",
+            "value": 35
+          }
+        },
+        {
+          "id": "d4",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "1.5",
+            "value": 1.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Leaf A",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=3 * Knuckle",
+          "value": 30
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Knuckle Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 5,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "10",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Knuckles",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=3 * Knuckle",
+          "value": 30
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    },
+    {
+      "id": "f9",
+      "type": "ref_plane",
+      "name": "Room Plane",
+      "suppressed": false,
+      "params": {
+        "method": "offset",
+        "distance": {
+          "expr": "=Knuckle - Gap",
+          "value": 9.6
+        }
+      },
+      "refs": {
+        "first": {
+          "feature": "f2"
+        }
+      }
+    },
+    {
+      "id": "f10",
+      "type": "sketch",
+      "name": "Room Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f9"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 5.4,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=10mm + 2 * Gap",
+            "value": 10.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "type": "extrude",
+      "name": "Room",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=Knuckle + 2 * Gap",
+          "value": 10.8
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f10"
+        }
+      }
+    },
+    {
+      "id": "f12",
+      "type": "sketch",
+      "name": "Pin Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f9"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 2.5,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "5",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "type": "extrude",
+      "name": "Pin",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=Knuckle + 2 * Gap",
+          "value": 10.8
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f12"
+        }
+      }
+    },
+    {
+      "id": "f14",
+      "type": "ref_plane",
+      "name": "Leaf B Plane",
+      "suppressed": false,
+      "params": {
+        "method": "offset",
+        "distance": {
+          "expr": "=Knuckle",
+          "value": 10
+        }
+      },
+      "refs": {
+        "first": {
+          "feature": "f2"
+        }
+      }
+    },
+    {
+      "id": "f15",
+      "type": "sketch",
+      "name": "Leaf B Knuckle Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f14"
+        }
+      },
+      "next_entity": 6,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 5,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "circle",
+          "center": "e4",
+          "radius": 2.9,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e4",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "10",
+            "value": 10
+          }
+        },
+        {
+          "id": "d2",
+          "type": "diameter",
+          "entities": [
+            "e5"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=5mm + 2 * Gap",
+            "value": 5.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "type": "extrude",
+      "name": "Leaf B Knuckle",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=Knuckle",
+          "value": 10
+        },
+        "reverse": false,
+        "merge": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f15"
+        }
+      }
+    },
+    {
+      "id": "f17",
+      "type": "sketch",
+      "name": "Leaf B Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f14"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 4,
+          "y": -1.5,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 35,
+          "y": -1.5,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 35,
+          "y": -1.5,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 35,
+          "y": 1.5,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 35,
+          "y": 1.5,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 4,
+          "y": 1.5,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 4,
+          "y": 1.5,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 4,
+          "y": -1.5,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "31",
+            "value": 31
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "3",
+            "value": 3
+          }
+        },
+        {
+          "id": "d3",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "4",
+            "value": 4
+          }
+        },
+        {
+          "id": "d4",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "1.5",
+            "value": 1.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "type": "extrude",
+      "name": "Leaf B",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=Knuckle",
+          "value": 10
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f17"
+        }
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

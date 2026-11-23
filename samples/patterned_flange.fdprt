@@ -1,0 +1,481 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 14,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Flange Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 50,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "100",
+            "value": 100
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Flange",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "10",
+          "value": 10
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Hub Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              -7.1054273576e-15,
+              -2.94448909699e-15,
+              10
+            ],
+            "area": 7853.98163397,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 20,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "40",
+            "value": 40
+          }
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Hub",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "15",
+          "value": 15
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    },
+    {
+      "id": "f9",
+      "type": "sketch",
+      "name": "Bore Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 10,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "20",
+            "value": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "type": "extrude",
+      "name": "Bore",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "through_all",
+        "depth": {
+          "expr": "1",
+          "value": 1
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f9"
+        }
+      }
+    },
+    {
+      "id": "f11",
+      "type": "sketch",
+      "name": "Bolt Hole Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 35,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 4,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "8",
+            "value": 8
+          }
+        },
+        {
+          "id": "d2",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "35",
+            "value": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "type": "extrude",
+      "name": "Bolt Hole",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "through_all",
+        "depth": {
+          "expr": "1",
+          "value": 1
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f11"
+        }
+      }
+    },
+    {
+      "id": "f13",
+      "type": "circular_pattern",
+      "name": "Bolt Circle",
+      "suppressed": false,
+      "params": {
+        "count1": {
+          "expr": "6",
+          "value": 6
+        },
+        "angle1": {
+          "expr": "360",
+          "value": 6.28318530718
+        },
+        "equal_spacing": true
+      },
+      "refs": {
+        "axis": {
+          "kind": "face",
+          "name": "f8/side/e3",
+          "snapshot": {
+            "surface": "cylinder",
+            "point": [
+              1.06581410364e-14,
+              -4.63518112781e-16,
+              17.5
+            ],
+            "area": 1884.95559215,
+            "axis": [
+              0,
+              0,
+              10,
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "features": [
+          {
+            "feature": "f12"
+          }
+        ]
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

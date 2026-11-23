@@ -1,0 +1,372 @@
+{
+  "format": "fdef",
+  "schema": 2,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 9,
+  "variables": [
+    {
+      "name": "D",
+      "kind": "length",
+      "expr": "8",
+      "value": 8
+    },
+    {
+      "name": "L",
+      "kind": "length",
+      "expr": "30",
+      "value": 30
+    },
+    {
+      "name": "DK",
+      "kind": "length",
+      "expr": "13",
+      "value": 13
+    },
+    {
+      "name": "K",
+      "kind": "length",
+      "expr": "8",
+      "value": 8
+    }
+  ],
+  "configurations": {
+    "active": "M8 x 30",
+    "items": [
+      {
+        "name": "M6 x 20",
+        "overrides": {
+          "var.D": {
+            "expr": "6",
+            "value": 6
+          },
+          "var.DK": {
+            "expr": "10",
+            "value": 10
+          },
+          "var.K": {
+            "expr": "6",
+            "value": 6
+          },
+          "var.L": {
+            "expr": "20",
+            "value": 20
+          }
+        }
+      },
+      {
+        "name": "M8 x 30",
+        "overrides": {
+          "var.D": {
+            "expr": "8",
+            "value": 8
+          },
+          "var.DK": {
+            "expr": "13",
+            "value": 13
+          },
+          "var.K": {
+            "expr": "8",
+            "value": 8
+          },
+          "var.L": {
+            "expr": "30",
+            "value": 30
+          }
+        }
+      },
+      {
+        "name": "M10 x 40",
+        "overrides": {
+          "var.D": {
+            "expr": "10",
+            "value": 10
+          },
+          "var.DK": {
+            "expr": "16",
+            "value": 16
+          },
+          "var.K": {
+            "expr": "10",
+            "value": 10
+          },
+          "var.L": {
+            "expr": "40",
+            "value": 40
+          }
+        }
+      }
+    ],
+    "design_table": {
+      "columns": [
+        "var.D",
+        "var.L",
+        "var.DK",
+        "var.K"
+      ],
+      "rows": [
+        {
+          "config": "M6 x 20",
+          "values": [
+            "6",
+            "20",
+            "10",
+            "6"
+          ]
+        },
+        {
+          "config": "M8 x 30",
+          "values": [
+            "8",
+            "30",
+            "13",
+            "8"
+          ]
+        },
+        {
+          "config": "M10 x 40",
+          "values": [
+            "10",
+            "40",
+            "16",
+            "10"
+          ]
+        }
+      ]
+    }
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Head Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 5,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=DK",
+            "value": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Head",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=K",
+          "value": 8
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Shank Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              8.881784197e-16,
+              -4.17443857259e-16,
+              6
+            ],
+            "area": 78.5398163397,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 3,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=D",
+            "value": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Shank",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=L",
+          "value": 30
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

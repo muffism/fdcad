@@ -1,0 +1,353 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 12,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Sketch f5",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 9,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 50,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 50,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 0,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e3",
+          "p2": "e4",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e1",
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Extrude f6",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "10.0",
+          "value": 10
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Sketch f7",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              25,
+              25,
+              10
+            ],
+            "area": 2500,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 3,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 10,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 40,
+          "y": 40,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f8",
+      "type": "sketch",
+      "name": "Sketch f8",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f4"
+        }
+      },
+      "next_entity": 2,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": -4,
+          "y": 3,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f9",
+      "type": "hole",
+      "name": "Hole f9",
+      "suppressed": false,
+      "params": {
+        "hole_type": "simple",
+        "end_condition": "up_to_vertex",
+        "diameter": {
+          "expr": "5",
+          "value": 5
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        },
+        "face": [
+          {
+            "kind": "face",
+            "name": "f6/cap/end",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                25,
+                25,
+                10
+              ],
+              "area": 2500,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ],
+        "up_to_vertex": [
+          {
+            "feature": "f8",
+            "sketch_entity": "e1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f10",
+      "type": "sketch",
+      "name": "Sketch f10",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              25,
+              25,
+              10
+            ],
+            "area": 2500,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 2,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 25,
+          "y": 25,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f11",
+      "type": "hole",
+      "name": "Hole f11",
+      "suppressed": false,
+      "params": {
+        "hole_type": "simple",
+        "end_condition": "up_to_next",
+        "diameter": {
+          "expr": "3",
+          "value": 3
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f10"
+        },
+        "face": [
+          {
+            "kind": "face",
+            "name": "f6/cap/end",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                25,
+                25,
+                10
+              ],
+              "area": 2500,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

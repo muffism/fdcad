@@ -1,0 +1,512 @@
+{
+  "format": "fdef",
+  "schema": 2,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 7,
+  "variables": [
+    {
+      "name": "Length",
+      "kind": "length",
+      "expr": "60mm",
+      "value": 60
+    },
+    {
+      "name": "Height",
+      "kind": "length",
+      "expr": "50mm",
+      "value": 50
+    },
+    {
+      "name": "Thick",
+      "kind": "length",
+      "expr": "8mm",
+      "value": 8
+    }
+  ],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Bracket Profile",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 20,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 60,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 60,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 60,
+          "y": 8,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 60,
+          "y": 8,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 8,
+          "y": 8,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 8,
+          "y": 8,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 8,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        },
+        {
+          "id": "e14",
+          "type": "point",
+          "x": 8,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e15",
+          "type": "point",
+          "x": 0,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e16",
+          "type": "line",
+          "p1": "e14",
+          "p2": "e15",
+          "construction": false
+        },
+        {
+          "id": "e17",
+          "type": "point",
+          "x": 0,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e18",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e19",
+          "type": "line",
+          "p1": "e17",
+          "p2": "e18",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e14"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e15",
+            "e17"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e16"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e18",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e19"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Length",
+            "value": 60
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Thick",
+            "value": 8
+          }
+        },
+        {
+          "id": "d3",
+          "type": "distance",
+          "entities": [
+            "e10"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Length - Thick",
+            "value": 52
+          }
+        },
+        {
+          "id": "d4",
+          "type": "distance",
+          "entities": [
+            "e13"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Height - Thick",
+            "value": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Bracket",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "mid_plane",
+        "depth": {
+          "expr": "40",
+          "value": 40
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    }
+  ],
+  "graphs": [
+    {
+      "id": "g1",
+      "name": "Graph 1",
+      "position": "f4",
+      "next_node": 7,
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "slider",
+          "params": {
+            "kind": "length",
+            "min": 30,
+            "max": 100,
+            "step": 5,
+            "value": {
+              "expr": "80",
+              "value": 80
+            }
+          },
+          "ui": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "id": "n2",
+          "type": "set_variable",
+          "params": {
+            "variable": "Length"
+          },
+          "ui": {
+            "x": 220,
+            "y": 0
+          }
+        },
+        {
+          "id": "n3",
+          "type": "slider",
+          "params": {
+            "kind": "length",
+            "min": 20,
+            "max": 80,
+            "step": 5,
+            "value": {
+              "expr": "35",
+              "value": 35
+            }
+          },
+          "ui": {
+            "x": 0,
+            "y": 130
+          }
+        },
+        {
+          "id": "n4",
+          "type": "set_variable",
+          "params": {
+            "variable": "Height"
+          },
+          "ui": {
+            "x": 220,
+            "y": 130
+          }
+        },
+        {
+          "id": "n5",
+          "type": "slider",
+          "params": {
+            "kind": "length",
+            "min": 10,
+            "max": 60,
+            "step": 2,
+            "value": {
+              "expr": "24",
+              "value": 24
+            }
+          },
+          "ui": {
+            "x": 0,
+            "y": 260
+          }
+        },
+        {
+          "id": "n6",
+          "type": "set_param",
+          "params": {
+            "feature": "f6",
+            "param": "depth"
+          },
+          "ui": {
+            "x": 220,
+            "y": 260
+          }
+        }
+      ],
+      "wires": [
+        {
+          "from": "n1.out",
+          "to": "n2.value"
+        },
+        {
+          "from": "n3.out",
+          "to": "n4.value"
+        },
+        {
+          "from": "n5.out",
+          "to": "n6.value"
+        }
+      ],
+      "groups": [],
+      "seed": 1
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

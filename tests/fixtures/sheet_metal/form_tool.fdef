@@ -1,0 +1,499 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 12,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sheet_metal",
+      "name": "Sheet Metal",
+      "suppressed": false,
+      "params": {
+        "thickness": {
+          "expr": "2",
+          "value": 2
+        },
+        "radius": {
+          "expr": "1",
+          "value": 1
+        },
+        "method": "k_factor",
+        "k_factor": {
+          "expr": "0.44",
+          "value": 0.44
+        },
+        "relief": "rectangular",
+        "relief_ratio": {
+          "expr": "0.5",
+          "value": 0.5
+        }
+      },
+      "refs": {}
+    },
+    {
+      "id": "f6",
+      "type": "sketch",
+      "name": "Plate Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 100,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 100,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 100,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 100,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 0,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "100",
+            "value": 100
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "60",
+            "value": 60
+          }
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "type": "base_flange",
+      "name": "Base Flange f7",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "sheet_metal": {
+          "feature": "f5"
+        },
+        "sketch": {
+          "feature": "f6"
+        }
+      }
+    },
+    {
+      "id": "f8",
+      "type": "sketch",
+      "name": "Form Places",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f7/top",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              50,
+              30,
+              2
+            ],
+            "area": 6000,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 5,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 40,
+          "y": 30,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 60,
+          "y": 30,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": []
+    },
+    {
+      "id": "f9",
+      "type": "form_tool",
+      "name": "Form Tool f9",
+      "suppressed": false,
+      "params": {
+        "tool": "louvre",
+        "length": {
+          "expr": "16",
+          "value": 16
+        },
+        "width": {
+          "expr": "6",
+          "value": 6
+        },
+        "height": {
+          "expr": "3",
+          "value": 3
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sheet_metal": {
+          "feature": "f5"
+        },
+        "sketch": {
+          "feature": "f8"
+        }
+      }
+    },
+    {
+      "id": "f10",
+      "type": "sketch",
+      "name": "Dimple Places",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f7/top",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              50,
+              30,
+              2
+            ],
+            "area": 6000,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 5,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 70,
+          "y": 15,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 80,
+          "y": 15,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": []
+    },
+    {
+      "id": "f11",
+      "type": "form_tool",
+      "name": "Form Tool f11",
+      "suppressed": false,
+      "params": {
+        "tool": "dimple",
+        "diameter": {
+          "expr": "8",
+          "value": 8
+        },
+        "height": {
+          "expr": "2",
+          "value": 2
+        },
+        "reverse": true
+      },
+      "refs": {
+        "sheet_metal": {
+          "feature": "f5"
+        },
+        "sketch": {
+          "feature": "f10"
+        }
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

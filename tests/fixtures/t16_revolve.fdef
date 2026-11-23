@@ -1,0 +1,221 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 8,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Sketch f5",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 12,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 10,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 10,
+          "y": 40,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 0,
+          "y": 40,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e3",
+          "p2": "e4",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e1",
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": -5,
+          "construction": true
+        },
+        {
+          "id": "e10",
+          "type": "point",
+          "x": 0,
+          "y": 45,
+          "construction": true
+        },
+        {
+          "id": "e11",
+          "type": "line",
+          "p1": "e9",
+          "p2": "e10",
+          "construction": true
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Sketch f7",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f4"
+        }
+      },
+      "next_entity": 2,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": -7,
+          "y": 3,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f6",
+      "type": "revolve",
+      "name": "Revolve 1",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "direction": "two_directions",
+        "angle": {
+          "expr": "90",
+          "value": 1.57079632679
+        },
+        "end_condition": "offset_from_face",
+        "end_condition2": "up_to_vertex",
+        "end_offset": {
+          "expr": "30",
+          "value": 0.523598775598
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        },
+        "axis": {
+          "sketch_entity": "e11"
+        },
+        "end_ref": {
+          "feature": "f4"
+        },
+        "end_ref2": {
+          "feature": "f7",
+          "sketch_entity": "e1"
+        }
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

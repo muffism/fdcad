@@ -1,0 +1,833 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 13,
+  "variables": [
+    {
+      "name": "Flats",
+      "kind": "length",
+      "expr": "13mm",
+      "value": 13
+    },
+    {
+      "name": "Head",
+      "kind": "length",
+      "expr": "5.5mm",
+      "value": 5.5
+    },
+    {
+      "name": "NutHeight",
+      "kind": "length",
+      "expr": "6.5mm",
+      "value": 6.5
+    }
+  ],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Head Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 16,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 6.5,
+          "construction": true
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 3.75277674973,
+          "y": 6.5,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": -3.75277674973,
+          "y": 6.5,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": -7.50555349947,
+          "y": 9.19165206895e-16,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "point",
+          "x": -3.75277674973,
+          "y": -6.5,
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 3.75277674973,
+          "y": -6.5,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 7.50555349947,
+          "y": -1.83833041379e-15,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e5",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "line",
+          "p1": "e6",
+          "p2": "e7",
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e7",
+          "p2": "e8",
+          "construction": false
+        },
+        {
+          "id": "e14",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e15",
+          "type": "line",
+          "p1": "e9",
+          "p2": "e4",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e10",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e11",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e12",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e13",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e14",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e15",
+            "e3"
+          ]
+        },
+        {
+          "type": "equal",
+          "entities": [
+            "e10",
+            "e11",
+            "e12",
+            "e13",
+            "e14",
+            "e15"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Flats",
+            "value": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Head",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=Head",
+          "value": 5.5
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Shaft Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              -5.13719018302e-16,
+              5.17333296036e-16,
+              5.5
+            ],
+            "area": 146.35829324,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 4,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "8",
+            "value": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Shaft",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "20",
+          "value": 20
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    },
+    {
+      "id": "f9",
+      "type": "sketch",
+      "name": "Nut Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 18,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 25,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 6.5,
+          "construction": true
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 28.7527767497,
+          "y": 6.5,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 21.2472232503,
+          "y": 6.5,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 17.4944465005,
+          "y": 9.19165206895e-16,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "point",
+          "x": 21.2472232503,
+          "y": -6.5,
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 28.7527767497,
+          "y": -6.5,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 32.5055534995,
+          "y": -1.83833041379e-15,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e5",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "line",
+          "p1": "e6",
+          "p2": "e7",
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e7",
+          "p2": "e8",
+          "construction": false
+        },
+        {
+          "id": "e14",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e15",
+          "type": "line",
+          "p1": "e9",
+          "p2": "e4",
+          "construction": false
+        },
+        {
+          "id": "e16",
+          "type": "point",
+          "x": 25,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e17",
+          "type": "circle",
+          "center": "e16",
+          "radius": 3.625,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e10",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e11",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e12",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e13",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e14",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e15",
+            "e3"
+          ]
+        },
+        {
+          "type": "equal",
+          "entities": [
+            "e10",
+            "e11",
+            "e12",
+            "e13",
+            "e14",
+            "e15"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e16",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Flats",
+            "value": 13
+          }
+        },
+        {
+          "id": "d2",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "25",
+            "value": 25
+          }
+        },
+        {
+          "id": "d3",
+          "type": "diameter",
+          "entities": [
+            "e17"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "7.25",
+            "value": 7.25
+          }
+        },
+        {
+          "id": "d4",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e16"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "25",
+            "value": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "type": "extrude",
+      "name": "Nut",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=NutHeight",
+          "value": 6.5
+        },
+        "reverse": false,
+        "merge": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f9"
+        }
+      }
+    },
+    {
+      "id": "f11",
+      "type": "modeled_thread",
+      "name": "Bolt Thread",
+      "suppressed": false,
+      "params": {
+        "diameter": {
+          "expr": "8",
+          "value": 8
+        },
+        "pitch": {
+          "expr": "1.25",
+          "value": 1.25
+        },
+        "method": "cut",
+        "hand": "right",
+        "end_condition": "blind",
+        "length": {
+          "expr": "17",
+          "value": 17
+        },
+        "clearance": {
+          "expr": "0.1",
+          "value": 0.1
+        }
+      },
+      "refs": {
+        "edge": [
+          {
+            "kind": "edge",
+            "name": "edge(f8/cap/end|f8/side/e3)",
+            "snapshot": {
+              "curve": "circle",
+              "midpoint": [
+                -4,
+                4.89858719659e-16,
+                25.5
+              ],
+              "length": 25.1327412287,
+              "axis": [
+                0,
+                0,
+                25.5,
+                0,
+                0,
+                1
+              ],
+              "radius": 4,
+              "face_normals": [
+                [
+                  -1,
+                  1.22464679915e-16,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f12",
+      "type": "modeled_thread",
+      "name": "Nut Thread",
+      "suppressed": false,
+      "params": {
+        "diameter": {
+          "expr": "8",
+          "value": 8
+        },
+        "pitch": {
+          "expr": "1.25",
+          "value": 1.25
+        },
+        "method": "cut",
+        "hand": "right",
+        "end_condition": "blind",
+        "length": {
+          "expr": "6.5",
+          "value": 6.5
+        },
+        "clearance": {
+          "expr": "0.1",
+          "value": 0.1
+        }
+      },
+      "refs": {
+        "edge": [
+          {
+            "kind": "edge",
+            "name": "edge(f10/cap/end|f10/side/e17)",
+            "snapshot": {
+              "curve": "circle",
+              "midpoint": [
+                21.375,
+                4.43934464691e-16,
+                6.5
+              ],
+              "length": 22.7765467385,
+              "axis": [
+                25,
+                0,
+                6.5,
+                0,
+                0,
+                1
+              ],
+              "radius": 3.625,
+              "face_normals": [
+                [
+                  1,
+                  -1.22464679915e-16,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

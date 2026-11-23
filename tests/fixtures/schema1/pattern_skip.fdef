@@ -1,0 +1,330 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 10,
+  "variables": [
+    {
+      "name": "Size",
+      "kind": "length",
+      "expr": "50",
+      "value": 50
+    }
+  ],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Sketch 1",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 9,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 50,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 50,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 0,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e3",
+          "p2": "e4",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e1",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e6"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e8"
+          ]
+        },
+        {
+          "type": "equal",
+          "entities": [
+            "e5",
+            "e6"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Size",
+            "value": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Extrude 1",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "10",
+          "value": 10
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Sketch 2",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 3,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 8,
+          "y": 8,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "circle",
+          "center": "e1",
+          "radius": 3,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Extruded Cut 1",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "through_all",
+        "depth": {
+          "expr": "10",
+          "value": 10
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    },
+    {
+      "id": "f9",
+      "type": "linear_pattern",
+      "name": "Linear Pattern 1",
+      "suppressed": false,
+      "params": {
+        "spacing1": {
+          "expr": "12",
+          "value": 12
+        },
+        "count1": {
+          "expr": "3",
+          "value": 3
+        }
+      },
+      "refs": {
+        "features": [
+          {
+            "feature": "f8"
+          }
+        ],
+        "direction1": {
+          "kind": "edge",
+          "name": "edge(f6/cap/start|f6/side/e5)",
+          "snapshot": {
+            "curve": "line",
+            "midpoint": [
+              25,
+              0,
+              0
+            ],
+            "direction": [
+              1,
+              0,
+              0
+            ],
+            "length": 50,
+            "face_normals": [
+              [
+                0,
+                0,
+                -1
+              ],
+              [
+                0,
+                -1,
+                0
+              ]
+            ]
+          }
+        }
+      },
+      "skip": [
+        [
+          2,
+          1
+        ]
+      ]
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

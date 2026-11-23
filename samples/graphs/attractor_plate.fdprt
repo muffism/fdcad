@@ -1,0 +1,479 @@
+{
+  "format": "fdef",
+  "schema": 2,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 8,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Plate Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 120,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 120,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 120,
+          "y": 80,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 120,
+          "y": 80,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": 80,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 0,
+          "y": 80,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "120",
+            "value": 120
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "80",
+            "value": 80
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Plate",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "6",
+          "value": 6
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "graph_body",
+      "name": "Graph Body 1",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "graph": {
+          "graph": "g1",
+          "output": "n7"
+        }
+      }
+    }
+  ],
+  "graphs": [
+    {
+      "id": "g1",
+      "name": "Graph 1",
+      "position": "f6",
+      "next_node": 9,
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "point",
+          "params": {
+            "x": {
+              "expr": "10",
+              "value": 10
+            },
+            "y": {
+              "expr": "10",
+              "value": 10
+            },
+            "z": {
+              "expr": "-5",
+              "value": -5
+            }
+          },
+          "ui": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "id": "n2",
+          "type": "plane",
+          "params": {},
+          "ui": {
+            "x": 220,
+            "y": 0
+          }
+        },
+        {
+          "id": "n3",
+          "type": "point_grid",
+          "params": {
+            "count_x": {
+              "expr": "11",
+              "value": 11
+            },
+            "count_y": {
+              "expr": "7",
+              "value": 7
+            },
+            "spacing_x": {
+              "expr": "10",
+              "value": 10
+            },
+            "spacing_y": {
+              "expr": "10",
+              "value": 10
+            }
+          },
+          "ui": {
+            "x": 440,
+            "y": 0
+          }
+        },
+        {
+          "id": "n4",
+          "type": "point",
+          "params": {
+            "x": {
+              "expr": "35",
+              "value": 35
+            },
+            "y": {
+              "expr": "40",
+              "value": 40
+            },
+            "z": {
+              "expr": "-5",
+              "value": -5
+            }
+          },
+          "ui": {
+            "x": 440,
+            "y": 130
+          }
+        },
+        {
+          "id": "n5",
+          "type": "attractor",
+          "params": {
+            "radius": {
+              "expr": "70",
+              "value": 70
+            },
+            "near": {
+              "expr": "1",
+              "value": 1
+            },
+            "far": {
+              "expr": "4",
+              "value": 4
+            }
+          },
+          "ui": {
+            "x": 660,
+            "y": 0
+          }
+        },
+        {
+          "id": "n6",
+          "type": "cylinder",
+          "params": {
+            "height": {
+              "expr": "16",
+              "value": 16
+            }
+          },
+          "ui": {
+            "x": 880,
+            "y": 0
+          }
+        },
+        {
+          "id": "n7",
+          "type": "add_as_feature",
+          "params": {
+            "operation": "subtract"
+          },
+          "ui": {
+            "x": 1100,
+            "y": 0
+          }
+        },
+        {
+          "id": "n8",
+          "type": "comment",
+          "params": {
+            "text": "Holes grow from 1 mm radius near the point to 4 mm far away."
+          },
+          "ui": {
+            "x": 0,
+            "y": 260
+          }
+        }
+      ],
+      "wires": [
+        {
+          "from": "n1.out",
+          "to": "n2.origin"
+        },
+        {
+          "from": "n2.out",
+          "to": "n3.plane"
+        },
+        {
+          "from": "n3.out",
+          "to": "n5.points"
+        },
+        {
+          "from": "n4.out",
+          "to": "n5.attractors"
+        },
+        {
+          "from": "n5.points",
+          "to": "n6.base"
+        },
+        {
+          "from": "n5.values",
+          "to": "n6.radius"
+        },
+        {
+          "from": "n6.body",
+          "to": "n7.body"
+        }
+      ],
+      "groups": [],
+      "seed": 1
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

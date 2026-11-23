@@ -1,0 +1,434 @@
+{
+  "format": "fdef",
+  "schema": 2,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 8,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Panel Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 120,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 120,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 120,
+          "y": 80,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 120,
+          "y": 80,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": 80,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 0,
+          "y": 80,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "120",
+            "value": 120
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "80",
+            "value": 80
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Panel",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "4",
+          "value": 4
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "graph_body",
+      "name": "Graph Body 1",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "graph": {
+          "graph": "g1",
+          "output": "n6"
+        }
+      }
+    }
+  ],
+  "graphs": [
+    {
+      "id": "g1",
+      "name": "Graph 1",
+      "position": "f6",
+      "next_node": 7,
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "polyline",
+          "params": {
+            "points": [
+              [
+                8,
+                8,
+                -1
+              ],
+              [
+                112,
+                8,
+                -1
+              ],
+              [
+                112,
+                72,
+                -1
+              ],
+              [
+                8,
+                72,
+                -1
+              ]
+            ],
+            "closed": true
+          },
+          "ui": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "id": "n2",
+          "type": "populate_region",
+          "params": {
+            "count": {
+              "expr": "24",
+              "value": 24
+            },
+            "seed": 2
+          },
+          "ui": {
+            "x": 220,
+            "y": 130
+          }
+        },
+        {
+          "id": "n3",
+          "type": "voronoi",
+          "params": {
+            "gap": {
+              "expr": "3",
+              "value": 3
+            }
+          },
+          "ui": {
+            "x": 440,
+            "y": 0
+          }
+        },
+        {
+          "id": "n4",
+          "type": "vector",
+          "params": {},
+          "ui": {
+            "x": 440,
+            "y": 130
+          }
+        },
+        {
+          "id": "n5",
+          "type": "extrude",
+          "params": {
+            "distance": {
+              "expr": "6",
+              "value": 6
+            }
+          },
+          "ui": {
+            "x": 660,
+            "y": 0
+          }
+        },
+        {
+          "id": "n6",
+          "type": "add_as_feature",
+          "params": {
+            "operation": "subtract"
+          },
+          "ui": {
+            "x": 880,
+            "y": 0
+          }
+        }
+      ],
+      "wires": [
+        {
+          "from": "n1.out",
+          "to": "n2.boundary"
+        },
+        {
+          "from": "n1.out",
+          "to": "n3.boundary"
+        },
+        {
+          "from": "n2.out",
+          "to": "n3.points"
+        },
+        {
+          "from": "n3.cells",
+          "to": "n5.curve"
+        },
+        {
+          "from": "n4.out",
+          "to": "n5.direction"
+        },
+        {
+          "from": "n5.body",
+          "to": "n6.body"
+        }
+      ],
+      "groups": [],
+      "seed": 1
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

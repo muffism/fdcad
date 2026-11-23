@@ -1,0 +1,13 @@
+# Rules for both round 12 cloud sessions
+
+1. Read `CLAUDE.md` first and follow it. Clean room: never open `reference/` (it is not in the repo anyway) and never search the web for the commercial product's names, icons or text.
+2. Branch: create your branch (local sessions: your worktree branch, renamed to the branch in your brief) (named in your brief) from `origin/phase7b-stage2`. Push to that branch only. Never push to `phase7b-stage2`, `phase1` or `main`, and do not open a pull request; the manager merges.
+3. Each item: read its section in `docs/TUTORIAL_REVIEW_SPEC_2.md` (search for `### TRnnn`), look at what already exists in the code (some items are partly done; PLAN.md says which), then build it.
+4. One item (or one part of an item) per commit, each with: tests that fail before the change, the PLAN.md tick (or a "(item N done: Dxxxx)" note on a partly done line), a CHANGELOG.md `### Added` line, the user guide page in `docs/user_guide/`, and a DECISIONS.md entry using only numbers from your block, in the format `Dnnnn: Title (2026-11-07, TRnnn, Phase 7B Stage 3). ...`. Append DECISIONS entries at the end of the file.
+5. Commit message: `TRnnn short title (Dnnnn)`.
+6. Messages to the user need a next-step verb the message checker knows (Use, Pick, Enter, Turn off, ...); run the message checker tests. Inner kernel reasons use ValueError, not FeatureError. Every new dialog must be handled in the app sweep test (`tests/ui/sweep_support.py`).
+7. Tests: run the tests of what you touched plus `tests/ui` sweep tests after each item. Run the full suite (`uv run pytest -q -p no:cacheprovider > run.txt 2>&1`, then grep the summary line; kernel prints flood the tail) every five items and before you stop. Never run two pytest runs at once. Check a glob matches files before passing it to pytest.
+8. FDEF_SPEC.md, SHORTCUTS.md are owner files: do not edit them. List any new FDEF params or keys in your final report.
+9. Skip an item that needs an owner choice not already settled in DECISIONS (D683, D750 approved the spec as written) and say why in the final report. Do not stall on one item more than about an hour; record what is left and move on.
+10. Stay inside your area. If you must change a shared file (main window, ribbon, tool registry, sweep support), keep the change small and mention it in the final report, since the other sessions edit those too.
+11. Before you stop: `git fetch`, rebase on `origin/phase7b-stage2` if it moved, rerun the full suite, push, and write `docs/plans/round12/REPORT_<A or B>.md` with: items done (TR, decision, commit), items skipped and why, owner file items (FDEF params, keys), shared files changed, and the last full suite result.

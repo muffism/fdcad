@@ -1,0 +1,645 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 9,
+  "variables": [
+    {
+      "name": "Width",
+      "kind": "length",
+      "expr": "100mm",
+      "value": 100
+    },
+    {
+      "name": "Height",
+      "kind": "length",
+      "expr": "60mm",
+      "value": 60
+    },
+    {
+      "name": "Thickness",
+      "kind": "length",
+      "expr": "10mm",
+      "value": 10
+    },
+    {
+      "name": "Inset",
+      "kind": "length",
+      "expr": "10mm",
+      "value": 10
+    },
+    {
+      "name": "HoleDiameter",
+      "kind": "length",
+      "expr": "8mm",
+      "value": 8
+    }
+  ],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Plate Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 100,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 100,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 100,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 100,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 0,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Width",
+            "value": 100
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Height",
+            "value": 60
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Plate",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=Thickness",
+          "value": 10
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Hole Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              50,
+              30,
+              10
+            ],
+            "area": 6000,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 12,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 10,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 4,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 90,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "circle",
+          "center": "e4",
+          "radius": 4,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 90,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "circle",
+          "center": "e6",
+          "radius": 4,
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 10,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "circle",
+          "center": "e8",
+          "radius": 4,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "point",
+          "x": 50,
+          "y": 30,
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "circle",
+          "center": "e10",
+          "radius": 10,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=HoleDiameter",
+            "value": 8
+          }
+        },
+        {
+          "id": "d2",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Inset",
+            "value": 10
+          }
+        },
+        {
+          "id": "d3",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Inset",
+            "value": 10
+          }
+        },
+        {
+          "id": "d4",
+          "type": "diameter",
+          "entities": [
+            "e5"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=HoleDiameter",
+            "value": 8
+          }
+        },
+        {
+          "id": "d5",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Width - Inset",
+            "value": 90
+          }
+        },
+        {
+          "id": "d6",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Inset",
+            "value": 10
+          }
+        },
+        {
+          "id": "d7",
+          "type": "diameter",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=HoleDiameter",
+            "value": 8
+          }
+        },
+        {
+          "id": "d8",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e6"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Width - Inset",
+            "value": 90
+          }
+        },
+        {
+          "id": "d9",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e6"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Height - Inset",
+            "value": 50
+          }
+        },
+        {
+          "id": "d10",
+          "type": "diameter",
+          "entities": [
+            "e9"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=HoleDiameter",
+            "value": 8
+          }
+        },
+        {
+          "id": "d11",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e8"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Inset",
+            "value": 10
+          }
+        },
+        {
+          "id": "d12",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e8"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Height - Inset",
+            "value": 50
+          }
+        },
+        {
+          "id": "d13",
+          "type": "diameter",
+          "entities": [
+            "e11"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "20",
+            "value": 20
+          }
+        },
+        {
+          "id": "d14",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e10"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Width/2",
+            "value": 50
+          }
+        },
+        {
+          "id": "d15",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e10"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Height/2",
+            "value": 30
+          }
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Holes",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "through_all",
+        "depth": {
+          "expr": "1",
+          "value": 1
+        },
+        "reverse": true
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

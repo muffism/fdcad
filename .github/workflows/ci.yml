@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install Python
+        run: uv python install 3.13
+      - name: Sync dependencies
+        run: uv sync --locked
+      - name: Check formatting
+        run: uv run ruff format --check
+      - name: Lint
+        run: uv run ruff check
+      - name: Type check
+        run: uv run mypy
+      - name: Run tests
+        run: uv run pytest
+
+  macos:
+    runs-on: macos-14
+    defaults:
+      run:
+        shell: bash
+    env:
+      QT_QPA_PLATFORM: offscreen
+    if: github.event_name != 'push'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Eigen and Boost
+        run: brew install eigen boost
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install Python
+        run: uv python install 3.13
+      - name: Sync dependencies
+        run: uv sync --locked
+      - name: Check formatting
+        run: uv run ruff format --check
+      - name: Lint
+        run: uv run ruff check
+      - name: Type check
+        run: uv run mypy
+      - name: Run tests
+        run: uv run pytest

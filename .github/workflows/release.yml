@@ -1,0 +1,146 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  # Pull requests to main build both installers as a packaging check. Nothing is published.
+  pull_request:
+    branches: [main]
+  # Manual runs build and upload the installers but never publish a release.
+  # Mac builds follow DECISIONS D35: choose "both" only when a Mac build is needed.
+  workflow_dispatch:
+    inputs:
+      platforms:
+        description: "Installers to build"
+        type: choice
+        options: [windows, both]
+        default: windows
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set version
+        # Tags give the release version; other runs use the app version plus "-dev".
+        run: |
+          APP="$(sed -n 's/^__version__ = "\(.*\)"/\1/p' src/fdcad/__init__.py)"
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF_NAME#v}"
+            # A tag must match the app version: run tools/set_version.py first (D556).
+            if [[ "$V" != "$APP" ]]; then
+              echo "::error::Tag $GITHUB_REF_NAME does not match __version__ $APP. Run tools/set_version.py $V, commit, then tag again."
+              exit 1
+            fi
+          else V="${APP}-dev"; fi
+          echo "VERSION=$V" >> "$GITHUB_ENV"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install Python
+        run: uv python install 3.13
+      - name: Sync dependencies
+        run: uv sync --locked
+      - name: Run tests
+        run: uv run pytest
+      - name: Build standalone app
+        run: uv run pyinstaller packaging/fdcad.spec --noconfirm
+      - name: Smoke test the built app
+        run: bash packaging/smoke_test.sh dist/FDCAD/FDCAD.exe
+      - name: Check every bundled library has a notice
+        # Fails on a library or data folder with no entry in packaging/notices (D2860).
+        run: uv run python tools/third_party_notices.py check-dist dist/FDCAD
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+      - name: Build installer
+        # PowerShell, because Git Bash rewrites the /D switch as a file path.
+        shell: pwsh
+        run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "/DAppVersion=$env:VERSION" packaging\windows\fdcad.iss'
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: packaging/windows/Output/FDCAD-${{ env.VERSION }}-windows-x64-setup.exe
+
+  build-macos:
+    runs-on: macos-14
+    # Tags and pull requests to main always build the DMG; manual runs only when asked.
+    if: github.event_name != 'workflow_dispatch' || inputs.platforms == 'both'
+    defaults:
+      run:
+        shell: bash
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set version
+        # Tags give the release version; other runs use the app version plus "-dev".
+        run: |
+          APP="$(sed -n 's/^__version__ = "\(.*\)"/\1/p' src/fdcad/__init__.py)"
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF_NAME#v}"
+            # A tag must match the app version: run tools/set_version.py first (D556).
+            if [[ "$V" != "$APP" ]]; then
+              echo "::error::Tag $GITHUB_REF_NAME does not match __version__ $APP. Run tools/set_version.py $V, commit, then tag again."
+              exit 1
+            fi
+          else V="${APP}-dev"; fi
+          echo "VERSION=$V" >> "$GITHUB_ENV"
+      - name: Install Eigen and Boost
+        run: brew install eigen boost
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install Python
+        run: uv python install 3.13
+      - name: Sync dependencies
+        run: uv sync --locked
+      - name: Run tests
+        run: uv run pytest
+      - name: Build standalone app
+        run: uv run pyinstaller packaging/fdcad.spec --noconfirm
+      - name: Smoke test the built app
+        run: bash packaging/smoke_test.sh dist/FDCAD.app/Contents/MacOS/FDCAD
+      - name: Check every bundled library has a notice
+        # Fails on a library or data folder with no entry in packaging/notices (D2860).
+        run: uv run python tools/third_party_notices.py check-dist dist/FDCAD.app
+      - name: Build DMG
+        run: bash packaging/macos/make_dmg.sh "$VERSION"
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-dmg
+          path: dist/FDCAD-${{ env.VERSION }}-macos-arm64.dmg
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [build-windows, build-macos]
+    # Manual runs only build and upload the installers; publishing needs a version tag.
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-files
+      - name: Extract release notes
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          awk '/^## \['"$VERSION"'\]/{found=1; next} found && /^## \[/{exit} found' CHANGELOG.md > notes.md
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 0.0.x releases are technical skeletons, so GitHub marks them as pre-releases.
+          PRE=""
+          if [[ "$VERSION" == 0.0.* ]]; then PRE="--prerelease"; fi
+          gh release create "$GITHUB_REF_NAME" release-files/*/* --title "FDCAD $VERSION" --notes-file notes.md $PRE

@@ -1,0 +1,651 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 13,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Housing Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 14,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 80,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": 80,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": 80,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 80,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "point",
+          "x": 0,
+          "y": 60,
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e11",
+          "p2": "e12",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e3",
+            "e5"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e4"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e6",
+            "e8"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e7"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e9",
+            "e11"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e12",
+            "e2"
+          ]
+        },
+        {
+          "type": "vertical",
+          "entities": [
+            "e13"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "distance",
+          "entities": [
+            "e4"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "80",
+            "value": 80
+          }
+        },
+        {
+          "id": "d2",
+          "type": "distance",
+          "entities": [
+            "e7"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "60",
+            "value": 60
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Housing",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "30",
+          "value": 30
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Bore Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 40,
+          "y": 30,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 15,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "30",
+            "value": 30
+          }
+        },
+        {
+          "id": "d2",
+          "type": "horizontal_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "40",
+            "value": 40
+          }
+        },
+        {
+          "id": "d3",
+          "type": "vertical_distance",
+          "entities": [
+            "e1",
+            "e2"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "30",
+            "value": 30
+          }
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Bore",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "through_all",
+        "depth": {
+          "expr": "1",
+          "value": 1
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    },
+    {
+      "id": "f9",
+      "type": "sketch",
+      "name": "Top Hole Positions",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              40,
+              30,
+              30
+            ],
+            "area": 4093.14165294,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 5,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 10,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 70,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 70,
+          "y": 50,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 10,
+          "y": 50,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "fixed",
+          "entities": [
+            "e2"
+          ]
+        },
+        {
+          "type": "fixed",
+          "entities": [
+            "e3"
+          ]
+        },
+        {
+          "type": "fixed",
+          "entities": [
+            "e4"
+          ]
+        }
+      ],
+      "dimensions": []
+    },
+    {
+      "id": "f10",
+      "type": "hole",
+      "name": "M5 Tapped Hole",
+      "suppressed": false,
+      "params": {
+        "hole_type": "tapped",
+        "standard": "iso",
+        "size": "M5",
+        "end_condition": "blind",
+        "cosmetic_thread": true,
+        "diameter": {
+          "expr": "4.2",
+          "value": 4.2
+        },
+        "thread_diameter": {
+          "expr": "5",
+          "value": 5
+        },
+        "pitch": {
+          "expr": "0.8",
+          "value": 0.8
+        },
+        "thread_depth": {
+          "expr": "10",
+          "value": 10
+        },
+        "depth": {
+          "expr": "12.4",
+          "value": 12.4
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f9"
+        },
+        "face": [
+          {
+            "kind": "face",
+            "name": "f6/cap/end",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                40,
+                30,
+                30
+              ],
+              "area": 4093.14165294,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f11",
+      "type": "sketch",
+      "name": "Front Hole Positions",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/side/e4",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              40,
+              0,
+              15
+            ],
+            "area": 2400,
+            "normal": [
+              0,
+              -1,
+              0
+            ]
+          }
+        }
+      },
+      "next_entity": 3,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 15,
+          "y": 15,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 65,
+          "y": 15,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "fixed",
+          "entities": [
+            "e2"
+          ]
+        }
+      ],
+      "dimensions": []
+    },
+    {
+      "id": "f12",
+      "type": "hole",
+      "name": "M4 Tapped Hole",
+      "suppressed": false,
+      "params": {
+        "hole_type": "tapped",
+        "standard": "iso",
+        "size": "M4",
+        "end_condition": "blind",
+        "cosmetic_thread": true,
+        "diameter": {
+          "expr": "3.3",
+          "value": 3.3
+        },
+        "thread_diameter": {
+          "expr": "4",
+          "value": 4
+        },
+        "pitch": {
+          "expr": "0.7",
+          "value": 0.7
+        },
+        "thread_depth": {
+          "expr": "8",
+          "value": 8
+        },
+        "depth": {
+          "expr": "10.1",
+          "value": 10.1
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f11"
+        },
+        "face": [
+          {
+            "kind": "face",
+            "name": "f6/side/e4",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                40,
+                0,
+                15
+              ],
+              "area": 2400,
+              "normal": [
+                0,
+                -1,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

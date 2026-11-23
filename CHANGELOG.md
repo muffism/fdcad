@@ -1,0 +1,1192 @@
+# Changelog
+
+All notable changes to FDCAD are listed here. Versions follow semantic versioning.
+
+## [1.0.0] - 2026-11-22
+
+### Added
+
+- Report Problem, in error messages, in Help, Diagnostics and in the status bar after FDCAD closed unexpectedly: FDCAD saves a problem report with your name removed, copies it and opens your own mail app with a message to FDCAD@proton.me. FDCAD sends nothing itself; you read the message and press Send (D2871).
+- Flip puts a tangent reference plane on the other side of the cylinder, so the far side no longer needs a picked point there (D2629).
+- Cuts and joins on large bodies work only where the tool is, so a small hole in a part of thousands of faces takes a fraction of a second, not seconds. The result is the same as before; anything unusual still goes through the full boolean. The 768 feature machine bed rebuilds in 11 minutes instead of 16 (D2601).
+- Long rebuilds run in a separate helper process, so the window stays responsive and Cancel works at once, however large the part. The 768 feature machine bed rebuilds in about 16 minutes with the window free the whole time. A saved slow part opens showing its saved shape and is rebuilt behind it. If the helper stops on a feature, FDCAD stays open, holds the rebuild before that feature and offers to suppress it (D2600).
+
+- A part file now carries its finished solid, so a part shows at once even the first time it is opened on a computer. Only a solid that matches the part's features is used; the part is still rebuilt behind it (D1102).
+- A Hide or Show Items button (an eye) on the view toolbar: show or hide planes, axes, points, coordinate systems, curves, sketches, origins and dimensions, hide them all at once, or show hidden bodies (D1089).
+- A gearbox among the sample parts (File, Samples): a housing with its cover, shaft and fittings, 318 features of 105 kinds in 60 bodies, to open and study; it opens with no warnings (D1103). It takes about two minutes to build the first time (D1069).
+- A crash guard: if FDCAD ever closes while rebuilding a feature, the next start says which feature it was, and that part opens with the rebuild stopped just before it, with a button to suppress the feature. Before, such a part closed FDCAD again every time it was opened. Faults in the kernel are also written to `crash.log` beside the log file (D1035).
+- A new look, named Datum (`docs/DESIGN_LANGUAGE.md`, D1034): new colours in all four themes (cool greys with a cobalt accent), larger rounded corners, the command tools on a floating card with the chosen tab as a pill, and a restyled left panel and view toolbar.
+- New icons: closed shapes are lightly filled so parts read as solid, the main tools are drawn as lit solids, and tools that remove material (cuts, holes, trims, deletes) are drawn in ember orange while tools that add material stay blue. Feature rows in the tree show the same colours.
+- The single file `FDCAD-portable.exe` shows the start picture while it unpacks, so there is no wait with nothing on screen (D1034).
+- A new start page: the mark and name at the top, New Part as the main button, and recent parts without a picture shown as quiet tiles, not large folder icons (D1034).
+- A new app icon and start picture: the letters F and D as two solids, each pushed back from an off white front face, joined at a corner on a deep cobalt tile: the F is one face and the corner, the D is the face beside it (D1034, D1036, D1037). The installer pictures use it too.
+- Small tools in the command tabs flow into balanced columns of up to four rows, and a dropdown button is as wide as the tool it shows, so every tab fits a 1680 px wide screen without scrolling.
+- Portable FDCAD for Windows: a single `FDCAD-portable.exe` that runs without installing, and a portable folder build. A portable copy keeps preferences, autosaves, logs and the cache in a `FDCAD Data` folder beside the program and writes nothing to the registry (D1033).
+- A start picture with the app icon and version shows at once while the window loads (D1033).
+- More room for the part: command tabs are about a third shorter (a long list of small tools wraps into columns of three), the tree panel can be made much narrower and widens itself while a property panel needs the room, and the tree's filter box and state list sit one above the other (IDEAS 19, D1033).
+- Opening a part no longer leaves the unused Untitled part from the start open beside it (D1033).
+- Work without dragging: click then click handle arrows with arrow key nudges, arrow keys nudge picked sketch items, Tab picks the next sketch point, and Move Up and Move Down in the tree (TR293 in part, D2209).
+- Selection menu: Paint Selection, Pick Bodies, Faces or Edges Only, and Pick in Volume for items inside, outside or touching a box, cylinder or sphere (TR329, D2208).
+- An extrude depth arrow snapped to a part vertex with Alt becomes Up to Vertex, so the depth follows that point when the part changes (TR395, D2207).
+- 3D Sketch gets 3D relations: Along X, Y and Z, Coincident, Fix and 3D Length between 3D line points, and ties from 3D lines to plane sketch points (TR7 in part, D2206).
+- Save as Cut Feature in the section panel keeps the section view as a Section Cut feature that removes what the section hides (TR151 item 2, D2205).
+- Slice Body can turn its planes round a reference axis, a set angle apart (TR151 item 1, D2204).
+- Sketch text gets bold, italic and a turn for single characters, and a {copy} field that numbers the copies of a pattern (TR121 items 2 and 3, D2202, D2203).
+- Spline Length dimensions a spline's length and drives it, and Path Length chains can include splines (TR115 item 4, D2201).
+- Smart Dimension gives a symmetric angle about a centerline: the half angle with the text on the line's side, the full angle with the text across the centerline (TR111 item 2, D2200).
+- Forming Tool gets Own tool: the shape of a body of the part, with a stop face, faces to remove, an insert point, a rotation and a mirror (TR279, D2313).
+- A part can hold several sheet metal bodies beside solid bodies, each with its own Sheet Metal folder, values and Flat Pattern (TR281, D2312).
+- Stamp takes several outlines and a Drawn cut out, and the Forming Tool's rib gets square ends (TR283 item 1, D2311).
+- Bend Table lists the rips too, with a gap that can be typed (TR282, D2310).
+- Stamp gets Punch, Die and Corner radii (TR77, D2309).
+- Closed Corner gets an Open or Closed bend region (TR174 item 2, D2308).
+- Convert to Sheet Metal gets a Rip type (Overlap, Underlap, Open or Butt) and Keep the solid (TR171, D2307).
+- Miter Flange profiles can have tangent arcs, which become bends of the arc's radius, and the flange gets its own relief at offset ends (TR170, D2306).
+- Chamfer Corners gets Blend: a curved corner face that meets the three bevels smoothly (TR321, D2304).
+- Geometry Check lists nearly square edges, Fix turns a face to make a nearly smooth or nearly square edge exact, and the tour can clip the view to a box round each finding (TR262, D2303).
+- Combine gets Reapply fillets: rounds next to the other bodies are removed first and made again after (TR259, D2302).
+- Dome gets a Profile sketch: a closed outline drawn in a sketch sets the dome's section (TR147 item 3, D2301).
+- Bodies to Part Files saves each body to its own file in one command: linked parts that follow the master, FDCAD parts, STEP, STL or 3MF (TR280, D2421).
+- Insert Part brings the bodies of another FDCAD part in as one feature, linked to its file, with sketches and planes as reference lines and Break Link (TR71, D2420).
+- Move Part Origin moves the origin and main planes to the bodies' box centre, their centre of volume or a picked vertex or face, for imported parts far from the origin (TR343, D2419).
+- Face Relation keeps coplanar, offset, concentric, parallel, perpendicular, equal radius and fixed relations between faces, which later Move Face edits hold (TR266, D2418).
+- Linked Body Copy makes a copy with its own position that follows every later change of the original, with Break Link (TR154, D2417).
+- Move and Copy Body by relations: coincident, distance, angle and parallel between body faces and targets, all solved together (TR268 item 1, D2415).
+- Transform handles can sit on a picked point and use a plane's axes (TR268 item 3, D2416).
+- Roof adds an equal slope roof over any closed outline, with hips, valleys and ridges, and an optional flat top (TR258, D2414).
+- Deform Point, Deform Curve to Curve and Surface Push move part of a body: round a point, from one curve to another, or as a dent pressed in by a tool (TR67, D2412).
+- Swept Boss gets Ground ends, which cut a spring flat at both ends square to its axis (TR162 item 2, D2408).
+- A new sample with a tutorial: an M6 hex bolt, nut and washer sized from FDCAD's screw and washer tables (TR162, D2409).
+- Stone Setting cuts a seat for a round stone and adds prongs, for ring and pendant masters (TR408 item 2, D2410).
+- Sprue Tree joins casting sprues from a pouring cup to picked points, or a kit frame runner round them (TR408 item 3, D2411).
+- Vent gets a draft and a fillet for each element group (TR146 item 3, D2406).
+- Lip and Groove picks the rim by its edges, jumps gaps where ribs meet the wall and can follow the wall's draft (TR146 item 2, D2407).
+- Swept Cut moves a tool body along a path, such as a milling cutter, and removes what it passes through (TR138 item 3, D2405).
+- Loft profiles get more connectors that meet in order, with Reset (TR136 item 1, D2403).
+- Add Loft Section puts a new profile between two loft profiles, holding the loft's own cross section, ready to edit (TR136 item 3, D2404).
+- Linear and Circular Pattern copy a reference plane, axis, point or coordinate system; explode the pattern to use each copy as its own reference (TR142 item 1, D2402).
+- Drag a box over pattern copy markers to skip those copies, or with Ctrl to bring them back (TR270 item 3, D2401).
+- Patterns show a numbered marker on each copy while open; clicking one starts that copy's entry in Copy values (TR59 item 3 rest, D2400).
+- Command buttons can be added to a My Commands tab or hidden, and Simple Mode shows fewer tabs and tools for new users (TR222, D2508).
+- A freeze bar in the feature tree keeps the features above it from rebuilding and from being edited until it moves (TR98, D2507).
+- Slow rebuilds, exports and the hand off to the slicer show their progress on the Windows taskbar button and the Mac Dock icon (TR380 item 4, D2506).
+- Help, Lessons gives short first run lessons whose steps tick when the part shows them, with Resume Later (TR291 item 2, D2505).
+- A start page lists recent parts as pictures with pin, remove and Show in Folder, and each save keeps a picture in the part file (TR218, D2504).
+- Curvature Colors colours faces by largest, mean or Gaussian curvature, with a scale and the value under the cursor (TR199, D2503).
+- Measure works on the cut faces of a section view (TR213, D2502).
+- A Section Planes folder in the feature tree lists the section planes; each plane has a drag arrow and X and Y rotation rings in the 3D view (TR213, D2501).
+- Section View can leave chosen bodies whole while it cuts the others, and the choice is saved with the section (TR213, D2500).
+- Single letter shortcuts work by key position with non Latin layouts and through input methods, and the status bar says when they are paused (TR354, D2020).
+- Before and After lists the volume change per feature after a change and draws the old shape faintly over the new one (TR289, D2019).
+- Feature panels get a help button and a one line hint the first time a tool is used, and Help, What's New lists the newest changes (TR291 items 1 and 3, D2018).
+- Describe Part reads out the bodies, size and features, and Large controls makes command tab buttons and tree rows larger (TR294 items 2 and 3, D2017).
+- Safe graphics draws in software for computers whose graphics driver fails: a Preferences tick, --safe-graphics, or by itself after a start that did not finish (TR219, D2016).
+- Knurl cuts a straight or diamond knurl into a cylinder face by pitch and depth (TR163 item 1, D2015).
+- Joint cuts a groove, rabbet, mortise and tenon or dowel holes where two bodies touch, with a clearance (TR401, D2014).
+- Landing Pad raises a flat pad from a sloped or curved wall up to a sketch plane, or presses one into it with an optional cup wall behind (TR325, D2013).
+- Lightening Pockets pockets a plate face as triangles between ribs, with a kept border, rounded corners and a depth or through cut (TR245, D2012).
+- Edge Profile cuts a round over, cove, rabbet, chamfer with flat or ogee round a face or along edges, with round corner joins (TR243, D2011).
+- Transition Spiral draws a clothoid from the end of a sketch line to an end radius, for track and road pieces (TR408 item 1, D2010).
+- Face Seats sets copies of a seed body over a cylinder, sphere or other curved face, each turned to the face and sunk in, as studs, rivets or dimples (TR405, D2009).
+- Hinge adds a knuckle hinge where two bodies meet: with a pin hole or as a print in place hinge with cone pins, a clearance and optional detent bumps (TR404, D2008).
+- Gear gets Timing pulley outlines for GT2, GT3, HTD 3M and 5M, MXL, XL, T2.5 and T5 belts, and a Root fillet radius for true round gear roots (TR348, D2007).
+- Mark puts the text and lines of a sketch on a face with no depth or a small depth; marks on a sheet metal part's base wall go to a MARKS layer in the flat pattern DXF and SVG (TR330, D2006).
+- Lattice Fill fills bodies with a gyroid, diamond or honeycomb lattice of a wall thickness, with an optional solid skin (TR390, D2004).
+- Three more printing samples with tutorials: an M8 nut and bolt with modelled threads, a print in place hinge, and the base grid the storage bins sit on (TR188, D2003).
+- Split for Printing cuts Along Sketch for a stepped or shaped seam, and dovetail keys get a Key draft so they wedge tight (TR181 item 2 and the rest of item 1, D2002).
+- STL and 3MF options get Largest aspect ratio: thin triangles are cut across and flipped until none is thinner than the limit (TR336, D2001).
+- Fit Calibration opens a test plate of a pin and labelled holes with stepped gaps, and Keep Measured Fit stores the gap that fitted as the printer's fit value (TR358, D2000).
+- Save as Library Feature on a sketch or a feature made from a sketch, and Tools, Insert Library Feature to put it on a plane or flat face of any part (TR72 item 1 in part, D2115).
+- Rib from several open chains in one sketch makes a network of walls that join where they meet (TR285, D2114).
+- Wrap method Project: a sketch projected along a direction onto any face and raised or sunk by a height (TR156, D2113).
+- Rib draft can keep the thickness at the wall instead of the sketch plane, and Wrap gets a Pull Direction so emboss and deboss walls run along a picked line, edge or plane (TR75 items 1 and 2, D2112).
+- Mould Cavity cuts a part, scaled for shrinkage about its centre, the origin or a coordinate system, out of a block body (TR85, D2111).
+- Extrude can pick its operation from where it sits: inside the part it cuts, touching it joins, apart from it makes a new body, with Alternate solution for the other choice (TR334, D2110).
+- Move Face and Hole with many picks: when they fail together, each pick is tried on its own and the error names the ones that fail, with Keep the faces that worked or Cut the holes that work (TR400, D2109).
+- Select Faces Between: pick boundary faces or edges, then right click a seed face to pick every face between them, such as a whole pocket (TR328, D2108).
+- Move to Body... on a cut, boss, sweep, loft or hole in a part with several bodies: the feature then acts on the chosen body only (TR155, D2107).
+- Body folders inside Solid Bodies: Move to Folder on a body, and Hide, Show, Colour, Delete, Rename and Remove for a whole folder (TR153 item 1, D2106).
+- Name This Item on a face or edge, and Tools, Named Items to list the names and pick each item in the view; property formulas read "area@name" and "length@name", and node editor model references follow a name (TR152, D2105).
+- Text and yes or no variables, set with Type... in the equations manager (yes or no is 1 or 0 in formulas, text shows in sketch text fields), and Group... to list variables together (TR417, D2104).
+- Design table Rules and Themes: rules such as "if Width > 50, Depth is one of 20, 30" run top to bottom and can be turned off; a theme sets several values from one Theme column cell; Apply Rules and Try Row, which builds a row's values on a copy without adding a configuration (TR331, D2103).
+- Read from CSV in the equations manager: a variable takes its value from a CSV table by row label or row number and column header, read again when the part opens and on Rebuild (TR198 item 2, D2102).
+- More values per configuration: a sketch's plane and whether a dimension drives (design table columns), Colours by Configuration for face, feature and body colours, and Preview, which shows a configuration in a small window without making it active (TR197, D2101).
+- Design table columns for each configuration's description, the part colour and custom property values; the description shows as the configuration's tooltip (TR90 item 1, D2100).
+- Plane and Point How many: several offset or angle planes, or points along a curve, in one command, spaced from the first (TR148, D1925).
+- Loft start and end constraints Tangent to Faces and Curvature to Faces for an end on a face of the part (TR136 item 2, D1924).
+- Helix Closed Ends: a spring's end coils tighten to the End Pitch over the first and last turn (TR162 item 2, D1923).
+- Thread Relief (a run out groove sized from the pitch) for Thread and tapped holes, and a tapped hole Entry Chamfer (TR256, D1922).
+- Threads: Load User Sizes for Thread and Cosmetic Thread with a class column (TR327, D1920); Simplify threads while editing shows modelled threads as cosmetic until Force Rebuild (TR347, D1921).
+- Hole Tool Fit Table and Fit from Table: the print fit gap by hole diameter band, direction and nozzle (TR412, D1919).
+- Thread profile From a Sketch, and End Finish: Square, Chamfer or Fade Out (TR254, D1918).
+- Thread Taper Angle: a modelled tapered pipe thread on a cone (TR145, D1917).
+- Mounting Boss Step Height and Step Diameter: a narrower collar on top; fins can point along a picked face's normal (TR146 item 1, D1916).
+- Hole Tool Place by a distance and angle from an axis, or on a point, and holes along a slanted axis (TR397 item 1, D1915).
+- Hole Tool Custom Stack holes from typed elements, a start plane, and user hole sizes loaded from a file (TR144 items 1, 3 and 4, D1912, D1913, D1914).
+- Hole Tool Place by: one hole by its distances from two edges, or concentric with a round edge or cylinder, with no sketch (TR143 item 1, D1911).
+- Sweep Section values: profile dimensions as formulas of t, the position along the path, so a width can grow along it (TR396 item 1, D1910).
+- Sweep and Loft Show section: step through 11 sections from start to end to find where the shape goes wrong (TR139 item 2, D1909).
+- Loft profiles can be loops of model edges: pick the edges together in the view (TR138 item 1, D1908).
+- Sweep through more profiles placed along the path: the section changes smoothly from one to the next (TR137 item 2, D1907).
+- Sweep from a profile part way along the path: along it, against it or both ways, each side with its own twist (TR137 item 1, D1906).
+- Sweep Start tangency (Path Tangent turns the profile square to the path) and Merge tangent faces (one side face per profile edge on a smooth path) (TR56 items 1 and 2, D1905).
+- Add to Pattern in the feature tree menu: a feature built on a pattern copy, such as a chamfer on one hole, repeats at every copy and follows later count and layout changes (TR399 items 1 and 2, D1904).
+- Fill Pattern fills cylinder faces too, with the spacing along the surface or as seen from the front (TR398 item 1, D1903).
+- Explode Pattern in the feature tree menu: a pattern becomes one feature per copy, each editable on its own (TR270 item 1, D1902).
+- Pattern Chain: one pattern made of mirror, linear, circular and scale steps in the order you type them, each step copying what the steps before made (TR141 item 1, D1901).
+- Patterns get Copy values: type the values one copy uses, such as 3: depth 8, in place of the seed's (TR59 item 3, D1900).
+- Sheet metal Stamp: a closed sketched outline pressed into a wall with a depth and a draft (TR77, D1816).
+- Move and Copy Body Frame to frame: a picked origin, Z and X of the body land on a target frame (TR268 item 2, D1815).
+- Rip can slit a plain tube or cone along its length, with a gap, an angle and an offset (TR174 item 4, D1813).
+- Chamfer Corners: Patch or Mitre where three bevels meet (TR321, D1812).
+- Parting Line can split faces with both kinds of draft at the line (TR84, D1811).
+- Split Line methods Silhouette and Intersection with another body (TR60, D1810).
+- Detailed preview tick on the Extrude and Rib panels (TR164, D1809).
+- Wall Thickness Analysis gets a typed target in Preferences and reads the wall under the cursor (TR87 item 2, D1808).
+- Geometry Check Fix for edges with gaps and inexact edges: a new Heal Edges feature (TR262, D1807).
+- Dome gets a Direction: the dome rises along a picked edge, face or plane (TR147 item 3 in part, D1805).
+- Draft gets Reapply fillets: rounds next to the drafted faces are removed and made again after (TR259, D1806).
+- Draft type Fixed Edge: each face turns about one of its own edges (TR323, D1804).
+- Shell Wall rule Never thinner or Never thicker, checked after the shell with a warning when missed (TR322, D1803).
+- Fillet fix Limit failing areas: round the stretch of a failing edge that works and leave the rest sharp (TR271 item 1, D1802).
+- Select through faces on the Fillet and Chamfer panels: clicks take the nearest edge, even behind a face (TR64 item 4, D1800).
+- 3D Sketch: a path in space made of 2D sketches on several planes and typed 3D lines and splines, for sweeps and pipes (TR7 in part, D1719).
+- Slice Body cuts the part with parallel planes into section sketches in a tree folder, for laser cut stacks (TR151 item 1, D1718).
+- Sketch blocks: make a block from curves, place copies, update every copy from one, select or explode a copy (TR34, D1717).
+- Drag Without Solving with a prompt to delete what no longer holds, Detach Segment on Drag, and a preference for drags that change dimensions (TR112, D1716).
+- Temporary guide lines while drawing: rest on two points for a dashed guide whose ends, middle, thirds and quarters snap (TR232, D1714).
+- Explode Text turns sketch text into lines, arcs and splines you can edit (TR121 item 1, D1713).
+- Convert Entities copies a whole face by a click inside it, with or without its inner loops; Ctrl click an edge copies its loop (TR118, D1712).
+- Sketch Picture traces a colour region or a box of the picture into closed loops of sketch lines (TR116 item 2, D1711).
+- Infinite Construction Line, and Flip direction for Tangent Arc (TR115 items 1 and 2, D1710).
+- Edit Polygon changes a drawn polygon's sides, size and angle later; the Polygon tool gets a Triangle preset (TR114 item 2, D1709).
+- Right click while placing a distance locks it horizontal, vertical or aligned; Dimension Display can hide a distance's extension lines or dimension line (TR111 items 1 and 3, D1707, D1708).
+- Preference Lock changed dimensions while dragging: geometry of dimensions you changed stays still while you drag the rest (TR238, D1706).
+- Direction arrows in the Offset and sketch pattern previews show the offset side and the pattern directions (TR341 item 2, D1705).
+- Close Sketch to Model closes an open profile whose ends sit on part edges with those edges; click inside the shape to keep (TR106, D1704).
+- Show Construction in Part: a closed sketch can keep its construction lines and points in the 3D view, for Convert Entities in later sketches and for vertex picks (TR339, D1703).
+- Sketch Fillet and Sketch Chamfer on splines and arcs in any pairing with lines and arcs, and sizing a new fillet by dragging from its corner (TR48, D1700 to D1702).
+- Three printing samples with tutorials: a fit test plate, a living hinge strip and a storage bin on a grid (TR188, D1217).
+- Material Interlock adds a checkerboard of teeth where two bodies meet, so two printed materials lock together (TR414 item 1, D1216).
+- Hole Tool with an existing position sketch: click near one of its points to skip it, again to bring it back (TR143 item 2, D1520).
+- Patterns get Check copies: Fast skips the test that every copy touches the part, for speed on large patterns (TR399 item 3, D1519).
+- Fill Pattern Size gradient: cut shapes grow or shrink across the face from a point or an edge (TR324, D1518).
+- Mounting Boss height up to a mating face less a gap, and pin size from a mating round edge (TR146 item 1, D1517).
+- Sweep Face profile: a flat face of the part, holes included, swept along the path (TR138 item 1 in part, D1516).
+- Sweep Corners: Mitre or Round where the path has a sharp corner (TR137 item 3, D1515).
+- Sweep orientations Normal to Face (the section's up keeps to a face under the path) and Follow Second Path (the X axis points at a second sketch or curve) (TR396 item 2, D1514).
+- Linear and Circular Pattern can vary their copies: gaps that grow by an increment, and seed values that grow by a step at each copy (TR59 item 1, D1513).
+- A pattern or mirror of features can copy an earlier pattern of features whole, its original and every copy (TR141 item 2, D1512).
+- Hole Tool type Tapered Pipe Tapped with NPT and Rc sizes and the 1 in 16 taper (TR145, D1511).
+- Thread (modelled) gets the profiles Metric Trapezoidal, ACME, Square, Buttress and Pipe 55 degree (TR254, D1510).
+- A sweep that crosses itself names where along the path it bends too tight, and suggests a larger radius, a smaller profile or splitting the path (TR139 item 1, D1509).
+- Formulas can use the number of holes a Hole feature made, "count@Hole 1", beside its stored sizes (TR397 item 2, D1508).
+- Thread Class on tapped holes and modelled threads: shown in the Hole Table, and its allowance loosens a modelled thread (TR393, D1507).
+- Hole Tool type Counterdrill: a counterbore with a cone at its floor (TR144 item 2, D1506).
+- Hole Tool gets Taper for the whole hole wall and Depth Includes Point for drill point holes (TR144 item 3, D1505).
+- Sweep twist by a Number of Turns, whole turns on closed paths, and the orientation Follow Curvature (TR56 items 3 and 4, D1504).
+- Patterns get Suppress region: copies over picked faces or closed sketches (or outside them) are skipped, and Linear Pattern gets the fill Spacing and overall size (TR398 items 2 and 3, D1502, D1503).
+- Linear Pattern Seed cell puts the original in any cell of the grid, and Rotate pattern turns the whole grid in its plane (TR270 item 2, D1501).
+- Circular Pattern spacing law Per copy angles, and spacing laws (growing, random, list of fractions) for Array Along Curve (TR366, D1500).
+- Indent: a wall or pocket in one body that follows another body, with thickness and clearance (TR68, D1026).
+- Thin Feature Merge ends: an open wall's ends carry on to meet the part and stop there (TR272, D1025).
+- Twist Lock: lugs on a lid's plug and L shaped slots in the box round it, with a fit clearance (TR357, D1024).
+- Extruded Cut from an open line removes the material on one side of it, with Flip side (TR157, D1023).
+- Sensor: a tree row that watches the volume, area, mass or any formula and warns when it leaves typed limits (TR86, D1022).
+- Reference point method Centre of mass, which follows the model, and Override in Mass Properties to type the mass, centre and inertia of imported or simplified parts (TR80, D1021).
+- Goal Seek and Sweep on the Tools menu: find the variable value that gives a target volume, area, mass or measurement, or list the result per step (TR273, D1020).
+- Mass Properties measures a section: area, centroid, second moments, polar moment and principal axes of picked flat faces or a sketch (TR81, D1019).
+- Trackpad: the rotate gesture rolls the view, smart zoom fits, and a swipe goes to the previous or next view (TR380 item 1, D1612).
+- The status bar shows the hovered edge's length and radius, or the angle between a hovered flat face and the picked one; View > Collapse All closes the tree's folders (TR221, D1611).
+- Clicks pick through see through bodies (Shift picks the see through face itself), and finished part previews get a Before and After slider (TR224, D1610).
+- Preferences, View, Middle button: three mouse presets for what a middle drag does alone and with Shift or Ctrl (TR312, D1609).
+- Zoom Out command, double middle click zooms to fit, and Preferences, View for wheel direction, zoom centre, arrow key step, turn speed and fitting on standard views (TR211, D1607).
+- View > Display States saves named sets of hidden bodies, body colours, see through bodies and body display modes; a configuration can be linked to one (TR88, D1608).
+- Right click a body in Solid Bodies for its own Display Mode (shaded, shaded with edges or wireframe) and Transparency (TR216, D1606).
+- View > Display Quality sets how finely a part's curved faces are drawn, showing the deviation; large parts draw with less smoothing while turning (TR214, D1605).
+- Section View can be saved with the part (on again when it opens) and is kept in a saved view made while it is on (TR213 in part, D1604).
+- Section View with two or three planes: tick the zones to cut away, and draw chosen bodies see through with a slider (TR355, D1603).
+- Preferences, View: smooth edges shown, dashed or removed, hidden edges dashed or solid, and highlight every edge of the feature selected in the tree (TR212, D1602).
+- Click an axis of the corner triad to look along it, again for the other side, Shift and click for a quarter turn; View > Orientation lists the views, saved views and split layouts (TR210, D1600, D1601).
+- Miter Flange gets Start offset and End offset for a partial miter flange (TR170 in part, D1113).
+- Flat Pattern Fold progress shows all bends part way between flat and folded; Flat Marks copies sketch lines onto the flat pattern (TR283 item 2, D1112).
+- Sheet Metal Rules: named sheet metal rules in a shared library file, saved from a part and applied to one in one undo step (TR332, D1111).
+- Bend Table lists every bend, highlights the picked one, edits radius and allowance per bend and sets the bend order, which the flat pattern DXF and SVG carry (TR282, D1110).
+- Flat pattern quoting data: blank area, outer and inner cut length, cut outs, bends and flat size, in the panel, in equations and as a CSV export (TR172, D1106).
+- Export Flat Pattern asks which items to write, the origin, the axis directions and the up and down bend colours, with a list to leave out single bend lines and marks (TR173, D1108).
+- Extend Wall lengthens a wall by a distance or up to a plane; Perforated Fold Line cuts a row of slots for hand bending (TR370, D1109).
+- Sheet metal small options: hem lengths per edge and own allowance, closed corner overlap ratio, cross break angle and radius, break corner on all corners or inside corners, tab offsets and skipped tabs, a warning when the flat pattern is larger than the sheet (TR174, D1107).
+- Flat Pattern options: Merge faces, Corner trim and Faces to leave out (TR76, D1105).
+- Flat Pattern gets Bend notches: triangle, circle or rectangle notches at both ends of each bend line, in the flat pattern and its DXF (TR169, D1104).
+- Sheet metal Corner Relief cuts rectangular, circular, tear, obround or constant width reliefs where bends meet, with a type per corner (TR168, D1103).
+- Edit Bends changes the radius and bend allowance of one bend, picked bends or all bends after they are made (TR167, D1102).
+- Edge Flange gets a Flange profile: a closed sketch shapes the flange, narrower, wider, notched or any outline (TR166 item 1, D1101).
+- Sheet metal Tab adds a sketched piece of wall one sheet thick; Extruded Boss in sheet metal gets Link to thickness (TR165, D1100).
+- Sketch Fillet rounds corners where an arc meets a line or another arc (TR48 in part, D1317).
+- A faint extension of a line shows while the cursor snaps onto it (TR341 item 3, D1316).
+- Copy Entities gets Linked: copied dimensions keep the original's value (TR122 item 2, D1315).
+- The Line tool ignores a second click on top of the first, and Relax Spline evens a spline's inner handles (TR115 items 3 and 4 in part, D1314).
+- Rectangle tools can add construction centrelines, rounded corners and an inner offset frame as they draw (TR114 item 1, D1313).
+- A negative horizontal or vertical distance flips the side, and Angle to Horizontal or Vertical dimensions a line against an axis through its end (TR111 items 2 and 4, D1312).
+- Sketch dimensions can be a minimum or a maximum, and Point on Segment keeps a point between a line's ends (TR342, D1311).
+- Relations added while drawing are weak: one you add later that conflicts replaces them, and Keep Relation keeps one (TR362, D1310).
+- Each kind of automatic sketch relation has its own preference switch, and Tab skips the relations of the next click while drawing (TR231, D1309).
+- Linear Sketch Pattern takes its direction from a part edge, and Circular Sketch Pattern takes a radius and an angle from the centre (TR107, D1308).
+- Baseline, Ordinate, Chamfer and Path Length dimensions in sketches (TR45, D1307).
+- Insert Spline Point, Fit Spline and Simplify Spline sketch tools (TR42, D1306).
+- Spline handles show for a selected spline, and can be pinned, reset, and given a handle line for angle and length dimensions (TR43, D1305).
+- Ellipses take Tangent, Concentric, Equal and Midpoint, and spline ends take Tangent through their handle (TR41, D1304).
+- Parallel, Equal, Collinear and Coradial join groups with one numbered tag per member, and Equal works between lines and arcs as Equal Length (TR108, D1303).
+- Sketches warn when a corner or arc flips to another solution after a change, and Keep This Side locks it (TR338, D1302).
+- Sketch problem list: click the sketch status for dangling items, invalid geometry, conflict sets with Diagnose, and redundant items; new Dangling, Invalid and No solution states (TR38, D1301).
+- Repair Sketch finds small gaps, overlaps, tiny segments, duplicate points and broken relations, and fixes one or all of them (TR37, D1300).
+- Move Face and Delete Face get Reapply fillets: the rounds next to the change are removed first and made again after (TR259, D1420).
+- Neutral plane draft gets an other angle below the neutral plane and angles added to a face's lean (TR323, D1419).
+- Parting line and step draft get Allow reduced angle: the largest angle that works is used, with a warning (TR147 item 1, D1418).
+- Draft gets Detailed preview: added faces and changed faces in their own colours, or only the new bodies (TR164, D1417).
+- Geometry Check lists tight bends, knife edges, nearly smooth edges, duplicate faces and inexact edges, steps through findings with Next and Back, fixes slivers and duplicates, can Ignore a finding, and has a Symmetry Check (TR87 items 1 and 3, TR262, D1416).
+- Parting Line finds the edges between positive and negative draft for a pull direction as a curve, and reports a closed loop or the gaps (TR84, D1415).
+- Split Line divides faces by a projected sketch or where a plane crosses them (TR60, D1414).
+- Push Pull moves flat faces or a sketch region by a signed distance, with Next Parallel Face as the target (TR267, D1413).
+- Replace Face swaps faces for a flat target, extending or trimming the body under them (TR130, D1412).
+- Shell gets Both sides: half the wall inside the part and half outside (TR322 item 1, D1411).
+- Remove Fillets finds round faces on a body with no history, in a radius range, and removes them or makes them again at a new radius (TR260, D1410).
+- Face fillet gets the Hold Line method: the round follows picked edges and its size changes with the gap (TR29, D1409).
+- Fillet rules find edges again after changes: attach, free or all edges of a feature, or edges parallel to an axis, with exclusions and a radius per rule (TR320, D1408).
+- Fillet gets Limits: Edges to Keep that a round may not swallow, and a limiting plane where the rounds stop (TR271 items 2 and 3, D1407).
+- When Shell cannot make the wall of one face, a fix leaves that face open and names it; Reset Skipped Faces undoes it later (TR278, D1406).
+- A failing multi edge fillet offers other ways that build (each chain, smaller groups, larger radius first, one per edge) as fixes that split it, and a failing Offset Body names the face that is too tight (TR346, D1405).
+- Change Fillet Edge in the view menu, and Change Fillets and Change Drafts in the tree menu, change existing fillets and drafts without editing them (TR132, D1404).
+- Variable fillet control points can be placed by percent of the edge, added and deleted (TR133, D1403).
+- Fillet gets Method (Radius, Asymmetric, Chord Width) and Profile (Circular, Conic, Curvature Continuous, Elliptic) (TR62, D1402).
+- Partial Edges on Fillet and Chamfer get Reference: the start and end are set by picked vertices or planes (TR64 item 5, D1401).
+- Fillet and Chamfer get a Tangent propagation tick: turn it off to round or bevel only the picked edges, stopping square at smooth joins (TR131, D1400).
+- Code Tag draws a QR code of a text in a sketch as one region, for printed tags (TR311, D1215).
+- Coating Allowance keeps a coating thickness that STL and 3MF exports take off every face (TR307, D1214).
+- Suction Cups and Islands finds hollows that trap air or resin and points that start in mid air, marks them and offers drain holes or another orientation (TR409, D1213).
+- Import Mesh can repair a mesh (fill holes, fix shared edges, drop tiny pieces) and reduce it by percent or to a count (TR186, D1212).
+- Split for Printing adds magnet pockets, screw holes with nut pockets, and a glue gap (TR181 item 1, D1211).
+- Suggest Orientation ranks face down directions by fit, overhang and height and lays the chosen face flat; Arrange on Bed lays the bodies out with a spacing, clear of no print zones (TR301, D1210).
+- Layer Fit Check lists heights and walls that are not a whole number of layers or line widths of the printer (TR187 item 1, D1209).
+- Settings by Height adds pauses, colour changes and setting changes at Z heights, written for Bambu Studio, OrcaSlicer and PrusaSlicer (TR384, D1208).
+- Print Settings on a body row sets its layer height, walls, infill, supports and extruder for the slicer, written in each slicer's 3MF keys (TR383, D1207).
+- The 3MF Slicer choice gets Cura only and Plain 3MF targets, and says what each target keeps (TR385, D1206).
+- Import Mesh can make each part of a slicer 3MF its own named body and keep modifier, negative and support roles (TR386, D1205).
+- Export Section and Outline writes the cut at a plane or the outline along an axis as DXF or SVG, with a kerf offset, a scale and cut and engrave layers (TR300, D1204).
+- Pick Bodies ticks which bodies of a STEP or IGES import come in, with a preview in the view, and opens after inserting a file of several bodies (TR302 item 2, D1203).
+- STEP export asks for the unit, Y up, body names, one file per body and whether hidden bodies go in (TR302 item 1, D1202).
+- Rename Body gives a body a lasting name, shown in the tree and used for its 3MF object (TR183, D1201).
+- STL and 3MF options split triangles to a largest edge length and can show the mesh in the view with its worst aspect ratio (TR336, D1200).
+- Linear Pattern spacing law List of fractions places each copy at a typed share of the run (TR366, D1018).
+- Array Along Curve gets Square to face: copies keep a picked face's normal as their up direction (TR373, D1017).
+- Right click a face of a pattern copy and choose Edit Seed to open the feature it copies (TR142 item 2, D1016).
+- Sketch preferences get a polar grid: rings round the origin and spokes at an angle step, with snapping (TR238, D1014).
+- Show in Sketch gets a line weight choice for sketch lines and point marks (TR341 item 5, D1013).
+- Chamfer gets Partial Edges, as on Fillet: bevel only part of each edge by distance or percent (TR64 item 5, D1012).
+- Curve Through Points fills its points from X(t), Y(t) and Z(t) expressions, for 3D curves from equations (TR374, D1011).
+- Save As writes a 3D DXF wireframe of every edge (TR369, D1010).
+- Base Pad adds a thin removable pad body under the bed face with an air gap (TR414 item 2, D1009).
+- Polygon Holes makes round holes into polygons whose flats sit at the hole's size (TR189 item 1, D1007).
+- Drain Holes cuts a hole from the lowest point of each closed hollow out through the wall (TR189 item 3, D1006).
+- Corner Ears adds thin discs at the sharp corners of the bed face against warping (TR189 item 2, D1005).
+- A test checks the default keys against the Windows rules: no Ctrl and Alt pairs, no Windows key, no Alt and a menu letter, one key per command (TR380 item 5, D1003).
+- Help, Help for This Tool opens the user guide at the section for the tool in use (TR380 item 2, D1002).
+- Preferences Turn style: Free, Turntable (Z stays up) or Arcball (TR415 item 1, D1001).
+- Scale gets a shear: Shear angle slides the bodies along one axis by their height along another (TR371 item 3, D1000).
+- Combine gets Fragments (every piece where bodies cross) and Inside at least (the volume inside a number of the picked bodies) (TR371 items 1 and 2, D999).
+- Shell's Check Walls finds the faces too tightly bent for the wall and the smallest bend radius (TR147 item 2, D998).
+- Fillet's Omit attach edges leaves sharp the edges where a picked feature meets the part (TR64 item 6, D997).
+- Measure shows the angle across a picked edge along its length: largest, smallest and average (TR199 item 2, D996).
+- Save As writes Wavefront OBJ meshes (TR336 in part, D995).
+- Change to Chamfer and Change to Fillet on a fillet or chamfer's right click menu (TR134, D994).
+- Layer Preview draws the printer's layer lines on the part (TR315, D993).
+- Printer profiles get keep out zones and a head clearance, checked by Build Volume (TR413, D992).
+- Sketch Shapes gets standard sections: angle, channel, I beam, rectangular and round tube, and the 35 mm DIN rail (TR367, D991).
+- Delete Face can fill every hole up to a size and every enclosed void, without picks (TR388, D990).
+- Save As writes IGES, BREP, PLY and glTF (.glb) as well (TR369 in part, D989).
+- Print Estimate takes the infill percent and the wall count, so the weight is closer to the print (TR187 item 2, D988).
+- Sketches mark where curves cross and where three or more meet (TR238 in part, D987).
+- Merge Into Sketch joins two sketches on the same plane (TR122 item 1, D986).
+- Partial Hyperbola sketch tool: centre, vertex and one end (TR374 in part, D985).
+- A reference point where an axis, line or curve crosses a curved face, with a crossing number when it crosses more than once (TR353, D984).
+- Remove History turns a part into one plain body feature (TR158, D983).
+- Sketch layers: named sets of curves with their own colour, line style and visibility, picked, hidden or locked together (TR389 and TR419 item 2, D982).
+- Linear Pattern spacing laws: growing gaps and seeded random moves (TR366 in part, D981).
+- Reference planes, axes and coordinate systems get an extra offset and turn in their own axes, and a flip, after any method (TR149, D980).
+- Array Along Curve gets a start offset and an end offset (TR373 offsets, D979).
+- Link Values gives several sketch dimensions one shared name and value; changing one changes the others (TR193, D978).
+- Sketch pictures can show one colour see through, with a tolerance (TR116 item 1, D977).
+- Sketch text can follow a circle or a spline, with a start offset along the curve (TR230, D976).
+- Reduce Motion follows the system setting until you change it in Preferences (TR294 item 1, D975).
+- A sketch tool chosen with no sketch open names itself while you pick the plane or face to draw on (TR123, D974).
+- Dragging a picked point or circle moves the whole picked group, as curves already did (TR53 group part, D973).
+- Feature History on a body lists the features that made it (TR153 item 2, D972).
+- Open for Viewing opens a part that refuses changes until you click Edit (TR356, D971).
+- Shake Sketch picks what is still free in a sketch, and Lock All Points stops drags for comparison (TR372, D970).
+- Add Values... in the design table adds columns for several variables and formula values at once (TR90 item 2, D969).
+- A warning bar with a Save All button when disk space or memory runs low (TR220, D968).
+- Ellipses get both axes as construction lines, for dimensions and turning (TR114 item 3, D967).
+- The design table shows the sum, average, smallest, largest and count of the current number column (TR198 item 1, D966).
+- Make several picked dimensions reference or driving at once, and New Dimensions Are Reference for measuring only (TR111 item 5, D965).
+- Sketches mark open end points while you draw, and Show in Sketch hides relation tags by kind, driving or reference dimensions, and sets the tag size (TR341 items 1 and 4, D964).
+- Recently Edited in the feature tree's right click menu, and an option to name new features as they are made (TR221 item 1, D963).
+- Linear Pattern by total length, and a question before a pattern with more than 200 copies (TR142 items 3 and 4, D962).
+- Save All, Close All, Revert to Saved, numbered older copies on save, and an option to reopen the last parts at start (TR218 items 1 and 3, D961).
+- 3MF files carry the part's title, designer, description, copyright, licence and dates as standard metadata (TR183 item 1, D960).
+- Message bars above the view that stay until closed, with Don't Show Again, and a Preferences list to show hidden messages again (TR203, D959).
+- Identical bodies are grouped in the Solid Bodies folder with a count (TR308, D958).
+- Copy Values to Others and Edit by Rule, to set values of many features of one kind at once (TR160, D957).
+- Purge Unused (sketches nothing uses, suppressed features, unused variables) and Delete Below Rollback Bar (TR159, D956).
+- Set Current View As Front, another standard view or Home, Home, and Reset Standard Views, saved in the part (TR333, D955).
+- Shift and Enter accepts a feature panel and starts the same tool again; the panel title is red while the feature cannot be built (TR314, D954).
+- Smart Dimension can pick midpoints of lines, arcs and part edges (a Sketch preference), with switches for end and centre picks too (TR418, D953).
+- Sketch switches to shade every closed region and to hide sketch points (TR335, D952).
+- Diameter mode stays on in revolve sketches: later lines parallel to the centerline get diameters until Esc (TR361, D951).
+- Swap Axis Relations: a square shape's Horizontal and Vertical relations become Parallel and Perpendicular, so it can turn (TR124, D950).
+- Number display choices: inch values as fractions, a rounding rule and a decimal separator for shown values (TR350, D949).
+- Opened parts go on the system recent list (Windows) and the Dock menu (Mac); a double clicked part opens in the FDCAD already running (TR379, D948).
+- Favourites in every feature panel, with Rename and a choice of what new features start with: factory, last used or a favourite (TR326, D947).
+- Sketch: Slot Along Curves makes a slot of one width round picked lines and arcs (TR225, D946).
+- Sketch Offset: Outside corners Sharp or Round (TR391, D945).
+- Selection sets: save picks under a name, rule sets that pick again (faces of a feature or colour, edges over a length), and combined sets (TR94, D944).
+- Select Similar with rules that combine, and Select Their Edges, Faces and Bodies (TR303, D943).
+- Feature tree: Parent and Child Arrows, and a Parents and Children dialog that walks from feature to feature (TR96, D942).
+- Leaving a sketch: Exit Without Saving, and preferences to exit by double clicking empty space or by Esc (TR120, D941).
+- Delete offers to delete the variables only the deleted features used, unticked (TR91, D940).
+- Isolate can draw the other bodies transparent or as wireframe instead of hiding them (TR99, D939).
+- Sketch preference Keep proportions on the first dimension: the first length typed scales the whole unsized sketch (TR119, D938).
+- Formulas: exp, ln, log10, sign, trunc, mod, pow, seeded random and sinh, cosh, tanh (TR89, D937).
+- Primitive Solid: geodesic sphere and geodesic dome by frequency (TR371 item 4, D936).
+- Hole Tool: the heat set insert table has a Depth margin added to every insert hole's depth (TR189 item 4, D935).
+- Selection menu: Select All picks every face, or every edge when an edge is picked, or every sketch item in a sketch (TR380 item 3, TR224 item 2, D934).
+- Sketch: Points from File reads X and Y rows from a text file as sketch points (TR415 item 2, D933).
+- Sketch: Hide Construction Geometry hides and shows the open sketch's construction curves (TR419 item 1, D932).
+- Tools, Part Notes keeps a page of plain text notes in the part (TR392, D931).
+- Design Table: Copy Table and Paste Table move the configuration table through the clipboard, to a spreadsheet or another part (TR304, D930).
+- Evaluate: Edge Angle Analysis colours sharp edges and edges that are nearly but not quite smooth, with a chosen limit angle (TR420, D929).
+- Feature tree: Sketch Colour gives a finished sketch its own line colour in the 3D view (TR233, D928).
+- Sketch: Shapes adds a triangle (three ways), trapezoid, keyhole, constant width triangle, egg or superellipse centred on the origin (TR228, D927).
+- View, Mirror Image shows a see through mirror image of the part about a plane, display only, to judge symmetry (TR309, D926).
+- Measure: Points on faces measures the position of, and the distance between, the exact spots clicked on faces (TR192, D925).
+- Tools, Hole Table lists every hole and thread with type, size, depth, thread, count and position, to copy or save as CSV (TR316, D924).
+- File, Save Increment saves under the next numbered name (part 01, part 02) and keeps working in the new file (TR305, D923).
+- Sketch: Step Through Values on a dimension's right click menu solves the sketch at each value of a range in turn, then puts it back (TR236, D922).
+- Sketch: Show Formulas on Dimensions shows each dimension's formula beside its value (TR235, D921).
+- Sketch: Explain on a relation tag's right click menu says in words what the relation holds and which items it links (TR237, D920).
+- Equations: a new variable, dimension or value name that is a unit, a function or pi is refused with a message saying why (TR310, D919).
+- Sketch: Recent Sketch Tools in the right click menu lists the last sketch tools used, apart from part commands (TR204, D918).
+- Preferences, General: Pick distance sets how close the cursor must be to pick points, edges and vertices, in the 3D view and in sketches (TR313, D917).
+- Menus: in an open menu, typing the first letter of an entry goes to it, so every command can be reached from the keyboard (TR205, D916).
+- Selection menu: Select Previous brings back the selection before it was cleared, and Invert Selection picks what is not picked, within the selection filter (TR93, D915).
+- 3D Print: Hose Fitting adds a hose barb or a male or female luer taper with a bore on a face (TR406, D914).
+- Hole Tool: Bolt Circle turns the last clicked point into the centre of a ring of holes typed as count x diameter, such as 5x100, with a start angle (TR407, D913).
+- Sketch: Convex Hull adds the outline around the picked curves, with exact arcs on circles and tangent relations (TR229, D912).
+- Sketch: Mean Dimensions sets every dimension with an uneven tolerance to the middle of its range, and Typed Dimensions puts the typed values back (TR306, D911).
+- Reference planes: Mid plane between two faces that are not parallel makes the plane halving the angle between them; Flip side takes the other one (TR360, D910).
+- 3D Print: Fix Overhangs adds one Chamfer on the edges of flat faces that hang over thin air, and Overhang Analysis says when overhanging faces are fillets (TR410, D909).
+- Living Hinge: staggered slits through a plate inside a sketch outline, with slit length, width, bridge and row spacing, so the part bends (TR402, D908).
+- STL and 3MF export: says which bodies overlap, and an Overlapping bodies setting can join them or let the first body win (TR411, D907).
+- Equations: Allowed Values limits a global variable to a list or a range; a value outside it is named in the status bar after each rebuild (TR274, D906).
+- Model Health: lists values and sketch dimensions typed as the same number as a variable but not linked to it, with a Link to Variable button (TR351, D905).
+- File, Export, Batch Export: values or ranges for chosen variables; every combination is rebuilt and exported in the background with a name template, and a log lists any that failed (TR368, D904).
+- Reference planes: Tangent to a cylinder (beside a point or parallel to a plane) and Through a line and a point (TR74, D903).
+- Sketch: Parabola from a focus, an apex and two ends, and Jog Line, which steps part of a line sideways (TR52, D902).
+- Sketch dimensions: Display sets a tolerance (plus and minus, limits, plus or minus), the decimals, and radius or diameter for round dimensions (TR46, D901).
+- Sketch: with curvature combs on, splines also show their control polygon, inflection points and the tightest point with its radius (TR44, D900).
+- File, Mirror Part: saves the opposite hand of the open part as a new part file and opens it; the original is not changed (TR73, D899).
+- Right click an edge, Sketch Square to Edge: adds a plane square to the edge at its nearer end and opens a sketch on it (TR51, D898).
+- Sketch Text: fields in braces such as {width} show a variable, a dimension or a custom property and update on rebuild (TR54, D897).
+- Sketch: Add Relations finds geometry that is nearly horizontal, vertical, joined, tangent, parallel, square or equal and adds the relations you tick (TR416, D896).
+- Sketch: Modify Sketch moves, turns, scales or flips the whole sketch at once, scaling its length dimensions too (TR50, D895).
+- Tools, Select Bodies by Size: a slider picks the bodies smaller or larger than a percent of the largest one, to select them, delete them or keep only them in one step (TR70, D894).
+- Sketch Trim: Keep Trimmed Pieces as Construction leaves the cut away parts of lines, arcs and circles as construction geometry (TR47, D893).
+- Hole Tool: Keep size when the type changes can be turned off, so each hole type starts with the size last used for it (TR66, D892).
+- Crush Ribs: wedge ribs inside a hole or on a pin, with count, width, height, length and a flat tip, so a printed press fit holds (TR403, D891).
+- Feature tree: Switch to Cut or Boss for extrudes, revolves, sweeps and lofts, and Make Thin or Make Solid for extrudes and revolves, keeping the sketch, ends and references (TR387, D890).
+- Tools, Expected Values: target volume, size, face count, hole count or a measurement with a tolerance, checked after every rebuild; the status bar says how many pass (TR359, D889).
+- Sketch: Turned Outline copies the part's outline as if spun about the sketch X axis, as a closed half profile for lathe drawings and revolves (TR319, D888).
+- Point Pattern: copies features, faces or bodies to picked vertices, round edge centres, hole axes or every hole of a face, with no sketch (TR365, D887).
+- O Ring Groove: piston and rod seal grooves on round faces and face seal grooves along a sketch, sized from the cord and use, with squeeze and fill checked (TR250, D886).
+- Sketch: Detach from Model turns converted or projected geometry into free sketch geometry of the same shape, keeping its dimensions (TR340, D885).
+- Sketch: Blend Curve joins the ends of two lines, arcs or splines with a tangent spline whose handles set each end's weight (TR318, D884).
+- Finger Joint: interlocking fingers where two plates meet at a corner, with finger count, clearance and kerf, for laser cut boxes (TR246, D883).
+- Half Lap: matching notches so two crossing plates slot together, with depth percent, clearance and kerf (TR364, D882).
+- When a feature fails, every later solid feature shows a Not Rebuilt warning, and Measure and Mass Properties say their results are out of date (TR352, D881).
+- Extruded Boss and Cut: Profile offset grows or shrinks the sketch profile by a value, so one sketch makes both mating parts (TR344, D880).
+- Cable Tie: cuts a cable tie loop (two slots joined by a tunnel with a support free pointed top) under a face at each sketch point (TR363, D879).
+- Status bar: after adding or editing a feature it says what the feature did, for example "Cut 2 removed 2.4 cm3, 3 more faces.", and screen readers are told (TR290, D878).
+- Sketch: 2 Point Circle (the ends of a diameter) and Tangent Circle (touching three lines or curves, or two with a radius), in the Circle list (TR317, D877).
+- Measure: clicking one face also shows the wall thickness at the spot clicked (TR349, D876).
+- Ring Groove: retaining ring grooves on shafts and in bores, and E clip grooves, sized from the diameter (TR249, D874).
+- Hole Tool: Bearing Seat type for common ball bearings by designation, with a shoulder, press or slip fit and an optional retaining ring groove (TR251, D873).
+- Hole Tool: Dowel Pin type with metric and inch pin sizes and a press or slip fit (TR252, D872).
+- Shaft Shape keyways: standard key sizes for metric parallel keys, inch square keys and half moon keys, picked from the shaft or bore diameter (TR248, D871).
+- Sketch relations: Length Ratio and Length Difference between two lines or arcs, Equal Angle between two pairs of lines, and Equal Distance from a point to two lines (TR226, D870).
+- Hole Tool: Magnet Pocket type for round and block magnets, with a size list, optional relief slots and a closed skin to print the magnet in (TR179, D869).
+- Configurations: Add Linked makes a child that follows its parent's values except the ones it changes, marked in the list; features added in a linked child are suppressed in the others (TR195, D868).
+- Inlay: cuts a sketch (text or a shape) into a face and keeps the cut piece as a separate body for a second colour; 3MF export keeps both bodies (TR184, D867).
+- Sketch, Gear: involute spur gear (module or diametral pitch, teeth, pressure angle, profile shift, rounded roots), internal gear and roller chain sprocket outlines (TR161, D866).
+- Combine: Exclusive operation, Keep tool bodies and Keep largest piece only (TR128, D865).
+- Evaluate, Undercut Analysis: faces coloured by what a mould pulled along a direction can reach (seen from above or below, straddle, undercut, side wall), with counts and Zoom per group (TR83, D864).
+- Sketch, Insert SVG: lines, rectangles, circles, ellipses, polylines and paths from an SVG file, with Insert DXF's scale, base point, angle and preview (TR117, D863).
+- Sketch: with one or two items selected and no tool, a faint dimension follows the cursor near them and a click places it (TR110, D862).
+- Property panel: Pin keeps making the same feature after OK; folded groups stay folded; pick boxes have Delete and Clear Selections on right click and grow with their list (TR206, D861).
+- Sketch: a grid spacing per part, Snap to Grid (while shown or always), length and angle steps with Alt held, and Snap Next Click To in the drawing menu (TR102, D860).
+- Sketch: click inside a closed region to select and shade its border, then drag to move the whole shape; Ctrl with Select Chain adds a chain (TR39, D849).
+- The corner point a sketch fillet or chamfer keeps for dimensions now shows as a small x mark (TR105, D848).
+- Sketch, Segment and Equally Spaced Points: split a line or arc into equal pieces that stay equal, or put equally spaced points on it (TR103, D847).
+- Sketch, Replace First with Second: a new curve takes an old curve's place, with its fitting relations and dimensions, so features that used it keep working (TR104, D846).
+- Derived Sketch: a linked copy of a sketch on another plane that follows the original, with Edit Placement and Break Link (TR49, D845).
+- Sketch, Cut Away in Front: hides the part in front of the sketch plane while sketching, kept per sketch (TR113, D844).
+- Sketch Pierce: a point stays where a curve feature or another sketch crosses the sketch plane, and follows it when the curve changes (TR101, D843).
+- Extrude with Selected Regions: Own depth per region gives each picked region its own depth in one feature (TR242, D842).
+- Shaft Shape: hex, D flat, double D or keyway on a shaft, or the matching shape in a bore with a fit clearance, sized from the diameter (TR247, D841).
+- Hole Tool type Self Tapping (Plastic): a hole below the screw size with an entry bevel, from an editable size table (TR255, D840).
+- Sketch, Airfoil: a four or five digit series airfoil, or one from a two column point file, with chord, angle and trailing edge, drawn as one smooth spline (TR257, D839).
+- Replace Everywhere in the tree menu switches every feature that uses a sketch, plane or feature to another one, with Delete the old one; the Delete dialog offers Replace Instead (TR277, D838).
+- Tick boxes of features (Reverse, Merge result and the others) can be set by a formula in the equations manager, such as `"reverse@Extrude 1" = if("Width" > 50mm, true, false)` (TR275, D837).
+- Lock Body in the Solid Bodies menu: the body stays visible, drawn greyed, and cannot be picked or given transform handles until unlocked (TR269, D836).
+- Edit, Pause Rebuilds for heavy parts (Rebuild, Rebuild and Stay Paused, Discard Paused Edits), and Checkpoint on a feature, which stops each rebuild after it until Continue Rebuild (TR276, D835).
+- Sketch, Round All Corners: every corner of the selected lines gets a fillet with one shared radius dimension, with a list to give single corners their own radius (TR227, D834).
+- File, Save as Template keeps a part's units, variables, colour, print and mesh settings, material, custom properties and printer; New Part can start from a template (TR217, D833).
+- Middle click on the part sets a turning centre; middle drag then turns the view about it. Preference: Keep the model upright while turning (TR209, D832).
+- While a body tool's panel is open, right click in the view moves to the next pick box; at the last box it shows OK and Cancel (TR207, D831).
+- Equations manager: names and functions offered while typing a formula, Filter, Sort, several rows selected at once, Disable (kept but not used) and Replace Name for a name that no longer exists (TR194, D830).
+- Sketch relations and dimensions can be turned off without deleting them (drawn greyed and dashed), and switched per configuration (TR109, D829).
+- Scale to Fit Printer: print exports and the build volume turn the part, and shrink it if needed, to fit the printer; Save Print Scale as Feature keeps the size in the part (TR185, D828).
+- File, Export, Export Configurations: one part file, STEP, STL or 3MF per ticked configuration in a folder, named by configuration, with a log (TR196, D827).
+- Loft to a point: the first or last loft profile can be a vertex, sketch point or reference point, for a pointed end (TR135, D826).
+- Offset Body: grows or shrinks every face of a body by one distance, with Sharp or Rounded corners; Shell gets the same Corners choice (TR129, D825).
+- Thin Feature, Auto fillet corners: a wall from an open sketch gets rounded corners, the inside radius typed and the outside radius that plus the wall (TR65, D824).
+- Right click an edge: Select Loop (again for the next face), Start Partial Loop and End Partial Loop Here; right click a face or edge: Select Tangent (TR92, D823).
+- Sketch Merge: joins two picked points into one point that keeps both points' curves, relations and dimensions (TR40, D822).
+- Table Driven Pattern: copies to X and Y positions typed in a table, pasted from a spreadsheet or loaded from a text file, measured from a picked frame; rows can be ticked off, and the table can be saved to a file (TR58, D821).
+- The Errors panel is a table (kind, feature, message) sorted by clicking a header, with Show Errors and Show Warnings ticks (TR202, D820).
+- View, Show Types: a tick per kind (planes, axes, points, coordinate systems, curves, sketches, origins, temporary axes, dimensions, relations) and Hide All Types, which turns them back on as they were (TR215, D819).
+- Measure, Keep: a measurement saved in the part that measures again after each change, shows a label in the view, and whose values (distance, length, diameter, area, angle, dX, dY, dZ, volume) formulas can use (TR190, TR191, D818).
+- Curve Through Points: a smooth curve through points typed in a table, loaded from a text file (with Reload), placed in a frame, or picked vertices; closed if wanted; usable as a sweep, loft or pipe path (TR61, D817).
+- Extrude End twist and End scale (vases, twisted columns); Sweep scale at start and end, even or smooth (TR240, TR241, D816).
+- Extruded Boss and Cut can go along a plane's normal, an axis, a sketch line or a picked edge instead of square to the sketch, with the depth measured along it or square to the sketch (TR239, D815).
+- Esc stops a running rebuild, or a slow preview while a feature panel is open, after a short confirm (TR126, D814).
+- Primitive Solid (Features tab, with Loft): add or cut a box, cylinder, sphere, cone, torus, wedge, prism or tube from typed sizes, on a plane, face or coordinate system, with no sketch (TR127, D813).
+- Equations can use the printer in use's fit values: "fit_tolerance@Printer", "clearance_fit@Printer", "slip_fit@Printer" and "press_fit@Printer"; changing printer rebuilds the parts that use them (TR180, D812).
+- Linear Pattern: Symmetric in each direction makes the same copies on both sides of the seed (TR140, D811).
+- Custom Properties (Tools menu or the part's right click menu): named text, number, date and yes or no rows, formulas that can use the part's volume, area and mass, values per configuration; saved in the part, plain numbers usable in equations, written into 3MF files (TR82, D810).
+- Bounding Box (Evaluate tab): a box or cylinder around the part, along the part's axes, a best fit or a picked plane, shown as an outline or added as a body; its length, width, height and volume can be used in equations (TR69, D809).
+- The feature tree scrolls to the feature of a picked face or edge, Go To Feature on the right click menu, and hovering a tree row shows its feature in the view; both can be turned off in Preferences (TR200, D808).
+- Edit, Undo To lists the last steps and undoes back to one in one go; Delete lists every feature that depends on the one deleted, with a tick each; Delete in the 3D view with faces picked offers Delete Feature or Delete Face (TR201, TR208, D807).
+- File, Save a Copy and Save a Copy and Open; a filter box above the feature tree, by name and by state (TR95, TR97, D806).
+- Manufacturing Check for printing (slender posts, thin walls by part size, small holes, long bridges, small text, fine threads) and moulding (thick, thin and uneven walls, thick ribs, sharp inside corners, faces without draft) (TR298, TR299, D805).
+- Guide curves for Swept and Lofted Boss and Cut, and a Centerline with a Number of Sections for lofts (TR55, D804).
+- Part material (Tools, Material, or the Material row in the tree): a library of FDCAD's general values plus your own densities, density shown in g/cm3 and lb/in3, optional part colour; saved in the part; Mass Properties and Print Estimate start from it; the sheet metal check warns about bends tighter than the material allows (TR78, TR297, D803).
+- Stencil text: a bridge across every closed counter so letters cut through a sheet keep their middles; a Kerf value in Sheet Metal that Tab and Slot uses to draw slots narrower; tab minimums in the sheet metal check (TR297, D802).
+- Manufacturing Check: turning checks; milling finds deep pockets, tall thin walls and raised text; printer profiles have a process (FDM, resin, powder), layer height, smallest round hole and longest bridge, and the check starts from the printer in use (TR295, TR296, D801).
+- Move Face measured sizes: an arrow in the view whose value you edit there, Symmetric moves both faces half each, and Lock this size keeps the size through later Move Face edits (TR265, D800).
+- Move Face Resize takes cones: type the new cone angle and choose the end that stays (TR265, D799).
+- Move Face rules: Keep symmetry, Keep parallel and square faces, Keep faces on main planes, one rule off for chosen faces, each rule shows what it adds or holds, and the preview colours moved, still and stretching faces (TR263, D798).
+- Move Face: Neighbours choice (Extend, Tip or Lift), Previous and Next Solution, Keep This Solution, and Rounds on its edges Follow or Remake (TR264, D797).
+- Print roles for bodies (right click a body, Print Role): Part, Modifier, Negative Volume, Support Enforcer or Support Blocker, written into 3MF the way Bambu Studio, OrcaSlicer, Cura and PrusaSlicer read them; Export 3MF has a Slicer choice and says what each slicer keeps (TR382, D796).
+- Repair Lost References (Evaluate tab, and the tree's right click menu on a feature with problems): lists every lost pick with one clear match offered where there is one, shows where the lost item was, and puts the matches in or removes the picks as one undo step. Pick lists in the panel take Pick Again and Clear All Missing (TR125, D795).
+- 3MF export is checked in the tests against the 3MF Consortium's schema, and the 3MF import against the consortium's valid and invalid sample files (TR381, D794).
+- Move, Copy, Rotate, Scale and Stretch Entities in sketches, with typed values in the view, Keep relations and one undo step each (TR1, D684).
+- Copy and paste: sketch entities inside a sketch, a whole sketch onto another plane or face, and a sketch based feature onto a face, also by Ctrl and drag from the tree (TR3, TR9, D685).
+- Hidden Lines Visible display style (Shift+H): hidden edges show as thin dashed lines (TR13, D686).
+- Ctrl+Tab goes to the next open part (Control+Tab on Mac); Previous Part can be given a key in the shortcut editor (TR22, D687).
+- Midpoint Line: click the middle, then one end; the line stays centred (TR4, D688).
+- File, Save Image saves the 3D view as a PNG, at the view's size or a chosen one, with or without the background (TR24, D689).
+- Dimetric and Trimetric standard views, and Save View: named views saved in the part file, listed with the standard views, with rename, update and delete (TR14, D690).
+- Split Entities: click a curve to split it at a point you can dimension and drag; circles and ellipses take two points; deleting the point joins the pieces again (TR2, D691).
+- Feature tree folders (Add to New Folder) and feature comments with a hover note, saved with the part; the tree takes Ctrl and Shift click to pick several rows (TR23, D692).
+- Temporary Axes: a line through every round face, to pick as an axis or snap to in sketches (TR17, D693).
+- Replace From File for imported STEP and mesh bodies; later features rebuild on the new body (TR11, D694).
+- Insert DXF: lines, arcs, circles, polylines, ellipses and splines from a DXF file into a sketch, at true size, placed with the mouse (TR5, D695).
+- Sheet metal: Extruded Cut Link to thickness, Edge Flange Offset position, Miter Flange Propagate (TR30, D696).
+- Bodies box for cuts, bosses and holes in multibody parts: All bodies or Selected bodies (TR33, D697).
+- Named dimensions and feature values for formulas, and Show All Dimensions (TR32, D698).
+- Split View: one, two (side by side or stacked) or four views of the part, with a shared selection (TR16, D699).
+- Perspective view: View, Perspective switches every open part between the parallel view and perspective (TR15, D747).
+- Measure can show a second unit beside the first, for example millimetres and inches (TR26, D748).
+- Equations to and from a text file: Export, Import and a linked file that is read again on open and on Rebuild (TR25, D749).
+- Ctrl and drag the border of a shown plane to start an offset plane with the dragged distance filled in (TR10, D752).
+- Make one body see through from its row in the Solid Bodies folder; saved with the part (TR21, D753).
+- Zebra Stripes on the Evaluate tab: reflected stripes that show how smoothly faces join (TR18, D754).
+- Lasso Selection: draw a free loop to select in the 3D view; clockwise takes what is inside, counter clockwise also what it crosses (TR19, D755).
+- Selection breadcrumbs above the view: the part, body, feature and sketch of what you picked, each clickable (TR20, D756).
+- Conic and Equation Curve sketch tools; both make an editable spline (TR28, D757).
+- Compare Bodies on the Evaluate tab: two bodies, or a body and a STEP file, with the faces and volumes that differ (TR27, D758).
+- Intersection Curves and Silhouette sketch tools: copy where the sketch plane cuts the part, or the part's outline (TR6, D759).
+- IGES import: open or insert IGES files, joined into a solid where the surfaces close; Heal closes small gaps in STEP and IGES imports (TR31, D760).
+- Fully Define Sketch: adds the relations and dimensions a sketch still needs, at its current sizes, as Baseline, Chain or Datum Pairs (TR35, D762).
+- Check Sketch for Feature: lists gaps, near misses, extra curves and the wrong number of contours for a chosen feature; and a preference to use only fully defined sketches (TR36, D763).
+- Mass Properties on the Evaluate tab: mass, volume, area, centre of mass, principal axes and inertia about the centre, the origin or a coordinate system (TR79, D764).
+- Drop part, STEP, IGES and mesh files on the window to open them (TR377, D765).
+- Mac: About, Preferences and Quit always in the application menu, a Window menu, and the part's file in the title bar (TR376, D766).
+- Mac: Redo is Command+Shift+Z (Command+Y still works); Previous View moves to Control+Shift+Z (TR375, D767).
+- Windows contrast themes: FDCAD uses the system's contrast colours while one is on (TR378, D768).
+- Sketch status also shows by line weight, line style and point shape, and a colour vision safe colours preference (TR292, D769).
+- Horizontal and vertical sketch distances keep their side; a negative value flips it on purpose (TR337, D770).
+- Interference Check on the Evaluate tab: bodies that overlap, touch or are closer than a gap, each shown in the view (TR150, D771).
+- Enclosed Cavities: closed voids that trap resin or powder, with Add Drain Hole, and Cup Volume (TR284, D772).
+- Missing reference errors name the earlier feature that took the face away, with Show Cause; the errors list puts those first (TR288, D773).
+- Change Test: steps each value up and down on a copy and lists the ones that break the part, with safe ranges (TR287, D774).
+- Model Health: advice on loose sketches, early fillets, features on rounds, cuts that do nothing and more, with Move to End (TR286, D775).
+- STL and 3MF export options: quality, binary or text STL, unit and bodies, with the triangle count and size before saving (TR182, D776).
+- 3MF for slicers: a colour group per body, the bodies as parts of one object, the print orientation as the item transform, and a thumbnail (TR381 items 1 to 4, D777).
+- Bed Edge Chamfer: one chamfer on every edge of the face on the bed, holes included (TR177, D779).
+- Hole Tool Print Top: teardrop or flat bridge tops for sideways holes, toward the printer's up (TR175 Hole Tool part, D780).
+- Hole Tool Head Down Bridge: a sacrificial layer or two stepped bridge layers under counterbores and countersinks (TR176, D781).
+- Thread printing options: a printable 90 degree or round profile, clearance from the fit presets, and a lead in (TR178, D782).
+- Sketch tab: Check Sketch for Feature is now Check Sketch, and Fully Define Sketch sits under Construction Geometry, so the window fits 1024 px again (D783).
+- Extruded Cut Print Top: teardrop or flat tops on round holes cut sideways (TR175, D784).
+- Corner Relief: dogbone, T-bone or corner fillet on inside corners for a milling tool (TR244, D785).
+- Hole Tool: button, low head, pan, cheese and washer seat heads, a cross recessed countersunk form, metric fine and large sizes, inch fine, extra fine and small gauge sizes, and drill names (TR253, D786).
+- Merge Faces, and a touching tolerance for Combine and Split (TR261, D787).
+- Move Face rules: keep coplanar, concentric, tangent and equal radius faces moving together, with Suspend all rules (TR263 first part, D788).
+- Move Face: Resize to a typed diameter, and Offset to a size measured from a picked item (TR265 first part, D789).
+- Body tools panels send view picks to the first empty pick box in panel order (D789).
+- Manufacturing Check: process profiles to edit and share, and milling checks with Corner Relief and Snap to Stock Size fixes (TR295 and TR296 first part, D790).
+- Manufacturing Check: laser and sheet metal layout rules and a cutting preflight on the flat pattern (TR297 first part, D791).
+- Fill Pattern: grid, staggered and ring layouts of a seed or a cut shape over a flat face, keeping only copies that fit (TR57, D792).
+- Fill Pattern: the number of copies shows in the panel and formulas can use it (`"count@Fill Pattern 1"`); a closed sketch region can bound the fill; Fit by whole shape or centre; negative margins (TR57, D793).
+- Sheet metal Gusset, and Normal cut: extruded cuts in sheet metal parts cut square to the sheet and show in the flat pattern (TR12, D700).
+- Surface modelling spec (`docs/SURFACE_SPEC.md`) and PLAN.md Phase 8, Surfacing: planned, not built yet (D850).
+
+#### Sketching
+
+- Sketch: Convert Entities copies curve features (contours, projected and composite curves, helices) onto the sketch plane as lines, arcs, circles and splines. Pick the curve in the feature tree or its dotted outline in the sketch (D517).
+- Sketch: arc length dimensions (pick an arc and its two end points), and Shift click on a circle or arc in Smart Dimension measures to its near or far side (D515, D516).
+- Sketch: 3 Point Corner Rectangle, 3 Point Center Rectangle, Parallelogram and Perimeter Circle tools; an option to open the size box at the cursor while drawing (D511 to D513).
+- Sketch: Dynamic Mirror mirrors each new shape about a line as you draw, and splines can show curvature combs (D514).
+- Steadier sketch snaps: a snap holds while the mouse drifts a little, and a click near a line's end picks the end point. The sketch grid is off by default (Preferences, Sketch, Show the grid).
+- Sketch Trim with five modes (drag trim, corner, trim inside, trim outside, trim to nearest) and Extend. Relations and dimensions of removed pieces are removed with them and listed in the status bar.
+- Sketch Offset: chains, part edges, both directions, cap ends with arcs or lines, construction options and an optional dimension. Copies follow their source through an offset relation.
+- Sketch Fillet and Sketch Chamfer on the corner between two lines, picked as a corner point or two lines. Keep constrained corners moves corner dimensions to a construction point; Dimension each fillet off gives later fillets Equal to the first.
+- Convert Entities: straight and round part edges become fixed sketch curves, with Select chain and For construction.
+- Linear and circular sketch patterns with instances to skip (click an instance mark), Add spacing dimension, Fix direction and radius and angle dimensions. Copies follow the size of the original.
+- Slots: straight, center straight, 3 point arc and center point arc, with optional width and length dimensions (center to center or overall).
+- Spline through clicked points with drag set tangent handles; Ellipse and Partial Ellipse as new sketch entity types that the solver, sketch checks and features use with exact kernel curves.
+- Sketch Picture: insert a PNG, JPEG or BMP image into a sketch (embedded in the `.fdef`), move it by dragging, resize it by its corners, set origin, angle, size, flips and transparency in the panel, and scale it with a two handle scale line and a typed true length.
+- Polygon with 3 to 40 sides on an inscribed or circumscribed construction circle.
+- Sketch Mirror about a centerline, a picked line or a straight part edge, with Symmetric relations, as a copy or in place of the originals.
+- Snapping to part geometry in sketches: part corners, straight and round edges, edge midpoints, round edge centres and the part origin, projected onto the sketch plane, snap in every sketch tool, Smart Dimension and drags. Snaps tie the sketch to fixed copies that remember their part edge or corner. When the part changes, the sketch warns and an Update button moves the copies after you confirm.
+- Sketch Text: add, edit and delete text in the open sketch with font, height, bold, italic, a base line from a point at an angle or along a sketch line or arc, text box width, Left, Centre, Right or Full alignment, width and spacing percent, a turn for each character and horizontal and vertical flips. Text extrudes, cuts and wraps like any closed profile.
+- Preferences > Sketch: turn normal on open, show centres, show end point dots, snapping, snap to model geometry, automatic relations, and what to do with an over defining dimension. Changes reach an open sketch.
+- Holding Ctrl while drawing turns snapping off for that move.
+- Feature tree marks under defined sketches with "(-)" and over defined ones with "(+)".
+- Discarding a sketch puts the 3D view back where it was.
+- Selected sketch items use the theme accent; circle and arc centres show as a plus mark.
+- Relations: Coradial and Intersection, Horizontal and Vertical for several points, Collinear for several lines, Midpoint on an arc, Concentric with a point or several circles, Symmetric for lines, circles and arcs.
+- Clicking a relation tag selects the relation; Delete removes it. The sketch panel shows a delete button per relation and the selection's state.
+- Relations panel (Sketch tab) listing every relation with filters and Delete or Delete All.
+- Smart Dimension: a circle or arc with a point, the origin, a line, a part edge or another circle measures to its centre, with Measure To Center, Nearest or Farthest in the sketch panel; a single line gives its length; the angle side follows where the text is placed; a line and a centerline with the text beyond the centerline give a doubled distance; Esc drops the last pick.
+- Snapping in Smart Dimension and while dragging points, arc midpoints, alignment guides to part circle centres, parallel and perpendicular line snaps with their relations, Concentric for circles drawn from a centre, and centre marks on hovered or selected arcs and circles. Snapping to a part circle centre ties the sketch to a fixed copy of it.
+- Dimension panel in the left panel while Smart Dimension is active and when a dimension is selected: value, Driving or Reference, Measure To, and Place Text Automatically.
+- Smart Dimension shows the dimension and its value following the cursor before it is placed.
+- A new dimension that over defines the sketch asks beside it: Make Reference or Keep Driving. Reference dimensions show in grey, in brackets, and follow the geometry.
+- Dimension text can be dragged in Select and Smart Dimension; its place is saved in the file.
+- A doubled distance also works from a point to a centerline.
+- Every two point sketch tool also draws by press, drag and release.
+- Tool panels: For construction, Line orientation (As drawn, Horizontal, Vertical, Angle), and the values of the shape drawn last or the selected entity (point X and Y, line length and angle, circle and arc centre and radius, rectangle width and height). Typed values go through the solver and keep every relation.
+- Line: moving back onto the end point and away again, or the Switch Line and Arc command, draws a tangent arc; the length and angle show next to the cursor.
+- Shift while placing a rectangle corner makes a square with Equal sides.
+- Tangent Arc: leaving the end point sideways draws a normal arc; going back to the end point chooses again.
+- Hovering a relation row in the sketch panel highlights its tag.
+- Edit Sketch Plane (feature tree menu and command) moves a sketch to another plane or face.
+
+#### Boss, cut and modify features
+
+- Thin Feature for Revolve and Revolved Cut, including open profiles and Cap ends (D523).
+- Fillet: Face and Full Round types, a fillet assistant that adds all convex or all concave edges of the part or of one feature, and partial edge fillets by distance or percent (D518, D519).
+- Chamfer: Offset Face and Face to Face types, with a chamfer width option for Face to Face (D520).
+- Draft: Parting Line and Step Draft types. Faces next to picked parting edges are drafted away from the parting line on one side, the other side or both, with the parting line kept in place (D521).
+- Hold Alt while dragging an extrude depth arrow over a part face or vertex to snap the end to it. Click inside a region of a finished sketch and drag its arrow to make a boss or cut without the panel; a small bar then switches Boss or Cut, adds it, cancels or opens the full panel (D525).
+- Values typed in the work area: every length, angle or count of an open feature panel shows as a value label in the 3D view (on the drag handle, or at the first pick). Click a label or type a digit to open the value box there; Tab and Shift+Tab move between labels and Esc puts the values back. Sketch tools with a number (Offset, Sketch Fillet and Chamfer, the sketch patterns, Polygon) show their values in the sketch the same way, and typing a number while drawing a line, rectangle, circle, arc or slot fixes its size and adds the matching dimension.
+- More end conditions. Extrude and Extruded Cut: Through All Both, Up to Next and Up to Body. Revolve and Revolved Cut: Through All (a full turn), Up to Vertex, Up to Face and Offset from Face in Direction 1, and Up to Vertex, Up to Face and Offset from Face in Direction 2. Hole Tool: Up to Next and Up to Vertex. Offset from Face has a drag arrow for the offset. Older files open, rebuild and save unchanged.
+- Selected Regions for Extrude, Extruded Cut, Revolve and Revolved Cut: hover a region in the 3D view to highlight it and click to add or remove it. Picks are kept by name through sketch edits; a lost pick shows an error naming it. A sketch used by several features shows a link row under the later ones.
+- Lofted boss and cut: ordered profiles (sketches or flat faces) with Move Up and Move Down, connection points, Default, None, Normal to Profile and Direction Vector start and end constraints, Close loft and Thin Feature for bosses.
+- Swept boss and cut: sketch or circular profile, a sketch path or part edges, Follow Path or Keep Normal Constant, Minimum Twist, a twist angle or a direction vector, and Thin Feature for bosses.
+- Draft (neutral plane): angle, Reverse, a plane or flat face as the neutral plane, and None, Along tangent, All, Inner and Outer face propagation; the preview shows the changed faces.
+- Shell: faces to remove (or a closed hollow part), inward or outward, multi thickness, and a body pick in parts with several bodies. A face that bends too tightly for the wall is named before the shell runs.
+- Chamfer: Angle Distance, Distance Distance (symmetric or asymmetric, with Flip) and Vertex (three distances or equal). Failing edges are pinpointed with fixes; lost picks are listed first so they can be picked again.
+- Fillet: constant and variable size, multiple radius, faces and whole features as items, Full, Partial and None preview. Each edge is checked before the result is used; failing edges are listed with the largest radius they allow, and Fillet the Rest or Reduce the Radius fixes run only when clicked.
+- Extrude end conditions Up to Vertex, Up to Face and Offset from Face (with Reverse offset and Translate surface) in both directions, draft while extruding (inward or outward), and Thin Feature (One Direction, Mid Plane, Two Direction, Cap ends) with open profiles allowed.
+- Clearer revolve messages for a profile that crosses the axis and for a missing axis.
+- Extrude From list: Sketch Plane, Surface/Face/Plane (flat or curved faces and planes), Vertex and Offset. Depth counts from the start; a lost pick shows an error naming it.
+- Through All for bosses once a body exists, Direction 2 end conditions (Blind, Through All), and Cut Outside for extruded and revolved cuts.
+- Drag handles show a ruler while dragging; near the ruler the value snaps to its ticks (5 degrees for revolves). Dragging an extrude handle back past its start flips the direction.
+- Clicking the value beside a drag handle opens the value box there to type the depth or angle.
+
+#### Holes, threads and fastening
+
+- Hole Tool slots: Simple, Counterbore and Countersink holes can be slots, with a length measured centre to centre or overall and an angle in the face plane (D524).
+- Wrap (analytical): emboss, deboss or scribe a sketch of closed contours on a cylindrical face (from a plane that touches it, lengths kept along the surface) or on a flat face, with thickness and Reverse.
+- Dome: flat faces raised into domes or sunk with Reverse; spherical caps or half ellipsoids on round faces (distance 0 meets the side tangent), and on polygon faces either one smooth surface (Continuous) or a dome rising from each edge.
+- Rib: a wall from an open sketch that grows until it meets the part, parallel to the sketch or normal to it, with thickness on the first, both or second side, Flip, draft (one straight line, Normal to Sketch), Linear or Natural ends and a body pick.
+- Fastening features, each with a Favourites box (save, apply, update, delete, export and import settings): Mounting Boss (screw thread side or head side, pin or pin hole, draft, fins with spacing, draft and end chamfer, on flat and curved faces), Snap Hook (up and hook directions with Reverse, body height typed or from a face, full hook data), Snap Hook Groove (cut in the mating body, following the hook head and its draft), Lip and Groove (along the inner edge of picked rims, with linked sizes and draft) and Vent (boundary, ribs, spars and fill in from sketch curves, with the total and open area shown live).
+- Thread: a real helical thread on a hole or shaft, cut in or extruded on, from a round edge with a start offset, start angle and Reverse; Blind, Revolutions or Up to Selection with Keep Thread Length; size, diameter and pitch, right or left hand and 1 to 4 starts. Tapped holes can carry a modelled thread too. The panel notes that profiles are nominal.
+- Cosmetic Thread: pick the round edge of a hole or shaft, choose a size (diameter and pitch from the standard table), Blind or Full Length and Reverse. The thread shows as rings on the face and is written to the STEP file description; the part is not changed. Tapped holes can carry the same cosmetic thread.
+- Hole Tool with Type and Positions tabs: simple, counterbore, countersink, straight tapped, heat set insert, hex nut trap and captive nut slot holes; ISO metric and ANSI inch sizes from the published standards; Close, Normal and Loose clearance; Blind, Through All and Up to Face; drill point or flat bottom; head clearance, near side and far side countersinks; Clearance, Slip and Press print fits from the printer fit tolerance; an editable insert table; holes on flat and curved faces, placed by clicking or at the points of an existing sketch; and a Favourites box.
+
+#### Curves, patterns, bodies and deformation
+
+- Transform Handles: move arrows and turn rings on a selected body write a Move and Copy Body feature; Scale shows cube handles that drag the factor. Rulers, protractors and the clickable value work as on other handles.
+- Deformation features: Bend, Twist, Taper, Stretch and Flow Along Curve, with trim planes and triad arrows in the preview, a tolerance setting, a warning when the result is approximate and an error when it is not a valid solid.
+- Pipe (solid or hollow, cap ends, along a sketch, a curve or edges, mitred at sharp corners), Array Along Curve (features or bodies, count or spacing, orient to curve, instances to skip), Contour Curves (sections at a set spacing) and a Curvature Graph overlay with scale and density sliders.
+- Curves: Helix and Spiral (pitch and turns, height and turns, height and pitch, or a flat spiral; constant or variable pitch, reverse, start angle, clockwise, taper), Projected Curve (sketch onto faces, or where two sketches meet) and Composite Curve (joins sketch curves, curves and edges). Curves can be used as a sweep path.
+
+#### Reference geometry
+
+- Reference planes: Project (through a point projected onto a face, normal to the face there, nearest point or along the sketch normal) and Parallel to Screen through a point (D526).
+- Reference geometry: planes (offset, at an angle, three points, normal to a curve, mid plane, parallel through a point), axes, points and coordinate systems, with a panel that guesses the method from your picks, a live preview, and Hide or Show in the tree. Sketches can be placed on reference planes.
+- Reference planes in the 3D view: thin outline, light see-through smoke grey fill and the plane name in a corner; accent on hover while picking, selection colour when selected in the tree.
+
+#### Sheet metal
+
+- More sheet metal tools on the Sheet Metal tab: Hem (closed, open, teardrop, rolled), Miter Flange along a chain of edges, Jog, Closed Corner, Break Corner, Rip (sketched or between touching walls), Tab and Slot, Convert to Sheet Metal, Insert Bends, Cross Break, Unfold and Fold (cuts across a bend wrap onto it exactly) and Forming Tool (dimple, louvre, embossed rib). Circular corner reliefs and gauge tables (Load Gauge Table) join the Sheet Metal Parameters. Every tool flattens with the part's bend allowance; cross breaks go to the flat pattern DXF and SVG on their own layer. Swept flange and lofted bend are not built yet.
+- Sheet metal (Phase 5): a Sheet Metal tab with Base Flange (closed and open profiles), Edge Flange (angle, length from the outer or inner virtual sharp or the bend tangent, Up to Vertex, own length per edge, four flange positions, gap and reliefs) and Sketched Bend; a Sheet Metal folder with thickness, bend radius, K-factor, bend allowance, bend deduction, CSV bend tables and rectangular, obround or tear reliefs; a Flat Pattern that is always last, with a Flatten toggle, bend lines, an overlap warning, grain direction and flat size; flat pattern export as STEP, DXF and SVG at true scale with bend lines on their own layer. New sample parts: a sheet metal bracket and its flat pattern.
+
+#### 3D printing and evaluate
+
+- Evaluate, Draft Analysis colours faces by their draft from a direction of pull: positive, negative, needing draft and straddle. The Draft panel can add every face that needs draft in one click (D522).
+- Printing fit presets (Clearance, Slip, Press) on Offset Face, using the active printer profile's fit tolerance. Holes now use the profile's tolerance too.
+- Wall Thickness Analysis in the Evaluate tab: faces on walls thinner than the printer profile's minimum wall are painted purple, or pink where thin in part.
+- Geometry Check in the Evaluate tab: lists invalid faces, sliver faces, tiny edges and gaps on every body, including imported ones, and highlights the one clicked.
+- Print Estimate in the Evaluate tab: volume of the picked bodies and their weight in the chosen material, labelled as a solid part estimate.
+- Overhang Analysis: faces steeper than the printer profile's overhang angle from the build direction are painted red, faces that overhang in part orange.
+- Build Volume: the printer bed and build volume are drawn under the part, green when it fits and red with the axes that are too large when it does not. Lay Face Flat sets the print orientation used by STL, 3MF and Open in Slicer; the model never moves.
+- Printer profiles (build volume, nozzle, overhang angle, minimum wall, fit tolerance, slicer) and editable material densities on a new Printing page in Preferences.
+- Open in Slicer: the part is sent as 3MF to the slicer of the active printer profile, or to the default app for 3MF files.
+- Split for Printing: cut the part to fit the printer's build volume automatically or at picked planes, with alignment pins or dovetail keys at a set clearance, each printed as its own body.
+- Section View (View menu, view toolbar, Evaluate tab): cut the view open along up to three planes or a flat face, with offset, rotation, Reverse and a cap colour. Section 1 can turn about an axis. The part and the file do not change.
+- Measure (Evaluate tab): a floating box that measures lengths, areas, radii, distances, angles and dX, dY, dZ of up to six picked items, with its own units and decimals, a coordinate system and plane to measure in, a history and a copy button on each value. The status bar shows the main value of the selection.
+
+#### Import and export
+
+- Split can save the kept bodies to separate files (FDCAD part, STEP, STL or 3MF), and Wrap has a Spline Surface method that works on any face (D528).
+- Save As writes STEP, STL or 3MF as well as FDCAD parts.
+- Imported meshes: the Measure box shows a mesh picked in the tree (triangles, size, area, volume), the section panel gives where the section cuts each reference mesh, and a converted mesh can be subtracted from the part.
+- DXF and SVG export of a picked flat face or a sketch, at true scale in the part's units.
+- Mesh import: STL, 3MF and OBJ files open as a part or are inserted as a reference body, with a warning above 100,000 triangles and Convert to Solid on request. The original file is stored inside the `.fdef`.
+- STEP import as a base body: File, Open accepts STEP files and Insert, Import STEP Body adds one to the open part. The file is healed (the status bar says what was fixed), its colours are kept and it is stored inside the `.fdef`.
+- File, Export, build123d Script: a one way Python script of the part's sketches, extrudes and revolves for the build123d library. Features it cannot make are written as comments.
+
+#### Equations, configurations and the node editor
+
+- "Keep separate body" is now saved in the part, and the feature's right click menu has Warn About Separate Bodies to show the warning again. Renaming a feature or sketch also renames it in every formula that uses it, such as `"depth@Extrude 1"` (ideas 1 and 3, D527).
+- Node editor (Phase 7): a dockable panel opened from the Graph tab to build geometry and drive values with nodes. Add nodes from a searchable list, wire their ports, group them, add comments, copy and paste, zoom and pan; every edit can be undone. Input, math, list, point, curve, solid, pattern (attractor, Voronoi cells, cubic and octet lattices) and output nodes. Graph output previews as a see-through ghost in the 3D view. Set Variable and Set Feature Parameter drive the part; Add as Feature puts a graph body in the feature tree as a new body or added to or cut from the part. A graph sits at a position in the tree and reads only features above it. Four sample graphs in `samples/graphs`. Parts with a graph save as schema 2; other parts save exactly as before.
+- Equations manager (Tools, Equations): global variables, suppression formulas and equations in three sections, quoted names, picks of dimensions from the view, functions, comparisons and if(), a valid syntax mark, an Evaluates To column, comments and circular reference errors. An Equations folder in the tree lists the variables.
+- Configurations: create, rename, show and delete configurations in a new Configurations tab. Any feature value, sketch dimension, variable or suppression can differ per configuration; value fields offer This, All or Chosen configurations. Parts that use configured values are saved as schema 2; older files open and save unchanged.
+- Design tables: a built in table of configurations and values, stored in the `.fdef`, with CSV import and export.
+
+#### Interface, view and selection
+
+- Four colour themes: Beige, Light Gray (the default), Dark Grey and Stealth (black), each tested for readable contrast.
+- Command tabs regrouped: tool families share one dropdown button on the Features tab; new Bodies and 3D Print tabs. The left panel tabs are icons with their names as tooltips.
+- Isolate (I), Hide or Show bodies (H), Show Hovered Body (Shift+Tab) and Show All Hidden Bodies (Ctrl+Shift+Tab), also in the Solid Bodies folder menu. Hidden bodies are saved in the part; older files open unchanged.
+- Appearance: colour the part, a body, a feature or single faces (the most specific wins), copy and paste colours, and see the colours in use in the tree. Colours are written to STEP and 3MF.
+- Value box stepping: the wheel and the up and down arrows change the value by a spin step, ten times with Ctrl and a tenth with Alt.
+- Shortcut bar search box; a gesture guide shows the gesture commands while right dragging.
+- Shortcuts: View Selector (Ctrl+Space), Hide or Show (H), Hide All Reference Geometry (Ctrl+H), Snap Options (F3), Flat Tree View (Ctrl+T), and a Switch Line and Arc command with no default key, all editable in the shortcut editor.
+- Mouse wheel and Up and Down arrows step values in feature panel fields (Ctrl ten times, Alt a tenth).
+- Right click menus in the 3D view, the sketch editor and the feature tree for every context: empty space, a plane, a face, an edge or vertex, a feature, a sketch, sketch items, a dimension, an active tool and an open feature panel. Shift+F10 and the Menu key open the menu of the selection. Q still opens the shortcut bar and right drag gestures still work.
+- Select Other lists every item under the cursor with type icons; Tab or the wheel steps, a right click on a face row hides it until the list closes.
+- The context toolbar offers the actions of TOOL_SPEC T8 for planes, faces, features, sketches and selected sketch items (relations, construction, Smart Dimension).
+- Deleting a feature asks whether to delete its sketch too.
+- Selection filter bar (F5) with a type per button, Clear All, Select All and F6 to turn the filters on or off; E, X and V switch the edge, face and vertex filters. A small funnel on the cursor shows filters are on.
+- Box selection: left to right takes items inside the box, right to left also items it crosses; Shift adds, Ctrl toggles. In a part the box picks edges by default.
+- Normal To: round faces look along their axis, a feature looks at its sketch, running it again turns the view round, two faces put the first toward the screen and the second at the top, and with nothing selected the view snaps to the nearest standard direction.
+- View menu: Zoom to Selection, a Display Style submenu, and Hide or Show toggles for planes, origins, sketches and sketch relations.
+- The view selector opens at the centre of the view, previews the hovered view with its name, shows the back faces pushed out, and picks the back with Alt.
+- Rollback bar: Up and Down move it, it can be dragged, and Roll Forward, Roll to Previous and Roll to End are in the right click menus. New features go just above the bar. A rolled back feature can be deleted with the features that use it.
+- Dragging a feature in the tree shows where it lands and refuses places where a parent would come after its child.
+- Errors and warnings in the tree: coloured text and marks, a smaller mark on parents of a warning, a message box with Edit Feature and Edit Sketch when a marked feature is clicked, and a list of all problems on the part name.
+- Feature panel fields holding an expression show a button to switch between the expression and its result. Typing ="Name" and Enter makes a global variable from the value after a question, and links the field to it.
+- Shortcut editor: search and category list, a Search Words column the shortcut bar search also matches, a question before a key moves from another command, upper case letters, Caps Lock never acts as Shift, and Remove Shortcut, Reset to Defaults (shortcuts only or everything) and Copy List buttons.
+- Help menu: a short welcome on the first start (shown once, reopened from Help, Welcome), Open User Guide (the guide shipped with the app, read inside FDCAD with no internet connection), Keyboard Shortcuts (every command and its current keys, with a filter) and an About box with the version, the GPL v3 license and the third party licenses (D551 to D554).
+- Error and warning messages now say what failed and what to do next, including the feature value checks and the sketch solver messages. A test checks every message in the source (D550, D555).
+
+#### Samples, user guide and tests
+
+- Sample parts: patterned flange, multibody split part, tapped housing and a printable enclosure with bosses, snap hooks, inserts and a lip.
+- User guide in `docs/user_guide`: a page for each tool group and twelve tutorials built on the sample parts.
+- Performance report for every sample part in `docs/PERFORMANCE_REPORT.md`, and a budget test for the node editor samples.
+- Naming stress tests: seeded random upstream edits on every sample part check that every reference resolves to the right face or fails with a clear error. The long run is skipped unless `--run-slow` is given.
+- Schema review tests: every key the app writes is in the file format specification, and schema 1 files with every optional key open and save unchanged.
+- Phase 2 sample parts: an enclosure with shell and fillets, a lofted handle and a swept spring.
+- Sample parts: configured bolt family, twisted bar and a strap flowed along a curve.
+- An app icon, drawn for FDCAD, at every size from 16 to 1024 pixels, used by the Windows installer, the Mac app and the window (D557).
+
+### Changed
+
+- The six proposals of the 3D view review are closed (D2820 to D2826), with before and after pictures in `docs/screenshots/view_proposals_2026-11-20/`.
+- Thin lines in the 3D view are drawn more evenly at 100 and 125 percent on graphics cards with memory of their own: eight smoothing samples in place of four, where that costs a view no more than a sixteenth of the card's memory. Built in graphics, the Mac, and screens at 150 percent and up, keep four (D2820).
+- A selected face or edge, and the one under the cursor, has a thin line beside its outline, white in the light themes and black in the dark ones, so a highlight reads on a part of any colour. On a red or orange part the selection was hard to see (D2821).
+- The corner triad and its letters grow with the screen scale, and so do the places to click on it. At 200 percent it was half size (D2822).
+- Wireframe shows the part's real edges only. The extra curves across holes, fillets and other curved faces are gone (D2823).
+- Sketches shown in the view, reference curves, the lines to pick an axis from and the marks of errors and lost picks grow with the screen scale, as the part's edges do (D2824).
+- Sketch regions that can be picked are easier to see, and the cursor over a picked region shows more clearly, most of all in the dark themes. The mirror image is drawn with its edges, so its shape can be compared with the part (D2825).
+- No tool's panel makes the left panel wider than its default width any more. Where a panel has less room than it used to take, drop downs are narrower (their lists are not), long words on buttons and tick boxes go on two lines, and controls that sat side by side sit one under the other. Nineteen tools took more room before, among them Extrude, Draft, Helix, Hole Tool and Sweep (D2791).
+- The Fillet and Chamfer panels are as narrow as the tree: the left panel no longer widens when one opens (Fillet took twice the width). Their settings are on three tabs, Main, More and Favourites. The ways to add many edges at once (Add Feature, Add Convex Edges, Add Concave Edges, rules) are in an Add Edges group on More. The Favourites box is narrower in every panel (D2790).
+- Tool panels at the left panel's default width, after a look on a Windows screen at 100, 150 and 200 percent. A drop down with no room for its entry ends it with an ellipsis and shows the whole entry as its tooltip; before, the words were cut at the edge ("Sketch prof"). Every drop down gives 14 px more of its width to its entry. In a group with a long word (Sweep's Options, the Hole Tool) each drop down sits under its word at the full width; where the words are short (Along, in Extrude) the fields keep their one column. A list and its button that do not fit side by side sit one under the other, with the button's words on one line (Split, Loft). Words that must break give two lines of about one length (D2800, D2801, D2802, D2807).
+- Fillet and Chamfer: the three tabs fill their row. Favourites, in every panel: Apply sits under the list and the other six buttons are three pairs. The three ways to add edges on More stand apart. Hole Tool: the bolt circle's start angle shows its placeholder. The tables of the Hole Tool, Curve Through Points, Table Pattern and Vent no longer scroll sideways (D2803, D2804).
+- The 3D view was reviewed on a real screen, `docs/VIEW_REVIEW_2026-11-19.md`, with before and after pictures in `docs/screenshots/view_polish_2026-11-19/`. No theme colour changed and every preference works as before.
+- A part is drawn in the colour it was given: a red part is red, not salmon, and the grey part keeps its cool cast. The lights were set again so the brightest face has the part's own colour, and the feature preview is a little more see through (D2760).
+- Wireframe, Hidden Lines Removed and Hidden Lines Visible can be read in the light themes, where their lines were a pale grey on a pale view. Hidden edges are lighter than seen ones in every theme (D2761).
+- Text in the 3D view (the letters of the corner triad, plane names, values) uses the window's font (D2762).
+- The value beside a drag arrow, and other values shown in the view, sit on a small plate over the preview and can be read (D2763).
+- A selected face, and the face under the cursor, is a flat tint of its colour with its outline drawn, so it looks the same whichever way the face is turned (D2764).
+- The outline round a part is a little thinner, which ends a dot pattern between the turns of a thread (D2765).
+- Reference planes have a thinner outline, plane names and outlines grow with the screen scale, and the origin has the axis colours of the corner triad (D2766).
+- A review of the whole look, `docs/UI_REVIEW_2026-11-19.md`, with before and after pictures in `docs/screenshots/ui_review_2026-11-19/`. No command, label, shortcut or theme colour changed.
+- Node editor: node titles sit on a full coloured band and can be read, the node list shows the name and the category as two columns, and the panel's title matches the rest of the window (D2690).
+- The search box above the command tabs is level with the tab names and stops in line with the card of tools, not at the window's edge (D2691).
+- Property panels: fields in a group share one left edge and their icons sit level with them, lists of picked items have the outline of a field, OK and Cancel are words only, and Help and Pin are two small buttons. The sketch panel has the same header, and group boxes everywhere are cards with a bold title inside (D2692).
+- The left panel is one colour on every tab, "No warnings or errors." is centred, the Message column of the Errors table gets more room, and colour swatches in the tree line up with the other icons (D2693).
+- Message bars start with a mark for a warning or a notice, the button that does what the message asks stands out from Don't Show Again and Close, and the bars are cards with air round them (D2694).
+- The start page says what to do in the middle of the page when there are no recent parts, takes the colour of the panels, and has larger New Part and Open buttons (D2695).
+- Message windows show FDCAD's own warning, error, information and question marks in the theme's colours (D2696).
+- Spin boxes are the height of the fields beside them and their numbers line up with text fields, the progress bar in the status bar is a slim bar without a percent figure, and the two boxes above the tree have an even gap (D2697).
+- The mark on the start page and in About, relation icons in the sketch panels and the marks in the tree's problem box are sharp on 150 and 200 percent screens (D2698).
+- Preferences: both cards of the Gestures page fit the window (the second was cut off), and tick boxes in lists, such as the Shortcut Bar page, look like the other check boxes (D2699).
+- A second pass on the look, from four proposals of the review the owner approved, with before and after pictures in `docs/screenshots/ui_polish_2026-11-19b/` (D2700 to D2703).
+- An information bar above the view has a neutral grey edge in place of a green one, in all four themes. Green now means only that something worked (D2700).
+- Close on a message bar is a cross, and Help and Pin in the property panel header are icons. Each keeps its word in its tooltip and for screen readers, and the pin is drawn pushed in while it is on (D2701).
+- Empty places say what will show in them: the left panel when no part is open, the Variables table with no variables, and the Add Relation and Relations of the selection cards in a sketch before anything is picked (D2702).
+- Right click menus in the tree, the view and the sketch show the icons the same commands have in the menu bar and the command tabs. An entry whose command has no icon yet shows none, and its text stays in line with the others (D2703).
+- A third pass on the look, from the six proposals of the review the owner approved last, with before and after pictures in `docs/screenshots/ui_polish_2026-11-19c/` (D2740 to D2745).
+- Accent coloured text on a row under the pointer and on a selected row is now checked by a test in all four themes. It already met 4.5:1 since the Datum colours, so no theme colour changed (D2740).
+- The unit selector at the right of the status bar has the outline of every other drop down, so it reads as something to click in all four themes (D2741).
+- Every field of a property panel starts at one place, whether its row begins with a word (Along, Type, Size) or with an icon, in every group of the panel. A row that begins with a word no longer shows a small icon as well (D2742).
+- The Plane, Axis, Point, Coordinate System and Section View panels have the same header as the property panel: the tool's icon and name, then OK and Cancel across the panel, with OK as the main button (D2743).
+- In the command tabs, the small arrow of a dropdown button sits just under its label when the label has one line (Fillet, Plane), as it does under a two line label. It was a whole line lower (D2744).
+- The node editor's title bar has larger Float and Close buttons, 24 px each, with FDCAD's own icons; Float turns into Dock while the panel floats. Dragging the title bar and double clicking it work as before (D2745).
+- A selected row under the pointer has a new fill in Light Gray, Beige and Dark Grey, so muted, red, green and accent text on it reads at 4.5:1; it fell short in eight places. A pressed button has the same fill. The step from a selected row is quieter than it was and still shows. Stealth is as before. This closes the last point of the UI review, with before and after pictures in `docs/screenshots/ui_leftovers_2026-11-20/` (D2840).
+- A large saved part opens in seconds, as it was saved, instead of rebuilding every feature first with the window frozen. Press Ctrl+B to rebuild it; any change rebuilds it too (D1106).
+- Opening a part again is much quicker: each feature's result is kept beside the part in the local cache, so the rebuild after opening reuses them. The bike frame now finishes in half a second instead of 41 seconds (D1097).
+- The eye button on the view toolbar: click it to hide planes, axes, points, sketches and the rest at once, and again to show them; rest the pointer on it to tick each kind on or off (D1096).
+- Previous View is no longer on the view toolbar; it is still in the View menu and on Ctrl+Shift+Z (D1092).
+- Opening the bike frame is quicker: Delete and Patch, patterns of face groups and Wrap's Project method do much less work on large curved faces, with the same results (D1090).
+- Clearer view toolbar icons: Zoom to Fit, Zoom to Area, Previous View, Section View, Appearance and Standard Views no longer look alike, and every button says what it does when you hover over it (D1089).
+- The file format description (`FDEF_SPEC.md`) now names every feature type and every parameter: 64 feature types had no section and 42 had parameters missing. The format itself did not change (D1079).
+- The file format description (FDEF_SPEC.md) also names every choice a feature setting can hold and every reference a feature reads: 36 feature types had choice values missing and 10 had references missing. The format itself did not change (D2631).
+- Feature previews (Fillet, Chamfer, Shell, Draft, Move Face, Detailed) are a see-through overlay of the new faces over the unchanged part, always in front of it, with cross lines on rounds and chamfers (PV1 to PV8, D1032).
+- Planning: surface modelling is out of scope again, like assemblies and drawings (D1028). Phase 7B is complete; the parts of its items that were not built are listed in IDEAS.md (D1029).
+- Patterns: a count of 0 or a pattern of suppressed features leaves the part unchanged with a warning instead of failing; a count of 1 keeps just the original, so size families in configurations and design tables build (TR345, D875).
+- Every theme passes the contrast rules: text, accent text, input outlines and view colours are easier to read (D650).
+- Text fields, drop downs, spin boxes, check boxes and sliders have a clearer outline (D650).
+- Selection and pre-selection in the 3D view have their own colours in every theme, and selected edges are drawn thicker (D651).
+- The 3D view is anti-aliased, draws an outline around the part, and shows edges that read in dark themes (D653, D654).
+- New lighting gives the top, front and sides of a part clearly different shades from any standard view (D653).
+- Standard views and Normal To turn the camera smoothly in 250 ms; turning off Animations makes them instant (D653).
+- The axis triad uses theme colours and stays clear of the part (D653).
+- Picking a face from a list (Select Other and similar) highlights only that face, not the whole part (D655).
+- One type scale everywhere: 11 px captions, 13 px text, 13 px semibold titles and 15 px semibold dialog titles (D660).
+- Numbers in value fields and the status bar keep their place while you type (D660).
+- Even spacing on a 4 px grid in panels and dialogs: 12 px padding, 8 px between rows, 16 px between groups (D667).
+- Buttons, fields, check boxes, radio buttons, sliders and spin boxes have clear hover, pressed, checked and disabled looks, with 4 px corners (D663).
+- Buttons, fields and rows are at least 24 px tall; OK and other main buttons are 28 px and filled with the accent colour (D663).
+- Menus have one row height, a fixed icon column and shortcuts right aligned in a softer colour (D668).
+- Scroll bars stay thin until the mouse is over them (D661).
+- A blue ring shows which control has keyboard focus, including the 3D view. It does not appear after a mouse click (D662).
+- Screen readers can name every icon button and the main areas of the window (D665).
+- Warnings and errors in the feature tree have different mark shapes, and the errors list shows an icon on each row (D666).
+- Preferences: Reduce motion turns off all animation. It replaces Animate view changes (D664).
+- Icons: every line sits on the pixel grid, so icons are sharp at 16 px and on high DPI screens; all strokes are one weight (D670).
+- Icons take each theme's own colours, and disabled icons are drawn in the theme's disabled colour (D671).
+- The app icon is drawn bolder at 16 to 32 px so it reads on the taskbar (D672).
+- Error messages say what failed and what to do next, with Show Details and a Copy Details button for bug reports (D673).
+- Rebuild and export progress shows in the status bar only for work longer than 300 ms; a rebuild can be cancelled there (D673).
+- Saved, exported and copied confirmations show briefly in the status bar instead of a dialog (D673).
+- A new part shows a hint under the tree on how to start; empty Recent Files and command searches say so (D673).
+- Closing an unsaved part says the changes will be lost and defaults to Save; deleting used features and discarding sketch changes default to No (D673).
+- The window remembers its size, place, maximised state and panel width, and opens on a visible screen if a monitor is gone (D674).
+- The title shows the file name, an unsaved mark and FDCAD (D674).
+- Windows uses the dark title bar in the dark themes (D675).
+- Unexpected errors are written to the log and shown in one message; the app keeps running (D676).
+- Qt warnings are written to the log (D677).
+- Help, Diagnostics: Copy System Info and Open Log Folder. About shows the build date and the log folder (D677).
+- Preferences: an optional developer overlay with frame and rebuild times in the view (D678).
+
+- The version is 1.0.0. Development builds before the release tag show 1.0.0.dev0; `tools/set_version.py` sets the version in its two places for the release (D556).
+- Rebuilds solve equations once and make cache keys from each feature's own data: editing near the end of a 200 feature part is about 15 percent faster.
+- Crossing curves are no longer a sketch error: they split the sketch into regions. A sketch with crossings and no picked regions uses every outline with its holes.
+
+### Fixed
+
+- The source offer gives FDCAD@proton.me as the address to ask for the source (D2870).
+- The installers carry every licence notice they must: a generated `THIRD_PARTY_NOTICES.txt` gives the version, licence, copyright lines and full licence text of every bundled component (Qt and the code inside it, PySide6, Open CASCADE, FreeImage, LibRaw, VTK, planegcs, Python, OpenSSL and more), and `SOURCE_OFFER.md` gives exact source links and a written offer of source. Both are beside FDCAD.exe, on the Mac disk image and in Help, About. The installer shows the GPL as information, not as terms to accept. PyYAML and typing_extensions, used only for development, no longer ship, and the Windows build takes Python's own OpenSSL (D2860 to D2868).
+- Split's list of bodies is labelled Keep; it showed "keep", the name of its field. Six more bare names are words now: Keep in Intersect, Angle in Circular Pattern's second direction, Type and Pin in Hinge, An axis in Move Face and Offset Face, and Flat in the sheet metal Gusset. A test looks for such names in every tool's panel (D2841).
+- No blank line at the end of the Hole Tool's Options, under Add Faces That Need Draft in Draft, at the end of Shell's Parameters and Multi Thickness, or in Fillet's Variable Radii. A note takes its row when it has something to say (D2842).
+- Fillet, Variable Size: the fields of the control points and of the radii start at one place; they were 8 px apart (D2843).
+- Fillet, Variable Size: every picked edge has its own rows of radii. Before, there were rows for only as many edges as there were control points, so with no control point there was no radius to type, and the other edges were built at the main radius (D2844).
+- A drop down in a tool's panel ends an entry it has no room for with an ellipsis in every case. Before, one that was as wide as its row could cut the entry short, as Front Plane was in Linear Pattern on a Mac (D2810).
+- Where the 3D view cannot run, its message wraps. As one line it set the least width of the part's tab, and in a small window the left panel was pushed below its default width (D2805).
+- A button whose words were put on two lines keeps new words its panel gives it; the old ones came back (D2806).
+- Select Other, the 3D view's right click menu and Paste on a face use the face, edge or vertex under the cursor. Before, they got the whole part, so Paste on a face never found a face. Select Through Faces, picking through a see through body and snapping a drag handle to a vertex work again for the same reason (D2781).
+- A 3D view keeps drawing after other parts are closed. Before, a closed part's view was freed late, and a part still open could stop drawing with "wglMakeCurrent() has failed" (D2780).
+- A spline shows the same inflection marks on a Mac as on Windows. Before, rounding on Apple Silicon could add a mark near the end of a curve (D2706).
+- On a Mac, the low disk space warning lists a second disk that is low. Before, every folder counted as one disk there (D2707).
+- The startup memory check on a Mac counts the memory FDCAD itself uses, the figure Activity Monitor shows, not library files the system maps (D2711).
+- Six tests that held Windows values (keys, pixel exact icons, sizes without a screen) now pass on a Mac. Nothing changes when FDCAD runs (D2708, D2709, D2710).
+- On a Mac with no screen (the test platform), a 3D view shown by itself reports that it could not start. Before, it ended the whole test run (D2705).
+- The type check passes on a Mac: three Windows only system calls are read in a way the checker accepts on every platform. Nothing changes when FDCAD runs (D2704).
+- When another program ends FDCAD from outside, FDCAD's shortcut filter no longer runs on the exiting thread and is no longer blamed in crash.log. The build smoke test now stops the app with kill -9, which leaves no crash entry (D2659).
+- Gyroid and diamond Lattice Fill keep every wall. Before, a wall thinner than an eighth of the cell was partly lost, so the panel's 10 mm gyroid with 1 mm walls held about half its material and could break into many pieces. A lattice too large to build now names a cell that is under every limit (D2674).
+- A value whose formula uses a measured value, such as a Bounding Box length, is built with every digit on a part just opened too. Before, it was rounded on the first rebuild only, so the part could build differently than later in the session (D2673).
+- New parts are named Untitled, Untitled 2 and so on, so tabs and the question about unsaved changes tell them apart. Before, every new part was called Untitled (D2682).
+- The right click menu for selected sketch items offers Select Chain when it is opened from the keyboard or away from the items, and chains from the selection (D2681).
+- A fillet on edges whose rounds run into each other, such as the four corners of a square plate at half its width, names every such edge with the largest radius that works and offers Reduce the Radius. Before, only some of the edges were named, with no radius (D2680).
+- Saved views, tree folders and configurations that share a name, have no name or break the name rules in a file are renamed when the part opens (Top 2, Folder 1), and the warning bar says so. Before, a second view of the same name could not be reached (D2679).
+- Opening a part with damaged configuration entries shows a warning bar that says what was left out. Before, the entries were dropped with no message (D2678).
+- Layer Preview and the Silhouette sketch tool now say so when the part cannot be meshed. Before, they showed nothing (D2635).
+- The Silhouette sketch tool keeps the flat end of a long slanted part as a straight line with sharp corners. Before, it could come out as an arc, or a side as a spline. Long thin triangles no longer use most of the outline's lookup grid (D2634).
+- A cut whose floor ends level with a face beside it (a pocket in a block next to a plate of the same height) no longer warns that it removes no material (D2632).
+- The names of parallel planes in the 3D view, such as a row of offset planes, no longer sit on top of each other: each one sits a row under the last (D2630).
+- A global variable typed with an exponent, such as e3 = 2e3, is no longer reported as a circular reference, and a feature above a graph that types =1e1 is no longer refused for using a variable e1 the graph sets (D2633).
+- Rib, Roof, Vent and the Split for Printing connectors change only the body they were put on. Before, a rib or a roof could join to its body another body it touched, a vent cut a little into a body lying under its wall, and a screw hole for a split bar went on into a body touching the bar's end (D2641).
+- A sweep along a helix with a round profile wider than the pitch now fails with a message. Before, it reported OK with coils that ran into each other (D2649).
+- Escape after Smart Dimension picks a part edge now takes away the construction line it added; so does leaving the tool (D2648).
+- A cosmetic thread longer than its shaft or hole is shown only as long as the face, with a warning. Before, it ran on past the end with no message (D2647).
+- Deleting a feature also takes it out of its tree folder and drops its comment, so a folder whose features were all deleted no longer keeps its name taken (D2646).
+- In a part in inches, a new Move Face, pattern or other body tool starts with small round inch values (0.04 in, 0.4 in). Before, the millimetre defaults were read as inches, so a Move Face started at 1 in (D2645).
+- Three error messages now name the right cause: a fillet edge with a radius of 0, an asymmetric chamfer that is too large (both largest distances are given) and a reference point at a negative distance along an edge (D2644).
+- A tap drill or other table value filled into an inch part keeps its exact length. Before, the M5 tap drill of 4.2 mm was written 0.1654 in and built as 4.2012 mm (D2643).
+- Delete Face with Patch now works on a copy of the body, so it can never change the results kept for earlier features (D2642).
+- Measuring or sectioning a large imported mesh is about six times quicker: finding whether the mesh is closed no longer sorts every edge as a row (D2660).
+- The nut and bolt rebuilds with half as many volume measures: a solid is measured once per rebuild, the thread check measures only the body it cut, and bodies with different face counts are not measured to find identical ones (D2661).
+- The checks after each cut or join look at what the feature changed with one kernel call, not a walk over the whole part per question (D2662).
+- Editing one dimension near the end of a long tree reads each kept feature's data once and each typed value once; the edit near the end of the 200 feature part takes half the time it did (D2663).
+- A cut in a plate with many holes is made only where the tool is, also on plates of a hundred faces or more: generated_200 rebuilds in about 30 percent less time, with the same result (D2664).
+- A pick on a piece of a face that an edit no longer splits off no longer says it was lost at the feature that makes the whole face, when that feature was not changed (D2637).
+- A Strut Lattice whose cells do not fit its body exactly no longer makes and counts struts that lie wholly outside the body. Before, a cell 1 percent smaller could ask to confirm a boolean of many bodies, most of which were then cut away (D2636).
+- A hinge whose two bodies no longer meet on the picked edge, after one body was made a little thicker, now says how far apart their edges are and offers a button to move the hinge to the edge where they meet (D2627).
+- When a picked face was one face of two features (two plates of the same thickness side by side) and a changed value splits it, the error now says so and how far apart the faces are. For two extrude ends it offers to tie both depths to one new variable, so the faces meet again and move together (D2628).
+- A part builds the same in the session that made it as when it is opened from its file: every feature is built from the numbers the file keeps (D2626).
+- A part with a value that cannot be saved, such as nan, in a suppressed feature or one below the rollback bar rebuilds again. Since D2626 every rebuild of it stopped with "Cannot save the value nan" (D2670).
+- A feature holding a value that is not a number, or too large, now fails with an error that names the value, and the rest of the part still builds. Before, the whole rebuild stopped with "Cannot save the value nan" (D2671).
+- A number too large for the part's unit, such as 1e308 typed in an inch part, is refused when typed. Before, it became an infinite length (D2671).
+- In a graph, Arithmetic that gives a result too large or not a number, and Set Variable or Set Feature Parameter given one, now show an error on the node. The driven feature keeps its own value (D2671).
+- A part file or library feature file with NaN, Infinity or a number such as 1e400 in it is reported as damaged instead of opening with a value no rebuild or save can take (D2671).
+- A measured value that is not a number is not passed to formulas that read it (D2671).
+- Insert Part stores the path of a part in the same folder or below relative to the part file, so a folder of parts can move to another folder or computer. Older files open as before (D2625).
+- A typed value may use exponent notation, such as 2e6, 1.5e-3 or 2e3 mm. Before, a pasted 2e+06 failed with "Unknown unit 'e'" (D2620).
+- A dome on the round end of a loft or a scaled sweep is made as on any round face. Before, it asked for Continuous dome, and a distance of 0 failed (D2621).
+- A test run that copied a feature no longer ends with a crash after every test has passed (D2617).
+- Lattice Fill with the panel's values (10 mm gyroid, 1 mm wall, 1.2 mm skin) now works on curved parts such as the twisted sweep, in seconds where it took three minutes and was then refused. On the swept spring a 15 mm cell fits where 44 mm was the finest, and a honeycomb fill no longer takes two and a half minutes (D2624).
+- Layer Preview on a part with spline faces (a loft, a thread) now shows in under a second instead of 10 to 20 s with the window held (D2615).
+- Shell fails in about 1.5 s instead of 16 s when two faces are too close for a wall on each, and names both faces (D2616).
+- A sketch on a part with spline faces opens in under a second; on the nut and bolt's Top Plane it took 17 to 22 s (D2683).
+- The Silhouette sketch tool on a part with spline faces now gives its outline in under a second. On the nut and bolt it took 37 s from the side and more than eight minutes looking down the bolt, with the window held (D2618).
+- Edge Profile, Ring Groove, O Ring Groove, Shaft Shape, Mark and Wrap change only the body they are put on. A groove on a shaft no longer cuts into a hub on it, a hex in a bore no longer joins a pin in the bore, and an emboss no longer joins a block it touches. Lattice Fill fills touching bodies each on its own instead of failing (D2622).
+- Lattice Fill with a skin on a part of flat faces no longer spends seconds checking whether its lattice pieces cross, and a cut whose tool has many pieces with overlapping boxes is checked in one step: 18 s instead of 255 s for 71 pieces (D2658).
+- A cut, join or intersection whose tool is made of crossing pieces now gives the right result. Before, such a tool could leave the part uncut with no message (D2623).
+- The fix that ties a pocket floor to a plate top beside it now keeps them level when the value changes again. Before, a thicker plate made a deeper pocket and the face split again (D2656).
+- A hinge off the edge where its bodies meet finds the edge to offer in a fraction of a second on a part of many bodies. On the gearbox it took 8 s (D2657).
+- A boss or cut that the kernel leaves out on a large part is now an error, as one of the wrong size was on a small part. A point inside each tool must be inside the part after a boss and outside it after a cut (D2619).
+- A face pattern of a boss top works again, and Delete Face on the top of a boss alone removes the boss as before. The quick refusal of D2608 is now kept for parts with free form faces, where the kernel takes minutes (D2613).
+- Offset Face on a flat face next to flat faces, on a part with threads or other free form faces, now takes a fraction of a second. On the nut and bolt head it took 37 s (D2612).
+- Saving a part again with no change now writes the same file. Before, the stored solid came out a little different each time (D2611).
+- With temporary axes shown, a sketch on a part with two counterbored holes, or the nut and bolt, lost all snapping to the part. It now snaps as on any part (D2610).
+- Opening a sketch on a part with threads no longer holds the window for about 30 s. The part's outline for the Silhouette tool is now worked out only when that tool is picked (D2609).
+- Delete Face on the end of a boss or a loft, which cannot be healed, now says so at once. Before, on a lofted part it worked for three to four minutes first (D2608).
+- A shell that the kernel cannot make on a part with many faces now fails in about half the time, and Cancel stops its search for a face to skip at once (D2606).
+- Lattice Fill no longer runs for many minutes and takes all the memory when a gyroid or diamond lattice is put in a body with large curved faces, such as a swept spring. It now says the lattice is too costly to fit and which cell size fits (D2605).
+- When the kernel can round several edges each on its own but not all in one fillet, the error now says so and points to the fix that rounds them as separate fillets. Before, it said the radius was too large (D2604).
+- Layer Preview took 40 s on the threaded nut and bolt sample; it now takes about 16 s (D2603).
+- A small edit could lose fillets, chamfers and sketches picked on pieces of a split face: two pieces could swap their numbers, and the reference was lost though the picked piece had barely moved. On the bike frame a one percent change to a chain stay lost the welds at the dropout. The piece is now found by its position, with a warning to check it (D2602).
+- On a large part, Push/Pull and Move Face of one flat face took minutes (over three each on a part of 5000 faces). They now take about a second (D1105).
+- Delete Face could report success while the hole it was meant to fill stayed open (one face of a hole in two faces was picked). It now says it changed nothing and asks for every face of the hole (D1104).
+- Delete Face, Remove Fillets and patterns of face groups could split and rename faces of other bodies of the part, so after an edit the part could differ from a full rebuild. They now work on their own body only (D1101).
+- Lattice Fill with small cells in a large body could hang FDCAD. Building the gyroid and diamond lattices is now about 16 times quicker, and a lattice too fine to build in good time is refused with a cell size that fits (D1099).
+- A Rib on a part of several bodies asked for its body even when its sketch lay inside one of them. It now uses that body (D1098).
+- The hover colour on curved faces such as tubes was patchy (D1095).
+- A selected face, most of all on a curved tube, was covered in blotches of the part colour. It is now drawn evenly in the selection colour (D1094).
+- Hide All Types failed with an error after the Hide or Show Items menu was opened (D1093).
+- Turning Planes, Axes or Points off left them on screen until the part was rebuilt. They now go at once, and while you pick a plane for a sketch only the three main planes and the planes on show are drawn (D1092).
+- A part you opened and closed without saving was built again in full the next time you opened it. Its shape is now stored, so it shows at once (D1091).
+- Tooltips stopped showing after you clicked or turned the part in the 3D view on Windows. They now always show (D1088).
+- A Geometry mirror or pattern of features that had to copy from the part's history left out the copies of any pattern among them: a mirror of a foot and its pattern copied one foot (D1081).
+- Corner Relief on a pocket in a body that sits on another body cut only some of the corners, because the kernel's inside test counts a shared face twice (D1082).
+- The two leaves of a pin hinge overlapped where each leaf's knuckles stood, so a printed hinge came out fused (D1085).
+- Finger Joint and Half Lap did nothing on plates far from the origin, and Replace Face said a face far from the plane's origin already lay on it (D1087).
+- Lip and Groove now warns when the lip runs into the other body, so the two halves would not fit (D1083).
+- Fillet now warns when a picked edge is the seam of a round face, which it cannot round (D1084).
+- An Extrude cut that removes no material, such as one pointing away from the part, now says so and suggests Reverse direction (D1086).
+- In a part with a sheet metal body and other bodies, a plain Extrude cut in the sheet removed every other body, and a cut in any sheet but the newest was not made (D1080).
+- Adding a new separate body with Extrude (or any boss) could join two other bodies of the part that only touched each other, such as blocks locked with Interlock teeth (D1078).
+- Lightening Pockets and Living Hinge on a plate cut on through another body lying on the plate, and Landing Pad could join other bodies that only touched each other. Each now works on the body it was put on (D1077).
+- In a sheet metal part with walls that face each other (a tray with four walls), Break Corner and Closed Corner on the back or left wall changed the front or right wall instead, with no message (D1071).
+- Perforation on the second of two walls in one plane failed with "no slot falls on the wall", and Flat Marks drawn there landed on the first wall (D1072).
+- In a part with more than one sheet metal body, Cross Break or Flat Marks on one sheet made an extra copy of another body, and the next feature of that sheet then removed the other bodies (D1073).
+- On a wall with a hole in its middle, Cross Break, Gusset, Tab and Slot and Leave Out said the face is not a face of a wall (D1074).
+- Switching a Flat Pattern on in a part of several bodies hid every other body. They now stay (D1075).
+- Fold could say "a feature after Unfold adds material" for a cut that only removes it (D1076).
+- On a part with bodies that share many edges (blocks locked with Interlock teeth), every later feature took seconds longer. The check for bodies touching along an edge now looks only at the bodies a feature changed (D1070).
+- A cut or join could quietly damage the results kept for earlier features, so a rebuild after an edit could start from a damaged body. Every cut, join and intersection now runs in the kernel's safe mode, which leaves its inputs as they were (D1067).
+- Heal Edges could leave a valid part not valid, and changed the results of earlier features. It now works on a copy, and a body it would make worse stays as it was, with a warning (D1066).
+- Faces made by Indent and Half Lap could get other numbers when the part was opened again, so a reference to one could point at another face. They are numbered by position now (D1068).
+- Past about 165 features on a large part, every edit built the whole part again, 90 seconds or more each time. The rebuild cache counted every face of the part for every feature and filled up; it now counts what each feature added (D1065).
+- Rounding or chamfering edges on a part with many faces could take half a minute; it now takes a fraction of a second (D1058).
+- A cut or hole through two bodies that touch (a cover on its flange) could leave the drilled plug behind as a body, or leave one body whole. Each body is now cut on its own (D1056).
+- Stone Setting, Face Seats, Sprue Tree and the patterns could join other bodies of the part that only touched each other, with no message. They now join only the bodies they reach (D1055).
+- Lightening Pockets on a large plate could leave a broken solid with no error (D1054).
+- A flat, hexagon or keyway on the middle step of a stepped shaft cut the shaft into three bodies (D1059).
+- A knurl below a shoulder removed nothing and left a warning. It now stops at the shoulder (D1060).
+- A Section Cut was lost as soon as a feature was added after it (D1063).
+- A Sensor, Contour or Parting Line could show the value from before a change to the part (D1064).
+- Split, Intersect and Split for Printing could say the plane misses the part when the part is far from the origin (D1062).
+- An inlay with round letters warned that bodies touch along an edge, and every feature after it repeated the warning. The warning is now given once, by the feature that causes it, and only when it is true (D1057).
+- A primitive made as a separate body on purpose no longer warns that it made a separate body (D1061).
+- A wrapped shape could be lost with no error: a badge wrapped on a tube built and added nothing. The kernel can make the raised solid inside out, and its fuse then ignores it. Such solids are now made again the right way round, in Wrap, Rib, Modeled Thread and thread relief (D1049).
+- A part could open from its file with features in error that had built without one ("missing reference ...#1"). Two causes are fixed: the lost wrap above, and mirror image faces that could swap their numbers on the last digits of the arithmetic (D1052).
+- A dome on the end of a swept bar could build and then fail when the part was opened again ("the dome cannot rise from every edge of this face"). The kernel sometimes returns nothing for the dome's shape; it is now asked again (D1053).
+- A fillet or chamfer that fails on a large part took up to a minute to say so, and could hang. The search for the largest size that works no longer goes below a sixteenth of the size asked for, a smooth chain of edges is tried once, and the extra fix buttons are left out when the answer has already taken 4 seconds (D1043).
+- When two picked edges lie between the same two faces, a failed fillet called both "edge 1" and Fillet the rest removed both. Each is now named by its place in the list and only the failing one is removed. The second of two such edges could also not be picked at all: a click on it did nothing (D1043, D1051).
+- A Mounting Boss on a hollow tube could fill the tube from wall to wall and come out of the other side (D1046).
+- A Mounting Boss on a curved face could not be patterned: each of two messages said to do what the other refused. A Geometry pattern of features now copies what the features added and removed when their faces cannot be patched away (D1045).
+- Wrap with the Project method failed on parts the kernel cannot offset ("the body could not be grown by the height"): text on one tube of a frame. Only the picked face is made thick then (D1044).
+- "Created a separate body" stayed on a feature after a later feature joined that body to the part. It now goes, and comes back if the joining feature is removed (D1047).
+- A mirror or pattern of features with Geometry pattern on could warn that a "picked face was found by its position" though no face was picked (D1048).
+- The thread marks of a tapped hole ran out of the part when the plate was thinner than the thread depth. They end with the material (D1050).
+- A note in a feature's panel (for example "Corner Relief 1: no edges are picked") stayed in the panel after that feature was cancelled or finished, and was listed again in the panel of every feature opened after it. Each panel now shows only its own note (D1042).
+- Compare Bodies: the choice "STEP file..." was cut short in its box (D1042).
+- Fillet on a side edge of a block whose top edges are already rounded with the same radius failed ("the radius is larger than the faces next to these edges allow"), though it is one of the most common things to round. The geometry kernel cannot build a round that has to run past the end of its edge. FDCAD now builds these rounds itself on straight outside edges between flat faces: with rounds of the same radius past the end the three meet in a ball corner, and at a chamfer or with another radius the round is cut straight through. An end against a wall or a floor stops flush as before, and a radius wider than the faces is still refused (D1041).
+- A feature that failed was reported in the status bar as "built; the solid did not change". It now reads "failed: the part is unchanged" and points to the Errors tab (D1041).
+- Starting a feature (for example Fillet or Shell) while the Appearance panel, the Section View panel or a reference plane panel was open left that panel in front: the feature was open, but its fields, OK and Cancel were hidden. The feature's panel now comes in front. Appearance closes, Section View closes as with its OK so the section stays on, and an unfinished reference feature closes as with its Cancel. Closing Section View while a feature is open goes back to the feature's panel, not to the tree (D1040).
+- The property panel's Pin, OK and Cancel buttons drew over each other in a narrow panel. OK and Cancel now have their own row under the tool's name, and the left panel widens to fit the fields of the open tool (D1034).
+- The node editor opened with the graph shrunk to a speck and took most of the window from the 3D view. It now opens at about two fifths of the window with the whole graph in view (D1034).
+- Mass Properties showed rounding noise such as 4.2e-16 where the value is 0. Such values now read 0 (D1034).
+- The Properties window opened too narrow to show its columns, and the filter box of Equations was cut off. Both open at a usable size (D1034).
+- The Variables tab hid its Expression and Value columns in a narrow panel. Its columns now share the width, and the left panel widens while the tab shows (D1034).
+- Suggest Orientation drew Cancel as its main button; Apply is the main button now. The Manufacturing Check table cut its rule names off, and the Draft Analysis plane box cut its plane name off (D1034).
+- The Preferences window was taller than a 1080 px screen, so its OK and Cancel buttons could be off screen. Its pages now scroll and the window fits (D1034).
+- Code checks pass again: formatting, lint and type errors that built up while CI could not run are fixed, including dialog fields that hid Qt's own methods (D1030).
+- The window fits a 1024 px wide screen again: the 3D Print tab's analysis tools have their own Print Analysis group. The nut and bolt sample's bolt thread is 17 mm, so it builds on Windows. The property panel help button has the full 24 px size (D1027).
+
+- The view orientation popup no longer blocks, so the app sweep does not hang on it (D2005).
+- Dragging a sketch no longer refuses to move when the solver's own arc rules repeat each other, as with round offset corners (D945).
+- A fillet that fails quotes the same largest radius as its Reduce button; a circular pattern spread past 360 degrees warns; a node editor body added to the part warns when it comes apart; graphs over 500 nodes are refused when they run, not only in the panel; a graph whose driving nodes fail is marked in the feature tree; the Bodies box keeps warnings about the picked bodies; more dialogs are freed after use; the node editor guide gives the rule for lists of different lengths (D746).
+- Design table CSV export keeps cells starting with = + - or @ as text so a spreadsheet does not run them, and import undoes it; the sketch solver accepts only known relation types; the shortcut bar says how many matching commands cannot run now; the flat face toolbar and the face right click menu offer Hide Body, and a menu opened from the keyboard offers Select Other; the contrast check measures tooltips and disabled text (D745).
+- Export asks before replacing a file whose name only matches once the file ending is added; quitting waits for an export being written; saving during a rebuild no longer stores the old shape in the cache; Paste with no part open says so; a "suppressed" value written as text reads as meant, and other values are refused; tests pin that unknown schema versions are refused (D744).
+- Sketching: a rectangle with no width or height says why nothing was drawn; typed sizes that could not become dimensions, or became reference dimensions, say so; Scale Entities keeps each dimension's unit and formula; the fillet limit shows inches too; the dynamic mirror note no longer points to Mirror for splines; the sketching and typing values guides list every function, the rounding rule, the snaps and the tools that take typed sizes (D743).
+- DXF import knows more units (mile, micron, nanometre, angstrom, decametre, hectometre) and starts on inches for an imperial file with no unit; SVG flat exports are sized to part arcs, not their whole circles; a cut short binary STL says it ends early; a STEP file with no solids points to Import Mesh (D742).
+- Opening a STEP or mesh file adds it to Open Recent, and opening it again switches to its tab; node editor delete, copy and paste keys leave a focused text field alone; a damaged node clipboard and node edits with no part say so; the guide lists the Mac Control keys, the focus each key needs and the fixed sketch keys (D741).
+- Thin extrude and revolve warn that Selected Regions are not used; Keep Normal Constant with Minimum Twist warns; Split warns when a ticked body number no longer exists; clearer messages for Sketch Pattern, Forming Tool and Wrap on a cone; the boss and cut, modify, reference geometry, patterns and design table guides state the limits the audit found missing (D740).
+- The heat set insert table names a bad row instead of dropping it; Edge Flange warns when edges past the eighth share Length 1; Export Flat Pattern adds the file ending when it is missing; the curves, deform, holes and sheet metal guides state the limits and behaviour the audit found missing (D739).
+- Small audit fixes: a blank cell in a bend or gauge table and a repeated gauge name are errors instead of shifted values; a count a hair off a whole number is accepted; spirals and variable pitch curves with very many turns warn that they are less exact; Slot ticked on a hole type that cannot slot warns; Curvature Graph says when it fails instead of showing 0 edges; tab titles keep an ampersand; parts with a byte order mark open, and a key repeated in a part file is refused (D738).
+- New robustness tests (spec 2 section 21): every sample rebuilds after tiny and ten percent changes to every length, every face of every sample has a name, pattern counts from 0 to 100, values unchanged by saving and opening, rebuild time steady over a hundred edits, and sketches square to every face (D737).
+- Docs: tutorials name the right tabs (Print Estimate, Build Volume and Split for Printing are on the 3D Print tab, Twist on the Bodies tab) and the right steps and checks; the guide is corrected for H, Reduce motion, the trackpad, renamed features in formulas, the node editor's Add Node, value labels and the sheet metal Corners group; PHASE5_SPEC notes what was built differently (audit A items 9, 25, 28, 32, C items 4 to 7, 14 and 15, D7, spec 2 section 20 item 16).
+- Deleting a feature that a node editor graph uses says so, and a graph placed after it stays in place; renaming a feature value rewrites node editor formulas too, with undo; the Reset to Defaults button says it resets input settings only (audit D3 items 5, 6 and 16, D735).
+- Stepping a value with the arrow keys or the wheel keeps a typed unit ("5mm" stays in millimetres), and says why a formula or a length at its smallest does not step (audit D2 item 5, D734).
+- Insert DXF says what it left out (blocks, hidden layers, 3D polylines and meshes, Z values flattened), and a form feed in a text no longer fails the file; parallel STEP exports keep their own schema; 3MF support and surface objects are left out of an import (audit D items 11, 14 and 17, D733).
+- On a Mac the main Delete key deletes the selected feature in the tree; the guide explains how Sketch Driven Pattern numbers its points (audit B item 10, C item 3, D732).
+- With Selected bodies, Up to Next and a boss's Through All look only at the picked bodies (audit B item 12, D731).
+- Flow Along Curve takes a curve feature as its path in the panel; node editor curve inputs made of several curves are joined when they touch, and say so when they do not, instead of using only the first (audit B items 17 and 18, D730).
+- A revolve of a sketch with no line says to add a centerline or pick an axis; Sweep and Loft thin features no longer offer Cap Ends, which they do not use; the guide now says what Up to Body, Partial preview, Skip numbering and failed pattern copies really do (audit B items 5 to 7, 9, 11 and 13, D729).
+- Mounting Boss builds when the fin count is raised from 0 by a formula or design table; the inch clearance hole data no longer claims a standard it does not follow, and the guide says the inch close and normal holes are drill sizes (audit E item 9.1, D13 item 1, D728).
+- Sheet metal: a flange can use the folder's loaded bend table while the folder uses K-factor; the flat size shows without the bounding box tick; No gauge brings back the typed thickness and radius; Cross Break lines stay on L shaped walls; Forming Tool says which curves it left out. Array Along Curve says when ticked features are not copied because bodies are picked (audit A items 1 to 5 and 7, D727).
+- Parts from a newer FDCAD open and keep what they hold: parameter values with extra keys or of new kinds no longer make the file damaged, and unknown keys on graph nodes, saved views and tree folders are kept when saving (audit D5 items 1 and 2, D726).
+- Autosave writes in the background, so a large part no longer stalls the window, and a failing autosave says so once (audit D3 item 10, D725).
+- Recovery: Cancel keeps the autosaved copies for the next start, unreadable copies are set aside instead of being tried every time, and a recovered part opens unnamed when its file was saved again after the crash. Design table OK asks before deleting configurations the table no longer lists, and CSV export has a byte order mark so spreadsheets read every name (audit D3 items 9 and 11, D724).
+- Save no longer freezes on large parts: the shape cache is written in the background and in linear time. Save flushes and reads the file back before it replaces the old one; Save As onto a file open in another tab is refused; repeated feature ids make a file damaged and a low next id or a dangling rollback is repaired on open; formulas that give infinity say so at once (audit D3 items 2, 7 and 13 to 15, D723).
+- DXF: two vertex closed polylines with bulges come in as full circles, entities seen from below are no longer mirrored, blocks (INSERT) are read, and paper space, invisible entities and frozen or off layers are left out. OBJ relative indices are read right. STEP import says which curves, points and loose faces it left out (audit D items 1, 2, 4 to 6, 8 and 15, D722).
+- Sketch toolbar no longer shows the last relation twice; Esc leaves Isolate; Add as Feature and the automatic Flat Pattern go above a rollback bar; the Solid Bodies filter picks bodies and the Planes, Axes and Sketches filters say to use the tree; temporary axes use the accent colour; every feature gets the tree toolbar; Normal To and Zoom to Selection in a sketch say what they did (audit C item 8, D11 items 1 to 7, D719).
+- Plane, Axis and Point can use the points, lines, arcs and circles of earlier sketches; reference planes you made can be chosen in Up to Face, Offset from Face, From Surface, the Draft neutral plane, the Loft and Sweep directions and the print panels (audit B items 3 and 4, D718).
+- Linear Pattern Up to reference works with an edge, a round face, a plane or a flat face at any angle; Propagate Colours now colours pattern and mirror copies (audit B items 1 and 2, D717).
+- The Hole Tool no longer makes holes at construction points or the centres of construction circles; Combine warns when added bodies stay apart or a subtract tool misses; Split with a sketch ignores construction lines (audit A item 6, B items 15 and 16, D716).
+- Import Mesh asks the unit of an STL or OBJ file; 3MF objects made of components are read and mirrored items are no longer inside out; Scale warns that it leaves reference meshes at their size; DXF and SVG export say how many sketch items (text, curves that could not be made) they left out (spec 2 section 20 items 20 and 21, audit D items 7 and 9, D715).
+- 3MF files with "&" or "<" in the part name are now valid; face colours survive Lay Face Flat in Export 3MF and reach Open in Slicer; Save Bodies uses the part colour. New File, Export, Bodies writes each body (for example split pieces) to its own file. A new Split for Printing uses the active printer profile's build size and fit, and Print Fit on a heat set insert warns (spec 2 section 20 items 11 to 13, 17 and 18, D714).
+- Swept Boss with a circular profile and Thin Feature ticked now says to use Pipe instead of making a solid rod; the Polygon option reads "Corners on the circle" instead of the misleading "Inscribed circle"; the guide no longer says Sweep and Loft start a sketch (spec 2 section 20 items 5, 6 and 8, D713).
+- Hole Tool holes can be picked as pattern and mirror seeds; reference axes and the origin's axes can be the axis of a circular pattern, Move Face, Move and Copy Body or revolve; a revolve takes a round face's axis when you click the face (spec 2 section 20 items 1, 3 and 4, D712).
+- Mirroring or patterning an edge flange or another sheet metal feature, as a feature or by its faces, now gives one message that says to use Edge Flange instead; the two old messages sent you back and forth (audit E item 7.7, spec 2 section 20 item 7, D711).
+- Quitting with several unsaved parts asks about each first and closes nothing until all are answered, so Cancel keeps every part. A stopped rebuild says so instead of "Rebuilt in", and Export refuses a partial or out of date body; an export of a part with errors or rolled back says what the file leaves out (audit D3 items 4 and 12, D710).
+- Damaged and hostile files: a malformed 3MF can no longer hang FDCAD; 3MF packages, embedded blocks and sketch pictures have unpack limits; ASCII STL with a huge word, DXF values that are not numbers, very deep nesting or huge numbers in a part file and very deep formulas all give a clear damaged file or formula message; DXF end points join in linear time (audit D12 items 1 to 8, D709).
+- A feature pasted into another part no longer keeps the first part's face and edge picks, which could cut into an unrelated feature: they are cleared with a note, and formulas become values. References into the feature's own sketch follow the pasted sketch (audit D3 item 3, D708).
+- Splines and partial ellipses in a sweep, pipe, thin feature or rib path are used instead of being dropped; a spline alone is a path. Flat paths keep the section square to their plane, so a spline that changes its bend no longer gives a wrong volume (spec 2 section 20 item 2, audit E item 4, D706, D707).
+- A spline or ellipse shape beside curves that cross no longer fails the whole sketch (audit D2 item 1, D706).
+- Sketch tools that cannot use splines and ellipses say so when you click one, and Offset's Select Chain says when it stops at one (audit D2 items 2 to 4, D706).
+- Swept Boss and Cut with a twist angle now keep the exact volume on long and bent paths; they were up to 5 percent off at 70 mm and failed at 100 mm. New sample `twisted_sweep` (spec 2 section 19 item 1, D703).
+- A face merge that fails or gives an invalid result no longer throws away a valid body: the unmerged body is kept. The lattice graph sample was affected and is now valid (spec 2 section 19 item 2, D704).
+- Booleans whose result has an impossible volume now fail with a message instead of reporting OK (spec 2 section 19 item 4, D705).
+- Changing the part's units no longer rescales the model: lengths typed as bare numbers are rewritten with the old unit ("25" becomes "25mm"), in one undoable step (audit D3 item 1, D702).
+- A reference to a split face piece, a position numbered face or an imported face no longer moves silently to another face when an upstream edit renumbers them: it is checked against where it was picked, and gives a warning with the right face or a missing reference (audit E item 13, D720).
+- The top of a mirrored body faces up: sketches on mirrored faces face out of the part, and features built from them grow the right way (D721).
+- Fillet and Chamfer round the edge piece that was picked when two faces meet along several edges, and every piece of an edge an earlier edit split (D606).
+- A message about lost picks names the earlier feature that failed or is suppressed (D600).
+- Modelled threads that the kernel cannot cut fail with a clear message instead of cutting nothing (D607).
+- Shell with a wall as thick as the part fails instead of returning the solid part (D607).
+- Loft with profiles on one plane, a closed loft of two profiles, or a missing profile fails with a clear message (D607).
+- Geometry pattern of a pattern also copies the pattern's seed (D604).
+- Sketch Pattern and Hole Tool no longer use the points that shape ellipses and splines (D605).
+- Reference plane, point and coordinate system values follow variables and formulas (D608).
+- "Fillet the rest" keeps each remaining edge its own radius (D609).
+- A vertex chamfer with three distances stays unequal when edited (D609).
+- Thread panels keep a size that is not in the table (D609).
+- Partial fillet over the whole edge works (D609).
+- Circular pattern direction 2 needs an angle above zero; a linear pattern direction 2 parallel to direction 1 is refused (D602).
+- Mirror and pattern copies that miss the part say what to change (D603).
+- Edge dome on a face that is not convex, and Mounting Boss errors, have clear messages (D609).
+- Split for Print has Bodies to Cut, so only the picked bodies are cut, and an edge click names the right faces (D621).
+- After Split or Split for Print, a boss on one piece no longer joins the pieces, and later features no longer warn that the pieces touch only along an edge (D620).
+- Lip and Groove works on the cut rim of a split enclosure: the lip goes on one piece and the groove in the other (D622).
+- Snap Hook and Mounting Boss join only the body they stand on (D622).
+- The build volume check measures each body of a split part on its own (D622).
+- Lay Face Flat no longer takes a face picked later for another tool.
+- Snap Groove keeps the body order, accepts a gap height of 0, and refuses to cut the hook's own body.
+- Preferences no longer gets slower each time it is opened.
+- Node inputs typed as formulas, such as a radius of =R * 2, follow changes to the variables they use (D627).
+- Renaming a variable keeps its values in every configuration; deleting it removes them (D626).
+- The Variables tab accepts edits when a variable uses a feature value, and keeps variable comments (D626).
+- Renaming a row in the design table renames that configuration instead of replacing it (D626).
+- Pasting an Add as Feature node adds its graph body, deleting the node removes it, and new graph bodies never reuse a name (D627).
+- The node editor's settings column is wide enough for every node's settings, in every theme (D627).
+- The equations manager refuses a variable name that no formula could use (D626).
+- Design table CSV import reads semicolon and tab separated files, and a failed export says what to do (D627).
+- Values of a deleted feature are no longer saved with the configurations (D626).
+- Graph errors name nodes by their title; the configurations panel clears its rename message when the old name is typed back.
+- Array Along Curve fuses copies that overlap each other, so the volume and body count are right, and warns about skip numbers that do nothing (D628).
+- Contour Curves and Projected Curve accept planes, reference planes and reference axes as the direction, and contours can be sweep paths and composite curve items (D629).
+- Projected Curve and Array Along Curve warn when a picked face was found again only by its position; a solid feature as a path says "not a sketch or a curve".
+- The Contour Curves panel is no longer cut off, and empty lists in the curve panels say what they take.
+- Flat Pattern no longer warns about cuts, holes or fillets on flat walls, or about planes, axes, points and sketches; a cut across a bend says to use Unfold and Fold (D623).
+- Base Flange, Convert to Sheet Metal and Insert Bends say the part is already sheet metal instead of adding a feature that fails (D625).
+- Unticked options that start ticked (Show bend lines, Show bounding box, Trim side bends, Merge, Uniform) stay off after OK and when the panel opens again (D624).
+- Editing a saved sheet metal feature and pressing OK no longer changes its own relief, own bend or trim settings (D624).
+- Flatten says why nothing happens when the Flat Pattern is suppressed or below the rollback bar (D625).
+- In a part in inches, the sheet thickness, bend radius and loaded gauges stay in mm (D625).
+- Edge Flange and Hem no longer leave a tiny loose piece at a corner when the gap is wider than the relief (D625).
+- Features below a failed Base Flange name it and say to fix it.
+- Command tabs: Draft, Shell, Rib, Mirror and the Hole Tool have their own buttons, the Features tab follows one left to right order, and dropdown arrows sit under or beside the label instead of a corner, with even button widths on every tab (D640 to D644).
+- Drag handles on feature previews are arrows (head and shaft), and the section view has a drag arrow for its offset (D579).
+- Command search box is at the top right of the command tabs (D577).
+- Section view starts through the middle of the part instead of on its bottom face, and keeps its settings when reopened (D580).
+- Edges and vertices are picked within 6 pixels, so Fillet and Chamfer edges are easier to click (D580).
+- Appearance is in the view toolbar and in the right click menus of faces, features and the part (D580).
+- Property panel: failed Fillet and other check messages wrap inside the panel, fix buttons shorten to fit, and the panel no longer scrolls sideways (D576).
+- Save and autosave keep the sketch that is open; Save closes it as OK does first (D590).
+- Switching to another part with a bad value in a sketch's value box keeps the sketch open instead of leaving it behind (D592).
+- Edit Sketch on another sketch no longer drops the open sketch's changes when one of its values is wrong.
+- Save As keeps dotted names ("rev 1.2" saves as "rev 1.2.fdprt") and asks before replacing a different file (D597).
+- A second FDCAD no longer offers or deletes the autosaves of one that is still running (D597).
+- A recovered part keeps the file it came from, so Save puts the work back there (D597).
+- Saved parts and exports get normal file permissions on macOS (D597).
+- Opening a part with a damaged configurations block says the file is damaged instead of failing silently.
+- Open stores full paths, opens a file only once, shows "&" in recent files and drops recent files that are gone (D597).
+- Save As and Export start in the part's own folder (D597).
+- The welcome text scrolls instead of being cut off at large text sizes.
+- The title bar shows the app name once the last part is closed.
+- Export during the first rebuild says to wait instead of saying the part is empty.
+- A value that cannot be saved names its fix instead of asking for another folder.
+- User guide links to a section scroll to that section.
+- Extrude: Mid Plane with a draft drafts both halves (D595).
+- Extruded Cut: Through All with an inward draft works (D595).
+- Revolve: Offset from Face larger than the turn to the face is an error instead of a silent 350 degree turn (D595).
+- Extrude: a turned off Direction 2 no longer takes faces picked for From.
+- Extrude and Revolve: switching between Up to Face and Offset from Face keeps the picked face (D595).
+- Inch parts get inch sized defaults for offsets and thin walls (D595).
+- A new Revolved Cut on a face no longer starts reversed (D595).
+- Undo and Redo are off while a feature panel is open, so OK can no longer fail on a feature Undo removed (D591).
+- Feature tree: deleting, suppressing or dragging the feature above the rollback bar keeps the part rolled back (D591).
+- Feature tree: a name another feature has, or one with a quote or @, is refused, so formulas keep pointing at the right feature (D591).
+- Feature tree: a refused drag says why in the status bar, and a double click no longer leaves a rename box open (D591).
+- Feature tree: rows follow undo and delete at once, so clicking a removed feature during a rebuild no longer fails (D591).
+- Feature tree: Rename works on a shared sketch link row, and the selection no longer jumps back after a rebuild.
+- Feature tree: rows show the full feature name as a tip (D594).
+- A sketch on a face of a suppressed feature says to unsuppress it.
+- Sketch: Delete keeps the sketch origin (D596).
+- Sketch: Mirror with Copy off keeps the joins of the shape (D596).
+- Sketch: angle dimensions refuse 0, negative and 180 degree or larger values (D596).
+- Sketch: Trim and Extend drop an arc's old arc length instead of changing its radius (D596).
+- Sketch: a sketch that cannot be solved shows as over defined instead of "Fully defined" (D596).
+- Sketch: the Dimension panel applies a typed value when you leave the field (D593).
+- Sketch: tool panel fields say what is wrong with a typed value, and shape value fields clear their error after a good value.
+- Sketch: dragging fully defined geometry no longer adds an empty undo step.
+- Sketch: a click on a pattern shape's side picks it instead of skipping an instance.
+- Sketch: Trim, Extend and Convert refusals say what to do next.
+- Preferences OK no longer gets slower each time Preferences is opened (D599).
+- Move Face, Offset Face and Delete Face change only the body that holds the picked faces, so Up to Body and offsets toward another body work (D611).
+- Merge result (Intersect), Uniform (Scale) and Equal spacing (Circular Pattern) can be turned off (D610).
+- Intersect lists its regions so they can be excluded; Split clears its list when the tools or bodies change (D612).
+- Clicking another face of a picked body removes it from a body list, and body rows and picks show body numbers (D612).
+- Clearer messages for Intersect on bodies that do not overlap and Combine Subtract with no main body.
+- Deform tools refit Start and End when the axis or bodies change, and start with inch values in an inch part (D614).
+- Bend and Flow give an error instead of folding a body through itself (D615).
+- OBJ files with Windows line endings import, binary STL with padding is accepted, and damaged mesh numbers give a clear message (D616).
+- STEP export keeps the cosmetic thread notes (D617).
+- Export adds the file suffix to a typed name, Save As keeps a dot in the name, and Save Bodies avoids names Windows reserves (D613).
+- Export of a part with only a reference mesh says to tick Convert to Solid.
+- Appearance, Section View, Measure and Print Estimate follow the part shown when you switch tabs (D618).
+- Appearance and the section panel no longer break each other; a new section centres on the shown bodies and its arrow label uses the part units (D618).
+- Copy Appearance takes a face's body colour, and colours in use name faces by their feature (D619).
+- Measure perimeter leaves out the seam of round faces, and changing units or decimals no longer repeats the history (D619).
+- Isolate ignores hidden bodies, and Show All with one hidden body reads correctly (D619).
+- The window stays responsive while a large part rebuilds; opening the 200 feature sample no longer freezes it for seconds (D631).
+- The window fits small screens: the command tabs scroll sideways (thin bar or mouse wheel) instead of forcing a width of 1330 pixels, and the first window size fits the screen (D632, D635).
+- Compact command buttons such as Swept Boss no longer cut their labels short, and every command tab has the same background (D632).
+- Closed parts and finished rebuilds and previews free their memory; before, each kept its shapes until FDCAD quit (D633).
+- A damaged part file shows "The file is damaged" with what to do, instead of failing with no message or opening a part that never rebuilds (D634).
+- Preferences OK no longer gets slower the longer FDCAD runs, and only restyles the app when the theme changed; closed dialogs and popups free their memory (D637, D638).
+- Fixed a rare crash while a part rebuilt in the background and windows or panels closed at the same time (D639).
+- The installers include the node editor samples in the samples folder's `graphs` folder, which the user guide and the attractor plate tutorial open (D636).
+
+- Extrude Thin Feature on a single straight line no longer fails with "the open profile could not be offset" (D529).
+- A feature that uses a suppressed, lower or deleted feature now names it and says what to do, instead of naming its id.
+- The value box of a new dimension opens beside its text, not in the middle of the sketch (owner note 2).
+- Escape or the cross in the value box of a dimension placed a moment ago removes that dimension.
+- Features whose new edges join two cylinder faces no longer fail in the merge check.
+- Normal To on a default plane selected in the tree works again.
+- Icons are drawn only at the sizes shown, which lowers memory at start.
+- The sketch Text dialog and the feature panel pick lists no longer hide standard window functions, which could make them fail. The UI code now passes the strict type check.
+
+### Known issues
+
+- Mac: test runs crashed twice, rarely, inside Qt while a dialog was freed or while FDCAD quit. It has not been seen in normal use. The cause is being looked into (IDEAS 84 and 85).
+
+## [0.1.0]
+
+A usable modeler for prismatic and turned parts.
+
+### Added
+- Main window: command tabs (Features, Sketch), feature tree, property panel, variables tab, errors tab, status bar, light and dark themes, preferences.
+- New Part dialog with mm and inch templates; save, save as, open, recent files; `.fdef` files open from the file manager.
+- Units and expressions: decimals, fractions, feet and inches, formulas with global variables.
+- Sketcher on default planes and flat faces: line, centerline, corner and center rectangle, circle, centerpoint, tangent and 3 point arcs, point, construction geometry.
+- Relations, smart dimension, snaps and inference lines with automatic relations, sketch status colours and conflict highlighting, sketch checks.
+- Extrude and revolve, boss and cut, with every Phase 1 end condition.
+- Background rebuild with progress and cancel, per feature cache, disk cache, topological naming with position fallback.
+- Errors panel with highlighted geometry and one click fixes, bodies folder and body count.
+- Undo and redo for every change, including steps inside an open sketch.
+- 3D selection with hover, filters, box selection and select other; seven standard views, normal to, previous view, display styles and transparency.
+- Shortcuts, mouse gestures and the shortcut bar from `SHORTCUTS.md`, all editable in preferences; repeat last command.
+- Feature tree: rename, reorder by drag (blocked when it would break a reference), suppress, rollback, edit, delete with warning, parents and children, find.
+- STEP (AP214 and AP242), STL and 3MF export.
+- Autosave every 5 minutes with crash recovery, and a local log file.
+- Rebuild statistics panel; speed and memory budgets run as tests.
+- Sample parts: plate with holes, turned shaft, bracket, and a 200 feature part.
+- Original icon set for every command, tree row and view button, in light and dark.
+- Tutorial style workflow: pick a plane or face when starting a sketch, feature first commands, dimension value box, confirmation corner, relation tags, and a context toolbar on selection.
+- Live, see-through feature preview with drag handles: a straight arrow for extrude depth and a curved arrow for revolve angle, kept in sync with the typed values.
+- Revolve around a straight edge of the part as well as a sketch line. The edge is found again after the part changes.
+- Smart Dimension can measure to straight edges of the part in a sketch on a face.
+- Opening a sketch turns the view to face it (preference: Animate view changes).
+- The status bar shows the point under the cursor on the model.
+- Grouped tool buttons remember the last tool used, also after a restart.
+- Show and hide of sketches and planes is saved in the part file and can be undone.
+
+### Changed
+- Polish pass: new light and dark themes with one accent colour, consistent spacing that scales with the display setting, subtler view backgrounds, cleaner tabs, tree, panels and status bar. The Features tab now also holds Sketch and Rebuild.
+- New features get generic names: Extrude 1, Cut 1, Revolve 1, Revolve Cut 1.
+- The installer build checks that icons, theme images and samples are included.
+
+## [0.0.1]
+
+### Added
+- Project skeleton: license, docs, `uv` project with pinned dependencies.
+- Developer tooling: ruff, mypy, pytest and commit hooks.
+- Main window with an OpenCascade viewport showing a test cube.
+- Standalone builds: Mac DMG and Windows installer, with the `.fdef` file type registered.
+- GitHub Actions for tests and releases.
+
+### Fixed
+- macOS: the 3D view failed to start because the window handle was passed in the Windows form.
+- The app shows a message instead of quitting when the 3D view cannot start.

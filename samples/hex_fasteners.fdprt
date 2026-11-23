@@ -1,0 +1,1014 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "0.1.0",
+  "units": "mm",
+  "next_id": 19,
+  "variables": [
+    {
+      "name": "Flats",
+      "kind": "length",
+      "expr": "10mm",
+      "value": 10
+    },
+    {
+      "name": "HeadHeight",
+      "kind": "length",
+      "expr": "4mm",
+      "value": 4
+    },
+    {
+      "name": "NutHeight",
+      "kind": "length",
+      "expr": "5.2mm",
+      "value": 5.2
+    },
+    {
+      "name": "WasherOD",
+      "kind": "length",
+      "expr": "12mm",
+      "value": 12
+    },
+    {
+      "name": "WasherThickness",
+      "kind": "length",
+      "expr": "1.6mm",
+      "value": 1.6
+    }
+  ],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Head Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 16,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 5,
+          "construction": true
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 2.88675134595,
+          "y": 5,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": -2.88675134595,
+          "y": 5,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": -5.7735026919,
+          "y": 7.0705015915e-16,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "point",
+          "x": -2.88675134595,
+          "y": -5,
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 2.88675134595,
+          "y": -5,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 5.7735026919,
+          "y": -1.4141003183e-15,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e5",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "line",
+          "p1": "e6",
+          "p2": "e7",
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e7",
+          "p2": "e8",
+          "construction": false
+        },
+        {
+          "id": "e14",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e15",
+          "type": "line",
+          "p1": "e9",
+          "p2": "e4",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e10",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e11",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e12",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e13",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e14",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e15",
+            "e3"
+          ]
+        },
+        {
+          "type": "equal",
+          "entities": [
+            "e10",
+            "e11",
+            "e12",
+            "e13",
+            "e14",
+            "e15"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Flats",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Head",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=HeadHeight",
+          "value": 4
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Shank Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              -1.49760748129e-16,
+              -2.15744076793e-16,
+              4
+            ],
+            "area": 86.6025403784,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 3,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "6",
+            "value": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Shank",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "20",
+          "value": 20
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    },
+    {
+      "id": "f9",
+      "type": "ref_plane",
+      "name": "Nut Plane",
+      "suppressed": false,
+      "params": {
+        "method": "offset",
+        "distance": {
+          "expr": "-15",
+          "value": -15
+        }
+      },
+      "refs": {
+        "first": {
+          "feature": "f2"
+        }
+      }
+    },
+    {
+      "id": "f10",
+      "type": "sketch",
+      "name": "Nut Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f9"
+        }
+      },
+      "next_entity": 16,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 5,
+          "construction": true
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 2.88675134595,
+          "y": 5,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": -2.88675134595,
+          "y": 5,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "point",
+          "x": -5.7735026919,
+          "y": 7.0705015915e-16,
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "point",
+          "x": -2.88675134595,
+          "y": -5,
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "point",
+          "x": 2.88675134595,
+          "y": -5,
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 5.7735026919,
+          "y": -1.4141003183e-15,
+          "construction": false
+        },
+        {
+          "id": "e10",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e5",
+          "construction": false
+        },
+        {
+          "id": "e11",
+          "type": "line",
+          "p1": "e5",
+          "p2": "e6",
+          "construction": false
+        },
+        {
+          "id": "e12",
+          "type": "line",
+          "p1": "e6",
+          "p2": "e7",
+          "construction": false
+        },
+        {
+          "id": "e13",
+          "type": "line",
+          "p1": "e7",
+          "p2": "e8",
+          "construction": false
+        },
+        {
+          "id": "e14",
+          "type": "line",
+          "p1": "e8",
+          "p2": "e9",
+          "construction": false
+        },
+        {
+          "id": "e15",
+          "type": "line",
+          "p1": "e9",
+          "p2": "e4",
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e10",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e11",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e12",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e13",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e14",
+            "e3"
+          ]
+        },
+        {
+          "type": "tangent",
+          "entities": [
+            "e15",
+            "e3"
+          ]
+        },
+        {
+          "type": "equal",
+          "entities": [
+            "e10",
+            "e11",
+            "e12",
+            "e13",
+            "e14",
+            "e15"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        },
+        {
+          "type": "horizontal",
+          "entities": [
+            "e10"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=Flats",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "type": "extrude",
+      "name": "Nut",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=NutHeight",
+          "value": 5.2
+        },
+        "reverse": false,
+        "merge": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f10"
+        }
+      }
+    },
+    {
+      "id": "f12",
+      "type": "sketch",
+      "name": "Nut Hole Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f9"
+        }
+      },
+      "next_entity": 4,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 2.5,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "5",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "type": "extrude",
+      "name": "Nut Hole",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=NutHeight",
+          "value": 5.2
+        },
+        "reverse": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f12"
+        }
+      }
+    },
+    {
+      "id": "f14",
+      "type": "ref_plane",
+      "name": "Washer Plane",
+      "suppressed": false,
+      "params": {
+        "method": "offset",
+        "distance": {
+          "expr": "-25",
+          "value": -25
+        }
+      },
+      "refs": {
+        "first": {
+          "feature": "f2"
+        }
+      }
+    },
+    {
+      "id": "f15",
+      "type": "sketch",
+      "name": "Washer Sketch",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f14"
+        }
+      },
+      "next_entity": 6,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": true
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "circle",
+          "center": "e2",
+          "radius": 6,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "circle",
+          "center": "e4",
+          "radius": 3.2,
+          "construction": false
+        }
+      ],
+      "relations": [
+        {
+          "type": "fixed",
+          "entities": [
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e2",
+            "e1"
+          ]
+        },
+        {
+          "type": "coincident",
+          "entities": [
+            "e4",
+            "e1"
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d1",
+          "type": "diameter",
+          "entities": [
+            "e3"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "=WasherOD",
+            "value": 12
+          }
+        },
+        {
+          "id": "d2",
+          "type": "diameter",
+          "entities": [
+            "e5"
+          ],
+          "driving": true,
+          "param": {
+            "expr": "6.4",
+            "value": 6.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "type": "extrude",
+      "name": "Washer",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "=WasherThickness",
+          "value": 1.6
+        },
+        "reverse": false,
+        "merge": false
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f15"
+        }
+      }
+    },
+    {
+      "id": "f17",
+      "type": "cosmetic_thread",
+      "name": "Bolt Thread",
+      "suppressed": false,
+      "params": {
+        "diameter": {
+          "expr": "6",
+          "value": 6
+        },
+        "pitch": {
+          "expr": "1",
+          "value": 1
+        },
+        "end_condition": "blind",
+        "length": {
+          "expr": "16",
+          "value": 16
+        }
+      },
+      "refs": {
+        "edge": [
+          {
+            "kind": "edge",
+            "name": "edge(f8/cap/end|f8/side/e3)",
+            "snapshot": {
+              "curve": "circle",
+              "midpoint": [
+                -3,
+                3.67394039744e-16,
+                24
+              ],
+              "length": 18.8495559215,
+              "axis": [
+                0,
+                0,
+                24,
+                0,
+                0,
+                1
+              ],
+              "radius": 3,
+              "face_normals": [
+                [
+                  -1,
+                  1.22464679915e-16,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f18",
+      "type": "cosmetic_thread",
+      "name": "Nut Thread",
+      "suppressed": false,
+      "params": {
+        "diameter": {
+          "expr": "6",
+          "value": 6
+        },
+        "pitch": {
+          "expr": "1",
+          "value": 1
+        },
+        "end_condition": "blind",
+        "length": {
+          "expr": "5.2",
+          "value": 5.2
+        }
+      },
+      "refs": {
+        "edge": [
+          {
+            "kind": "edge",
+            "name": "edge(f11/cap/end|f13/side/e3)",
+            "snapshot": {
+              "curve": "circle",
+              "midpoint": [
+                -2.5,
+                3.06161699787e-16,
+                -9.8
+              ],
+              "length": 15.7079632679,
+              "axis": [
+                0,
+                0,
+                -9.8,
+                0,
+                0,
+                1
+              ],
+              "radius": 2.5,
+              "face_normals": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  -1.22464679915e-16,
+                  0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}

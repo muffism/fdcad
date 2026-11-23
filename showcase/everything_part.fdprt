@@ -1,0 +1,1516 @@
+{
+  "format": "fdef",
+  "schema": 1,
+  "app_version": "1.0.0.dev0",
+  "units": "mm",
+  "next_id": 47,
+  "variables": [],
+  "configurations": {
+    "active": "Default",
+    "items": [
+      {
+        "name": "Default",
+        "overrides": {},
+        "suppressed": []
+      }
+    ],
+    "design_table": null
+  },
+  "features": [
+    {
+      "id": "f1",
+      "type": "origin",
+      "name": "Origin",
+      "suppressed": false,
+      "params": {},
+      "refs": {}
+    },
+    {
+      "id": "f2",
+      "type": "plane",
+      "name": "Front Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xy"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f3",
+      "type": "plane",
+      "name": "Top Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "xz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f4",
+      "type": "plane",
+      "name": "Right Plane",
+      "suppressed": false,
+      "params": {
+        "basis": "yz"
+      },
+      "refs": {}
+    },
+    {
+      "id": "f5",
+      "type": "sketch",
+      "name": "Sketch f5",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 9,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": -40,
+          "y": -30,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 40,
+          "y": -30,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 40,
+          "y": 30,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": -40,
+          "y": 30,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e3",
+          "p2": "e4",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e1",
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f6",
+      "type": "extrude",
+      "name": "Extrude f6",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "10.0",
+          "value": 10
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f5"
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "type": "sketch",
+      "name": "Sketch f7",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              -1.38777878078e-16,
+              -1.7763568394e-15,
+              10
+            ],
+            "area": 4800,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 3,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "circle",
+          "center": "e1",
+          "radius": 15,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f8",
+      "type": "extrude",
+      "name": "Extrude f8",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "end_condition": "blind",
+        "depth": {
+          "expr": "30.0",
+          "value": 30
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f7"
+        }
+      }
+    },
+    {
+      "id": "f9",
+      "type": "sketch",
+      "name": "Sketch f9",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f8/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              0,
+              1.32239898044e-15,
+              40
+            ],
+            "area": 706.858347058,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 3,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "circle",
+          "center": "e1",
+          "radius": 9,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f10",
+      "type": "extrude",
+      "name": "Extrude f10",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "end_condition": "blind",
+        "reverse": true,
+        "depth": {
+          "expr": "12.0",
+          "value": 12
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f9"
+        }
+      }
+    },
+    {
+      "id": "f11",
+      "type": "shell",
+      "name": "Shell f11",
+      "suppressed": false,
+      "params": {
+        "thickness": {
+          "expr": "2",
+          "value": 2
+        }
+      },
+      "refs": {
+        "faces": [
+          {
+            "kind": "face",
+            "name": "f6/cap/start",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                -1.38777878078e-16,
+                -1.7763568394e-15,
+                0
+              ],
+              "area": 4800,
+              "normal": [
+                0,
+                0,
+                -1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f12",
+      "type": "sketch",
+      "name": "Sketch f12",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 12,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 30,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 6,
+          "y": 30,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 6,
+          "y": 38,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 0,
+          "y": 38,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e3",
+          "p2": "e4",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e1",
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": -50,
+          "construction": true
+        },
+        {
+          "id": "e10",
+          "type": "point",
+          "x": 0,
+          "y": 50,
+          "construction": true
+        },
+        {
+          "id": "e11",
+          "type": "line",
+          "p1": "e9",
+          "p2": "e10",
+          "construction": true
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f13",
+      "type": "revolve",
+      "name": "Revolve f13",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "direction": "one_direction",
+        "angle": {
+          "expr": "360",
+          "value": 6.28318530718
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f12"
+        },
+        "axis": {
+          "sketch_entity": "e11"
+        }
+      }
+    },
+    {
+      "id": "f14",
+      "type": "sketch",
+      "name": "Sketch f14",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 12,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 24,
+          "y": -8,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": 28,
+          "y": -8,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": 28,
+          "y": -4,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": 24,
+          "y": -4,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e3",
+          "p2": "e4",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e1",
+          "construction": false
+        },
+        {
+          "id": "e9",
+          "type": "point",
+          "x": 0,
+          "y": -50,
+          "construction": true
+        },
+        {
+          "id": "e10",
+          "type": "point",
+          "x": 0,
+          "y": 50,
+          "construction": true
+        },
+        {
+          "id": "e11",
+          "type": "line",
+          "p1": "e9",
+          "p2": "e10",
+          "construction": true
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f15",
+      "type": "revolve",
+      "name": "Revolve f15",
+      "suppressed": false,
+      "params": {
+        "operation": "cut",
+        "direction": "one_direction",
+        "angle": {
+          "expr": "360",
+          "value": 6.28318530718
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f14"
+        },
+        "axis": {
+          "sketch_entity": "e11"
+        }
+      }
+    },
+    {
+      "id": "f16",
+      "type": "sketch",
+      "name": "Sketch f16",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "kind": "face",
+          "name": "f6/cap/end",
+          "snapshot": {
+            "surface": "plane",
+            "point": [
+              -2.22044604925e-15,
+              0.0512822217504,
+              10
+            ],
+            "area": 4058.45389749,
+            "normal": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "next_entity": 2,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 28,
+          "y": 0,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f17",
+      "type": "hole",
+      "name": "Hole f17",
+      "suppressed": false,
+      "params": {
+        "hole_type": "simple",
+        "end_condition": "through_all",
+        "diameter": {
+          "expr": "5",
+          "value": 5
+        }
+      },
+      "refs": {
+        "sketch": {
+          "feature": "f16"
+        },
+        "face": [
+          {
+            "kind": "face",
+            "name": "f6/cap/end",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                -2.22044604925e-15,
+                0.0512822217504,
+                10
+              ],
+              "area": 4058.45389749,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f18",
+      "type": "circular_pattern",
+      "name": "circular_pattern f18",
+      "suppressed": false,
+      "params": {
+        "count1": {
+          "expr": "4",
+          "value": 4
+        },
+        "angle1": {
+          "expr": "360",
+          "value": 6.28318530718
+        }
+      },
+      "refs": {
+        "axis": {
+          "kind": "face",
+          "name": "f8/side/e2",
+          "snapshot": {
+            "surface": "cylinder",
+            "point": [
+              -9.7860386461e-10,
+              0.0894838479126,
+              25.0435350552
+            ],
+            "area": 2786.06481383,
+            "axis": [
+              0,
+              0,
+              10,
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "features": [
+          {
+            "feature": "f17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f19",
+      "type": "fillet",
+      "name": "Fillet f19",
+      "suppressed": false,
+      "params": {
+        "fillet_type": "constant",
+        "radius": {
+          "expr": "2.0",
+          "value": 2
+        }
+      },
+      "refs": {
+        "edges": [
+          {
+            "kind": "edge",
+            "name": "edge(f6/cap/end|f8/side/e2)",
+            "snapshot": {
+              "curve": "circle",
+              "midpoint": [
+                -15,
+                1.83697019872e-15,
+                10
+              ],
+              "length": 94.2477796077,
+              "axis": [
+                0,
+                0,
+                10,
+                0,
+                0,
+                1
+              ],
+              "radius": 15,
+              "face_normals": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  -1,
+                  1.22464679915e-16,
+                  0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f20",
+      "type": "chamfer",
+      "name": "chamfer f20",
+      "suppressed": false,
+      "params": {
+        "chamfer_type": "distance_distance",
+        "distance": {
+          "expr": "1",
+          "value": 1
+        },
+        "distance2": {
+          "expr": "1",
+          "value": 1
+        }
+      },
+      "refs": {
+        "edges": [
+          {
+            "kind": "edge",
+            "name": "edge(f10/side/e2|f8/cap/end)",
+            "snapshot": {
+              "curve": "circle",
+              "midpoint": [
+                -9,
+                1.10218211923e-15,
+                40
+              ],
+              "length": 56.5486677646,
+              "axis": [
+                0,
+                0,
+                40,
+                0,
+                0,
+                1
+              ],
+              "radius": 9,
+              "face_normals": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  -1.22464679915e-16,
+                  0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f21",
+      "type": "linear_pattern",
+      "name": "linear_pattern f21",
+      "suppressed": false,
+      "params": {
+        "spacing1": {
+          "expr": "15",
+          "value": 15
+        },
+        "count1": {
+          "expr": "3",
+          "value": 3
+        }
+      },
+      "refs": {
+        "direction1": {
+          "feature": "f4"
+        },
+        "features": [
+          {
+            "feature": "f13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f22",
+      "type": "sketch",
+      "name": "Sketch f22",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f4"
+        }
+      },
+      "next_entity": 7,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": -20,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": -20,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": -30,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "arc",
+          "center": "e4",
+          "start": "e2",
+          "end": "e5",
+          "ccw": false,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f23",
+      "type": "sketch",
+      "name": "Sketch f23",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 3,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "circle",
+          "center": "e1",
+          "radius": 8,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f24",
+      "type": "sweep",
+      "name": "Sweep f24",
+      "suppressed": false,
+      "params": {
+        "operation": "boss"
+      },
+      "refs": {
+        "path": {
+          "feature": "f22"
+        },
+        "profile": {
+          "feature": "f23"
+        }
+      }
+    },
+    {
+      "id": "f25",
+      "type": "sketch",
+      "name": "Sketch f25",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f4"
+        }
+      },
+      "next_entity": 7,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": -20,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": -20,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "point",
+          "x": -30,
+          "y": 10,
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "arc",
+          "center": "e4",
+          "start": "e2",
+          "end": "e5",
+          "ccw": false,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f26",
+      "type": "sketch",
+      "name": "Sketch f26",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 3,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": 0,
+          "y": 0,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "circle",
+          "center": "e1",
+          "radius": 3,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f27",
+      "type": "sweep",
+      "name": "Sweep f27",
+      "suppressed": false,
+      "params": {
+        "operation": "cut"
+      },
+      "refs": {
+        "path": {
+          "feature": "f25"
+        },
+        "profile": {
+          "feature": "f26"
+        }
+      }
+    },
+    {
+      "id": "f28",
+      "type": "ref_plane",
+      "name": "ref_plane f28",
+      "suppressed": false,
+      "params": {
+        "method": "offset",
+        "distance": {
+          "expr": "30",
+          "value": 30
+        }
+      },
+      "refs": {
+        "first": {
+          "feature": "f2"
+        }
+      }
+    },
+    {
+      "id": "f29",
+      "type": "sketch",
+      "name": "Sketch f29",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f2"
+        }
+      },
+      "next_entity": 9,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": -36,
+          "y": -26,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "point",
+          "x": -26,
+          "y": -26,
+          "construction": false
+        },
+        {
+          "id": "e3",
+          "type": "point",
+          "x": -26,
+          "y": -16,
+          "construction": false
+        },
+        {
+          "id": "e4",
+          "type": "point",
+          "x": -36,
+          "y": -16,
+          "construction": false
+        },
+        {
+          "id": "e5",
+          "type": "line",
+          "p1": "e1",
+          "p2": "e2",
+          "construction": false
+        },
+        {
+          "id": "e6",
+          "type": "line",
+          "p1": "e2",
+          "p2": "e3",
+          "construction": false
+        },
+        {
+          "id": "e7",
+          "type": "line",
+          "p1": "e3",
+          "p2": "e4",
+          "construction": false
+        },
+        {
+          "id": "e8",
+          "type": "line",
+          "p1": "e4",
+          "p2": "e1",
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f30",
+      "type": "sketch",
+      "name": "Sketch f30",
+      "suppressed": false,
+      "params": {},
+      "refs": {
+        "plane": {
+          "feature": "f28"
+        }
+      },
+      "next_entity": 3,
+      "entities": [
+        {
+          "id": "e1",
+          "type": "point",
+          "x": -31,
+          "y": -21,
+          "construction": false
+        },
+        {
+          "id": "e2",
+          "type": "circle",
+          "center": "e1",
+          "radius": 3,
+          "construction": false
+        }
+      ],
+      "relations": [],
+      "dimensions": []
+    },
+    {
+      "id": "f31",
+      "type": "loft",
+      "name": "Loft f31",
+      "suppressed": false,
+      "params": {
+        "operation": "boss",
+        "merge": true
+      },
+      "refs": {
+        "profiles": [
+          {
+            "feature": "f29"
+          },
+          {
+            "feature": "f30"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f42",
+      "type": "mounting_boss",
+      "name": "Mounting Boss 1",
+      "suppressed": false,
+      "params": {
+        "boss_type": "screw_thread",
+        "boss_diameter": {
+          "expr": "8",
+          "value": 8
+        },
+        "boss_height": {
+          "expr": "12",
+          "value": 12
+        },
+        "hole_diameter": {
+          "expr": "3",
+          "value": 3
+        },
+        "hole_depth": {
+          "expr": "10",
+          "value": 10
+        },
+        "fin_count": {
+          "expr": "0",
+          "value": 0
+        },
+        "pos_x": {
+          "expr": "-28",
+          "value": -28
+        },
+        "pos_y": {
+          "expr": "18",
+          "value": 18
+        },
+        "pos_z": {
+          "expr": "10",
+          "value": 10
+        }
+      },
+      "refs": {
+        "face": [
+          {
+            "kind": "face",
+            "name": "f6/cap/end",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                0.598341406615,
+                0.46143741041,
+                10
+              ],
+              "area": 3709.30144282,
+              "normal": [
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f43",
+      "type": "dome",
+      "name": "Dome 1",
+      "suppressed": false,
+      "params": {
+        "distance": {
+          "expr": "3",
+          "value": 3
+        }
+      },
+      "refs": {
+        "faces": [
+          {
+            "kind": "face",
+            "name": "f13/face#2",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                1.7763568394e-15,
+                38,
+                -1.83495194348e-16
+              ],
+              "area": 113.097335529,
+              "normal": [
+                0,
+                1,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f44",
+      "type": "cosmetic_thread",
+      "name": "Thread",
+      "suppressed": false,
+      "params": {
+        "diameter": {
+          "expr": "18",
+          "value": 18
+        },
+        "pitch": {
+          "expr": "1.5",
+          "value": 1.5
+        },
+        "end_condition": "blind",
+        "length": {
+          "expr": "5",
+          "value": 5
+        },
+        "size": "M18"
+      },
+      "refs": {
+        "edge": [
+          {
+            "kind": "edge",
+            "name": "edge(f10/side/e2|f20/chamfer/edge(f10/side/e2|f8/cap/end))",
+            "snapshot": {
+              "curve": "circle",
+              "midpoint": [
+                -9,
+                1.10218211923e-15,
+                39
+              ],
+              "length": 56.5486677646,
+              "axis": [
+                0,
+                0,
+                39,
+                0,
+                0,
+                1
+              ],
+              "radius": 9,
+              "face_normals": [
+                [
+                  0.707106781187,
+                  -8.65956056235e-17,
+                  0.707106781187
+                ],
+                [
+                  1,
+                  -1.22464679915e-16,
+                  0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f45",
+      "type": "modeled_thread",
+      "name": "Thread",
+      "suppressed": false,
+      "params": {
+        "diameter": {
+          "expr": "12",
+          "value": 12
+        },
+        "pitch": {
+          "expr": "1.5",
+          "value": 1.5
+        },
+        "method": "cut",
+        "hand": "right",
+        "end_condition": "blind",
+        "length": {
+          "expr": "4",
+          "value": 4
+        }
+      },
+      "refs": {
+        "edge": [
+          {
+            "kind": "edge",
+            "name": "edge(f21/instance3.1/f13/side/e6|f6/side/e7#2)",
+            "snapshot": {
+              "curve": "circle",
+              "midpoint": [
+                30,
+                30,
+                6
+              ],
+              "length": 18.8495559215,
+              "axis": [
+                30,
+                30,
+                0,
+                0,
+                1,
+                0
+              ],
+              "radius": 6,
+              "face_normals": [
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  -1.83697019872e-16,
+                  0,
+                  1
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f46",
+      "type": "draft",
+      "name": "Draft f46",
+      "suppressed": false,
+      "params": {
+        "angle": {
+          "expr": "5",
+          "value": 0.0872664625997
+        }
+      },
+      "refs": {
+        "neutral": {
+          "feature": "f2"
+        },
+        "faces": [
+          {
+            "kind": "face",
+            "name": "f6/side/e5#1",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                -20.75,
+                -30,
+                5
+              ],
+              "area": 385,
+              "normal": [
+                0,
+                -1,
+                0
+              ]
+            }
+          },
+          {
+            "kind": "face",
+            "name": "f6/side/e5#2",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                20.75,
+                -30,
+                5
+              ],
+              "area": 385,
+              "normal": [
+                0,
+                -1,
+                0
+              ]
+            }
+          },
+          {
+            "kind": "face",
+            "name": "f6/side/e6",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                40,
+                -6.52256026967e-16,
+                5
+              ],
+              "area": 600,
+              "normal": [
+                1,
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "kind": "face",
+            "name": "f6/side/e7#1",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                -21.6704629481,
+                30,
+                5.14025728876
+              ],
+              "area": 365.631016975,
+              "normal": [
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "kind": "face",
+            "name": "f6/side/e7#2",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                21.2511914512,
+                30,
+                6.31287984055
+              ],
+              "area": 251.24772518,
+              "normal": [
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "kind": "face",
+            "name": "f6/side/e8",
+            "snapshot": {
+              "surface": "plane",
+              "point": [
+                -40,
+                6.52256026967e-16,
+                5
+              ],
+              "area": 600,
+              "normal": [
+                -1,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "rollback": null,
+  "appearance": {
+    "part_color": "#B4BCC4",
+    "faces": {}
+  },
+  "print_setup": {
+    "down_face": null
+  },
+  "embedded": {}
+}
