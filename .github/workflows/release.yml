@@ -71,7 +71,7 @@ jobs:
           path: packaging/windows/Output/FDCAD-${{ env.VERSION }}-windows-x64-setup.exe
 
   build-macos:
-    runs-on: macos-14
+    runs-on: macos-latest
     # Tags and pull requests to main always build the DMG; manual runs only when asked.
     if: github.event_name != 'workflow_dispatch' || inputs.platforms == 'both'
     defaults:
