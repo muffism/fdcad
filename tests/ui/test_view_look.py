@@ -80,7 +80,9 @@ def test_edges_and_highlights_have_ordered_widths() -> None:
     assert look.SELECTED_WIDTH > look.PRESELECTED_WIDTH > look.EDGE_WIDTH
     assert look.SILHOUETTE_WIDTH > look.EDGE_WIDTH
     assert look.MSAA_SAMPLES >= 4
-    assert look.edge_width(2.0) == 2 * look.edge_width(1.0)  # HiDPI keeps the look
+    assert look.edge_width(2.0) == look.line_scale(2.0) * look.edge_width(
+        1.0
+    )  # 0.75 pt on HiDPI (D2874)
     assert look.TRIAD_SCALE <= 0.08  # a small corner triad, clear of the part (U6.7)
     assert look.FIT_MARGIN > look.TRIAD_SCALE * 2
 

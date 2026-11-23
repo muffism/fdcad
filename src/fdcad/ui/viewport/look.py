@@ -227,9 +227,20 @@ def show_triad(view: object, palette: Palette, scale: float = 1.0) -> None:
     )
 
 
+#: Lines grow with this share of the screen scale above 100 percent. At a full share a
+#: Retina screen drew edges as heavy 1 pt lines; the owner chose 0.75 pt (D2874).
+LINE_SCALE_SHARE = 0.75
+
+
+def line_scale(scale: float) -> float:
+    """How much the lines of the view grow on a screen of ``scale``: not at all up to
+    100 percent, then with ``LINE_SCALE_SHARE`` of the scale (D2874)."""
+    return max(1.0, LINE_SCALE_SHARE * scale)
+
+
 def edge_width(scale: float) -> float:
     """Edge width in device pixels for a display scale."""
-    return EDGE_WIDTH * max(1.0, scale)
+    return EDGE_WIDTH * line_scale(scale)
 
 
 #: Widths of the other lines of the view, in pixels at 100 percent. They grow with the
@@ -251,7 +262,7 @@ COMB_WIDTH = 1.0
 def line_width(width: float, scale: float) -> float:
     """A line width given in pixels at 100 percent, in device pixels on a screen of
     ``scale`` (D2824)."""
-    return width * screen_scale(scale)
+    return width * line_scale(scale)
 
 
 def real_edges_only(context: object) -> None:
@@ -312,7 +323,7 @@ def style_part(drawer: Prs3d_Drawer, palette: Palette, scale: float = 1.0) -> No
     aspect = drawer.ShadingAspect().Aspect()
     aspect.SetDrawSilhouette(True)
     aspect.SetEdgeColor(colour(palette.silhouette))
-    aspect.SetEdgeWidth(SILHOUETTE_WIDTH * max(1.0, scale))
+    aspect.SetEdgeWidth(SILHOUETTE_WIDTH * line_scale(scale))
 
 
 #: How far hidden edges move from the outline colour toward the background (TR13, D686).
@@ -341,7 +352,9 @@ def style_hidden_lines(
     or solid ones when asked (TR212)."""
     line = Aspect_TOL_SOLID if solid else Aspect_TOL_DASH
     drawer.SetHiddenLineAspect(
-        Prs3d_LineAspect(colour(hidden_line_colour(palette)), line, HIDDEN_WIDTH * max(1.0, scale))
+        Prs3d_LineAspect(
+            colour(hidden_line_colour(palette)), line, HIDDEN_WIDTH * line_scale(scale)
+        )
     )
 
 
@@ -387,7 +400,7 @@ def style_highlights(context: object, palette: Palette, scale: float = 1.0) -> N
         # keep the part's depth, a little nearer the camera.
         drawer.SetZLayer(Graphic3d_ZLayerId_Top)
         c = colour(hex_colour)
-        width = (SELECTED_WIDTH if selected else PRESELECTED_WIDTH) * max(1.0, scale)
+        width = (SELECTED_WIDTH if selected else PRESELECTED_WIDTH) * line_scale(scale)
         drawer.SetColor(c)
         drawer.SetDisplayMode(1)  # shaded faces, not a wire outline only
         drawer.SetTransparency(HIGHLIGHT_TRANSPARENCY)
@@ -432,7 +445,7 @@ def rim_width(selected: bool, scale: float = 1.0) -> float:
     """Width of the line that makes the rim, in device pixels: it lies under the
     outline and shows ``RIM_WIDTH`` on each side of it."""
     outline = SELECTED_WIDTH if selected else PRESELECTED_WIDTH
-    return (outline + 2.0 * RIM_WIDTH) * screen_scale(scale)
+    return (outline + 2.0 * RIM_WIDTH) * line_scale(scale)
 
 
 # See-through items -----------------------------------------------------------------------
@@ -605,5 +618,5 @@ def style_origin(item: object, palette: Palette, scale: float = 1.0) -> None:
         item.SetTextColor(axis, text)  # type: ignore[attr-defined]
         # Setting a colour gives the item its own datum settings, so ask for them after.
         datum = item.Attributes().DatumAspect()  # type: ignore[attr-defined]
-        datum.LineAspect(axis).SetWidth(ORIGIN_WIDTH * max(1.0, scale))
+        datum.LineAspect(axis).SetWidth(ORIGIN_WIDTH * line_scale(scale))
     item.SetDatumPartColor(Prs3d_DatumParts_Origin, text)  # type: ignore[attr-defined]

@@ -4230,3 +4230,7 @@ D2873: The macOS licence notices use the folder names of the app bundle (2026-11
 Status: Decided
 Reason: The notices must match the files a user gets on each platform, and Windows CI must catch a Mac mismatch without a Mac.
 
+D2874: Lines in the 3D view are 0.75 pt on high resolution screens (2026-11-22, owner). On a Retina screen at a scale of 2, edges were 2 device pixels, a heavy 1 pt line; the owner compared 1, 0.75 and 0.5 pt on a MacBook Air and chose 0.75 pt. Every line width of the view now grows with `look.line_scale(scale)`, which is 1 up to 100 percent and three quarters of the scale above it: 1.125 at 150 percent, 1.5 at 200 percent. This replaces the full screen scale of D2824 for lines only; sizes such as the triad, points and text still follow the full scale. The ratios between lines stay as D2824 set them, so a sketch is still twice as heavy as an edge. Windows at 100 percent is unchanged.
+Status: Decided
+Reason: The owner's choice from side by side pictures on the screen it was meant for.
+

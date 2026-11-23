@@ -342,7 +342,7 @@ def test_outline_width() -> None:
     look.style_part(drawer, theme.LIGHT, 2.0)
     aspect = drawer.ShadingAspect().Aspect()
     assert aspect.ToDrawSilhouette()
-    assert aspect.EdgeWidth() == pytest.approx(3.0)
+    assert aspect.EdgeWidth() == pytest.approx(look.SILHOUETTE_WIDTH * look.line_scale(2.0))
 
 
 # D2766: planes and the origin ------------------------------------------------------------
@@ -397,7 +397,9 @@ def test_the_origin_has_the_triads_colours(pal: theme.Palette) -> None:
         assert _same(item.DatumPartColor(axis), colour)
         assert _same(item.DatumPartColor(arrow), colour)
         assert _same(datum.TextAspect(axis).Aspect().Color(), pal.view_text)
-        assert datum.LineAspect(axis).Aspect().Width() == pytest.approx(look.ORIGIN_WIDTH * 2.0)
+        assert datum.LineAspect(axis).Aspect().Width() == pytest.approx(
+            look.ORIGIN_WIDTH * look.line_scale(2.0)
+        )
     assert look.ORIGIN_WIDTH == 1.5
 
 

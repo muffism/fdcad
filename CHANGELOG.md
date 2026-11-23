@@ -6,6 +6,7 @@ All notable changes to FDCAD are listed here. Versions follow semantic versionin
 
 ### Added
 
+- Edges and other lines in the 3D view are thinner on high resolution screens: 0.75 pt on a Retina screen instead of 1 pt. Nothing changes at 100 percent (D2874).
 - Report Problem, in error messages, in Help, Diagnostics and in the status bar after FDCAD closed unexpectedly: FDCAD saves a problem report with your name removed, copies it and opens your own mail app with a message to FDCAD@proton.me. FDCAD sends nothing itself; you read the message and press Send (D2871).
 - Flip puts a tangent reference plane on the other side of the cylinder, so the far side no longer needs a picked point there (D2629).
 - Cuts and joins on large bodies work only where the tool is, so a small hole in a part of thousands of faces takes a fraction of a second, not seconds. The result is the same as before; anything unusual still goes through the full boolean. The 768 feature machine bed rebuilds in 11 minutes instead of 16 (D2601).
