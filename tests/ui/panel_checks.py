@@ -14,6 +14,7 @@ from itertools import pairwise
 from PySide6.QtCore import QPoint
 from PySide6.QtWidgets import (
     QAbstractButton,
+    QApplication,
     QComboBox,
     QGroupBox,
     QLabel,
@@ -101,6 +102,11 @@ def blank_rows(root: QWidget) -> list[str]:
     stands in it, whatever takes its place: a label with no words, or a holder whose
     widgets are all hidden."""
     found: list[str] = []
+    # A group's body can take its new height one turn of the event loop after its
+    # rows change: on the Mac runner, Rules was left 8 px too tall for a moment, 4 runs
+    # in 15. Let the queued resizes land before measuring.
+    for _ in range(5):
+        QApplication.processEvents()
     for group in root.findChildren(Group):
         if not group.isVisibleTo(root) or not group.is_expanded():
             continue
