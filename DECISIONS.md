@@ -4234,3 +4234,7 @@ D2874: Lines in the 3D view are 0.75 pt on high resolution screens (2026-11-22, 
 Status: Decided
 Reason: The owner's choice from side by side pictures on the screen it was meant for.
 
+
+D2875: A Windows build finds DLLs only in Python's folders and inside Windows (2026-11-23). The release build on GitHub's Windows runner stopped at the stray DLL check of D2864: the runner now has Java's `bin` folder on PATH, and PyInstaller took 44 C runtime DLLs (`ucrtbase.dll` and the `api-ms-win-*` set) from it. D2864 put Python's folders first on PATH, but any other folder on it could still hand the build a DLL that Python does not have. `packaging/build_path.py` now gives the build a PATH of Python's folders followed only by the PATH folders inside Windows (`SystemRoot`). PySide6's folder is added by PyInstaller's own hooks. The check of D2864 stays as the guard.
+Status: Decided
+Reason: The build must take the same DLLs on any machine, whatever else is installed on it.

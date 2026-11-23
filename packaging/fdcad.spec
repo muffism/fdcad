@@ -45,9 +45,16 @@ NOTICE_FILES = ["LICENSE", "THIRD_PARTY_NOTICES.txt", "SOURCE_OFFER.md"]
 
 if sys.platform == "win32":
     # Find Python's own DLLs first (D2864). PyInstaller looks for the DLLs a module
-    # needs on PATH, so a build started from Git Bash took OpenSSL from Git's folder.
-    os.environ["PATH"] = os.pathsep.join(
-        [str(Path(sys.base_prefix)), str(Path(sys.base_prefix) / "DLLs"), os.environ["PATH"]]
+    # needs on PATH, so a build started from Git Bash took OpenSSL from Git's folder,
+    # and the CI runner's Java folder gave it the C runtime. Keep only Python's folders
+    # and the ones inside Windows (D2875).
+    sys.path.insert(0, str(ROOT / "packaging"))
+    from build_path import build_path  # noqa: E402
+
+    os.environ["PATH"] = build_path(
+        os.environ["PATH"],
+        [str(Path(sys.base_prefix)), str(Path(sys.base_prefix) / "DLLs")],
+        os.environ.get("SystemRoot", r"C:\Windows"),
     )
 
 a = Analysis(
