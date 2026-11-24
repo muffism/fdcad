@@ -260,7 +260,10 @@ class SketchPanel(QWidget):
             if index not in picked and not chosen & set(rel.entities):
                 continue
             label = strings.RELATION_NAMES.get(rel.type, rel.type)
-            item = QListWidgetItem()
+            # The list makes the row itself. An item made in Python gets PySide's own
+            # destructor, which crashed in clear() on the Mac runner (IDEAS 85).
+            self.existing.addItem("")
+            item = self.existing.item(self.existing.count() - 1)
             item.setData(256, index)
             row = QWidget()
             line = QHBoxLayout(row)
@@ -281,7 +284,6 @@ class SketchPanel(QWidget):
             line.addWidget(text, 1)
             line.addWidget(delete)
             item.setSizeHint(row.sizeHint())
-            self.existing.addItem(item)
             self.existing.setItemWidget(item, row)
             self.delete_buttons[index] = delete
         self.existing_empty.setText(
