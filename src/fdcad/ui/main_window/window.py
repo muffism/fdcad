@@ -2721,6 +2721,9 @@ class MainWindow(QMainWindow):
     def _feature_applied(self, fid: str, was_new: bool) -> None:
         """Note a feature for Recently Edited; a new one gets its name typed at once
         when the preference asks for it (TR221, D963)."""
+        from fdcad.ui.main_window import failed_ok
+
+        failed_ok.watch(self)  # a feature that fails comes back to the panel (D2876)
         tab = self.current
         if tab is None:
             return

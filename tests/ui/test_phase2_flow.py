@@ -14,6 +14,7 @@ from pytestqt.qtbot import QtBot
 from fdcad.core.document.model import Param
 from fdcad.core.features.base import FeatureState
 from fdcad.core.features.modify import edges_of
+from fdcad.ui.commands.document import AddFeature
 from fdcad.ui.main_window.window import DocumentTab, MainWindow
 from fdcad.ui.preferences.settings import Settings
 from fdcad.ui.property_panel.forms.base import REMEMBERED
@@ -95,8 +96,13 @@ def test_fix_buttons_change_the_feature_only_when_clicked(qtbot: QtBot, window: 
     assert report is not None and report.body is not None
     panel.form.take_shapes(report.body, edges[:1])
     panel.form.fields["radius"].edit.setText("60")  # larger than the 50 mm plate allows
+    # OK takes a failing feature back to the panel (D2876). A feature in the tree still
+    # fails when a change before it breaks it, so add this one as such a change would.
+    failing = panel.current_feature()
+    assert failing is not None
+    panel.reject()
     with qtbot.waitSignal(tab.session.rebuilt, timeout=20000):
-        panel.accept()
+        tab.session.undo.push(AddFeature(tab.session, failing))
     report = tab.session.report
     assert report is not None
     fillet = tab.session.document.features[-1]
@@ -130,3 +136,64 @@ def test_edit_feature_opens_the_fillet_form(qtbot: QtBot, window: MainWindow) ->
     window.edit_feature(fid)
     assert panel.form is not None and panel.form.items.names()
     panel.reject()
+
+
+def _settled(qtbot: QtBot, tab: DocumentTab) -> None:
+    """Wait until the part is rebuilt and nothing is left to build."""
+    qtbot.waitUntil(lambda: not tab.session.is_rebuilding, timeout=20000)
+    qtbot.wait(50)
+    qtbot.waitUntil(lambda: not tab.session.is_rebuilding, timeout=20000)
+
+
+def test_ok_on_a_fillet_that_fails_keeps_the_panel_open(qtbot: QtBot, window: MainWindow) -> None:
+    """D2876, the owner: a fillet that does not work out must not finish its command."""
+    tab, ext = plate_tab(qtbot, window)
+    session = tab.session
+    count = len(session.document.features)
+    window.insert_feature("fillet", "boss")
+    panel = window.panel
+    assert panel is not None and panel.form is not None
+    report = session.report
+    assert report is not None and report.body is not None
+    panel.form.take_shapes(report.body, top_edges(tab, ext)[:1])
+    panel.form.fields["radius"].edit.setText("60")  # larger than the 50 mm plate allows
+    panel.accept()
+    qtbot.waitUntil(lambda: panel.is_editing, timeout=20000)
+    _settled(qtbot, tab)
+    assert len(session.document.features) == count  # not applied
+    assert panel.is_new and panel.feature is not None and panel.feature.type == "fillet"
+    assert panel.form is not None and panel.form.fields["radius"].edit.text() == "60"
+    assert "was not applied because it failed" in panel.message.text()
+    assert not panel.message.isHidden()
+    panel.reject()
+    assert not panel.is_editing and len(session.document.features) == count
+
+
+def test_ok_on_an_edit_that_fails_keeps_the_old_values(qtbot: QtBot, window: MainWindow) -> None:
+    tab, ext = plate_tab(qtbot, window)
+    session = tab.session
+    window.insert_feature("fillet", "boss")
+    panel = window.panel
+    assert panel is not None and panel.form is not None
+    report = session.report
+    assert report is not None and report.body is not None
+    panel.form.take_shapes(report.body, top_edges(tab, ext)[:1])
+    panel.form.fields["radius"].edit.setText("5")
+    with qtbot.waitSignal(session.rebuilt, timeout=20000):
+        panel.accept()
+    _settled(qtbot, tab)
+    fid = session.document.features[-1].id
+    assert session.report is not None
+    assert session.report.results[fid].state is FeatureState.OK
+    assert not panel.is_editing  # a feature that builds closes as before
+    window.edit_feature(fid)
+    assert panel.form is not None
+    panel.form.fields["radius"].edit.setText("60")
+    panel.accept()
+    qtbot.waitUntil(lambda: panel.is_editing, timeout=20000)
+    _settled(qtbot, tab)
+    assert session.document.feature(fid).params["radius"] == Param("5", 5.0)
+    assert not panel.is_new and panel.form is not None
+    assert panel.form.fields["radius"].edit.text() == "60"
+    assert session.report is not None
+    assert session.report.results[fid].state is FeatureState.OK
