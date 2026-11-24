@@ -71,7 +71,7 @@ jobs:
           path: packaging/windows/Output/FDCAD-${{ env.VERSION }}-windows-x64-setup.exe
 
   build-macos:
-    runs-on: macos-14
+    runs-on: macos-latest
     # Tags and pull requests to main always build the DMG; manual runs only when asked.
     if: github.event_name != 'workflow_dispatch' || inputs.platforms == 'both'
     defaults:
@@ -105,6 +105,14 @@ jobs:
         run: uv sync --locked
       - name: Run tests
         run: uv run pytest
+      - name: Keep the crash report
+        # A test run that crashes leaves its native stack in DiagnosticReports (IDEAS 85).
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-crash-reports
+          path: ~/Library/Logs/DiagnosticReports/*.ips
+          if-no-files-found: ignore
       - name: Build standalone app
         run: uv run pyinstaller packaging/fdcad.spec --noconfirm
       - name: Smoke test the built app

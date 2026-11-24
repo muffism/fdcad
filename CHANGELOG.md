@@ -6,6 +6,7 @@ All notable changes to FDCAD are listed here. Versions follow semantic versionin
 
 ### Added
 
+- Edges and other lines in the 3D view are thinner on high resolution screens: 0.75 pt on a Retina screen instead of 1 pt. Nothing changes at 100 percent (D2874).
 - Report Problem, in error messages, in Help, Diagnostics and in the status bar after FDCAD closed unexpectedly: FDCAD saves a problem report with your name removed, copies it and opens your own mail app with a message to FDCAD@proton.me. FDCAD sends nothing itself; you read the message and press Send (D2871).
 - Flip puts a tangent reference plane on the other side of the cylinder, so the far side no longer needs a picked point there (D2629).
 - Cuts and joins on large bodies work only where the tool is, so a small hole in a part of thousands of faces takes a fraction of a second, not seconds. The result is the same as before; anything unusual still goes through the full boolean. The 768 feature machine bed rebuilds in 11 minutes instead of 16 (D2601).
@@ -813,6 +814,7 @@ All notable changes to FDCAD are listed here. Versions follow semantic versionin
 
 ### Fixed
 
+- The Mac app's licence notices cover the 26 image, compression and run time libraries that come with Open CASCADE. They named the wheel's `.dylibs` folder, which the app bundle calls `__dot__dylibs` (D2873).
 - The source offer gives FDCAD@proton.me as the address to ask for the source (D2870).
 - The installers carry every licence notice they must: a generated `THIRD_PARTY_NOTICES.txt` gives the version, licence, copyright lines and full licence text of every bundled component (Qt and the code inside it, PySide6, Open CASCADE, FreeImage, LibRaw, VTK, planegcs, Python, OpenSSL and more), and `SOURCE_OFFER.md` gives exact source links and a written offer of source. Both are beside FDCAD.exe, on the Mac disk image and in Help, About. The installer shows the GPL as information, not as terms to accept. PyYAML and typing_extensions, used only for development, no longer ship, and the Windows build takes Python's own OpenSSL (D2860 to D2868).
 - Split's list of bodies is labelled Keep; it showed "keep", the name of its field. Six more bare names are words now: Keep in Intersect, Angle in Circular Pattern's second direction, Type and Pin in Hinge, An axis in Move Face and Offset Face, and Flat in the sheet metal Gusset. A test looks for such names in every tool's panel (D2841).

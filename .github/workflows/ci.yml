@@ -35,7 +35,7 @@ jobs:
         run: uv run pytest
 
   macos:
-    runs-on: macos-14
+    runs-on: macos-latest
     defaults:
       run:
         shell: bash
@@ -62,3 +62,11 @@ jobs:
         run: uv run mypy
       - name: Run tests
         run: uv run pytest
+      - name: Keep the crash report
+        # A test run that crashes leaves its native stack in DiagnosticReports (IDEAS 85).
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-crash-reports
+          path: ~/Library/Logs/DiagnosticReports/*.ips
+          if-no-files-found: ignore

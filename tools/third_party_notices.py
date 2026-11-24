@@ -11,6 +11,8 @@ repository root. No network is needed.
     uv run python tools/third_party_notices.py inventory dist/FDCAD
     uv run python tools/third_party_notices.py inventory dist/FDCAD --record \\
         packaging/notices/inventory-windows.txt
+    uv run python tools/third_party_notices.py inventory dist/FDCAD.app --record \\
+        packaging/notices/inventory-macos.txt
     uv run python tools/third_party_notices.py check-dist dist/FDCAD
 
 ``check`` fails when the written files are out of date. ``check-dist`` fails when a

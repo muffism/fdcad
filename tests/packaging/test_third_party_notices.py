@@ -1,8 +1,9 @@
-"""Third party notices, the source offer and what the builds ship (D2860 to D2867)."""
+"""Third party notices, the source offer and what the builds ship (D2860 to D2873)."""
 
 from __future__ import annotations
 
 import ast
+import fnmatch
 import re
 import sys
 import tomllib
@@ -14,6 +15,7 @@ from tools import third_party_notices as tpn
 
 ROOT = Path(__file__).resolve().parents[2]
 RECORDED = ROOT / "packaging" / "notices" / "inventory-windows.txt"
+RECORDED_MAC = ROOT / "packaging" / "notices" / "inventory-macos.txt"
 SPEC = ROOT / "packaging" / "fdcad.spec"
 ISS = ROOT / "packaging" / "windows" / "fdcad.iss"
 DMG = ROOT / "packaging" / "macos" / "make_dmg.sh"
@@ -39,6 +41,30 @@ def test_every_recorded_windows_file_has_a_notice(notices: tpn.Notices) -> None:
 def test_every_windows_component_matches_a_recorded_file(notices: tpn.Notices) -> None:
     """A component whose files are gone from the build is stale."""
     assert tpn.unused(tpn.read_inventory(RECORDED), notices, "windows") == []
+
+
+def test_every_recorded_macos_file_has_a_notice(notices: tpn.Notices) -> None:
+    """The OCP part of the Mac bundle, as PyInstaller names it (D2873)."""
+    items = tpn.read_inventory(RECORDED_MAC)
+    assert len(items) == 79
+    assert "OCP/__dot__dylibs/libc++.1.0.dylib" in items
+    assert tpn.unmatched(items, notices, "macos") == []
+
+
+def test_every_mac_ocp_pattern_matches_a_recorded_file(notices: tpn.Notices) -> None:
+    """A macOS pattern for an OCP library that matches nothing in the bundle is stale."""
+    items = [i.lower() for i in tpn.read_inventory(RECORDED_MAC)]
+    for c in notices.components:
+        for pattern in c.files:
+            if "macos" in c.platforms and pattern.startswith("OCP/") and ".pyd" not in pattern:
+                assert fnmatch.filter(items, pattern.lower()), (c.id, pattern)
+
+
+def test_mac_patterns_use_the_folder_names_of_the_bundle(notices: tpn.Notices) -> None:
+    """PyInstaller writes a folder such as .dylibs in Contents/Frameworks as __dot__dylibs."""
+    for c in notices.components:
+        for pattern in c.files:
+            assert "/.dylibs/" not in pattern, (c.id, pattern)
 
 
 @pytest.mark.skipif(not DIST.exists(), reason="no build in dist/: run pyinstaller first")
@@ -94,28 +120,28 @@ def test_inventory_finds_mac_framework_libraries(tmp_path: Path) -> None:
 
 
 def test_mac_wheel_files_have_notices(notices: tpn.Notices) -> None:
-    """Names from the macOS arm64 wheels on PyPI; no Mac build was listed (D2862)."""
+    """Names from the macOS arm64 wheels on PyPI, as the bundle has them (D2862, D2873)."""
     names = [
         "OCP/OCP.cpython-313-darwin.so",
-        "OCP/.dylibs/libTKernel.8.0.1.dylib",
-        "OCP/.dylibs/libfreeimage.3.18.0.dylib",
-        "OCP/.dylibs/libraw.25.dylib",
-        "OCP/.dylibs/libjpegxr.1.1.dylib",
-        "OCP/.dylibs/libjxrglue.1.1.dylib",
-        "OCP/.dylibs/libfmt.12.2.0.dylib",
-        "OCP/.dylibs/libc++.1.0.dylib",
-        "OCP/.dylibs/libz.1.3.2.dylib",
-        "vtkmodules/.dylibs/libvtkCommonCore-9.6.dylib",
+        "OCP/__dot__dylibs/libTKernel.8.0.1.dylib",
+        "OCP/__dot__dylibs/libfreeimage.3.18.0.dylib",
+        "OCP/__dot__dylibs/libraw.25.dylib",
+        "OCP/__dot__dylibs/libjpegxr.1.1.dylib",
+        "OCP/__dot__dylibs/libjxrglue.1.1.dylib",
+        "OCP/__dot__dylibs/libfmt.12.2.0.dylib",
+        "OCP/__dot__dylibs/libc++.1.0.dylib",
+        "OCP/__dot__dylibs/libz.1.3.2.dylib",
+        "vtkmodules/__dot__dylibs/libvtkCommonCore-9.6.dylib",
         "PySide6/QtCore.abi3.so",
         "PySide6/libpyside6.abi3.6.12.dylib",
         "PySide6/Qt/lib/QtCore.framework/Versions/A/QtCore",
         "PySide6/Qt/plugins/platforms/libqcocoa.dylib",
         "shiboken6/Shiboken.abi3.so",
         "shiboken6/libshiboken6.abi3.6.12.dylib",
-        "numpy/.dylibs/libscipy_openblas64_.dylib",
-        "numpy/.dylibs/libquadmath.0.dylib",
+        "numpy/__dot__dylibs/libscipy_openblas64_.dylib",
+        "numpy/__dot__dylibs/libquadmath.0.dylib",
         "planegcs/_planegcs.cpython-313-darwin.so",
-        "python3.13/lib-dynload/_ssl.cpython-313-darwin.so",
+        "python3__dot__13/lib-dynload/_ssl.cpython-313-darwin.so",
         "FDCAD",
     ]
     assert tpn.unmatched(names, notices, "macos") == []

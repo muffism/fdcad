@@ -356,7 +356,7 @@ def test_rim_widths() -> None:
     assert look.RIM_WIDTH == 1.0
     assert look.rim_width(True) == look.SELECTED_WIDTH + 2.0 == 5.0
     assert look.rim_width(False) == look.PRESELECTED_WIDTH + 2.0 == 4.5
-    assert look.rim_width(True, 2.0) == 10.0
+    assert look.rim_width(True, 2.0) == 7.5  # 5 px times 1.5 (D2874)
     assert look.rim_width(False, 0.5) == 4.5  # never finer than at 100 percent
 
 
@@ -623,10 +623,10 @@ def test_wireframe_and_the_hidden_line_styles_share_their_lines(
     wire, seen = drawer.WireAspect().Aspect(), drawer.SeenLineAspect().Aspect()
     assert _same(wire.Color(), look.bare_line_colour(pal))
     assert _srgb(wire.Color()) == _srgb(seen.Color())
-    assert wire.Width() == seen.Width() == pytest.approx(2.0)
+    assert wire.Width() == seen.Width() == pytest.approx(look.edge_width(2.0))
     hidden = drawer.HiddenLineAspect().Aspect()
     assert _same(hidden.Color(), look.hidden_line_colour(pal))
-    assert hidden.Width() == pytest.approx(look.HIDDEN_WIDTH * 2.0)
+    assert hidden.Width() == pytest.approx(look.HIDDEN_WIDTH * look.line_scale(2.0))
 
 
 # P5 (D2824): line widths grow with the screen ---------------------------------------------
@@ -637,8 +637,8 @@ def test_line_width_numbers() -> None:
     assert look.LOST_PICK_WIDTH == look.PREVIEW_MARK_WIDTH == 2.0
     assert (look.CHOICE_WIDTH, look.ERROR_WIDTH, look.COMB_WIDTH) == (3.0, 4.0, 1.0)
     assert look.line_width(2.0, 1.0) == 2.0
-    assert look.line_width(2.0, 1.5) == 3.0
-    assert look.line_width(3.0, 2.0) == 6.0
+    assert look.line_width(2.0, 1.5) == 2.25  # 2 px times 1.125 (D2874)
+    assert look.line_width(3.0, 2.0) == 4.5
     assert look.line_width(2.0, 0.75) == 2.0  # never finer than at 100 percent
     # A sketch is twice as heavy as an edge on every screen.
     for scale in (1.0, 1.25, 1.5, 2.0, 3.0):
@@ -655,25 +655,25 @@ def test_sketches_curves_and_marks_grow_with_the_screen(view: Any, scale: float)
     line = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(10, 0, 0)).Edge()
     edges = _shapes(box, TopAbs_EDGE)
     view.show_sketches([line])
-    assert view._sketches[0].Width() == pytest.approx(2.0 * scale)
+    assert view._sketches[0].Width() == pytest.approx(2.0 * look.line_scale(scale))
     view.show_references([line])
-    assert view._reference_items[0].Width() == pytest.approx(2.0 * scale)
+    assert view._reference_items[0].Width() == pytest.approx(2.0 * look.line_scale(scale))
     view.show_combs([line])
-    assert view._comb_items[0].Width() == pytest.approx(1.0 * scale)
+    assert view._comb_items[0].Width() == pytest.approx(1.0 * look.line_scale(scale))
     view.show_lost(edges[0])
-    assert view._ghost.Width() == pytest.approx(2.0 * scale)
+    assert view._ghost.Width() == pytest.approx(2.0 * look.line_scale(scale))
     view.show_preview_marks(edges[1:2])
-    assert view._preview_marks.Width() == pytest.approx(2.0 * scale)
+    assert view._preview_marks.Width() == pytest.approx(2.0 * look.line_scale(scale))
     view.preview_shapes(edges[2:3])
-    assert view._marked.Width() == pytest.approx(3.0 * scale)
+    assert view._marked.Width() == pytest.approx(3.0 * look.line_scale(scale))
     view.highlight(edges[3:4])
-    assert view._highlight.Width() == pytest.approx(4.0 * scale)
+    assert view._highlight.Width() == pytest.approx(4.0 * look.line_scale(scale))
     view.show_axis_choices({"a": line})
-    assert view._axes["a"][1].Width() == pytest.approx(3.0 * scale)
+    assert view._axes["a"][1].Width() == pytest.approx(3.0 * look.line_scale(scale))
     overlay.show_layer(view, "test", [line], "#C0392B")
-    assert view.print_layer_items["test"][0].Width() == pytest.approx(2.0 * scale)
+    assert view.print_layer_items["test"][0].Width() == pytest.approx(2.0 * look.line_scale(scale))
     overlay.show_layer(view, "test", [line], "#C0392B", width=3.0)
-    assert view.print_layer_items["test"][0].Width() == pytest.approx(3.0 * scale)
+    assert view.print_layer_items["test"][0].Width() == pytest.approx(3.0 * look.line_scale(scale))
 
 
 def test_no_fixed_line_width_is_left_in_the_view() -> None:

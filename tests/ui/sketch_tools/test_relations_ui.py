@@ -240,3 +240,26 @@ def test_midpoint_on_an_arc_from_the_panel(qtbot: QtBot, canvas: SketchCanvas) -
     panel.relation_buttons["midpoint"].click()
     s = canvas.edit.sketch.xy(pid)
     assert s == pytest.approx((10 / math.sqrt(2), 10 / math.sqrt(2)), abs=1e-6)
+
+
+def test_the_relation_rows_are_made_by_the_list_not_by_python(
+    qtbot: QtBot, canvas: SketchCanvas
+) -> None:
+    """IDEAS 85: on the Mac runner the sweep crashed in ``existing.clear()``, in the
+    destructor PySide gives an item made in Python. The list makes its own rows."""
+    import shiboken6
+
+    panel = SketchPanel(canvas)
+    qtbot.addWidget(panel)
+    sk = canvas.edit.sketch
+    lid = sk.add_line(0, 0, 20, 3)
+    sk.relate("horizontal", lid)
+    canvas.changed()
+    canvas.selection = [lid]
+    canvas.selection_changed.emit()
+    rows = [panel.existing.item(i) for i in range(panel.existing.count())]
+    assert rows
+    assert not any(shiboken6.createdByPython(row) for row in rows)
+    assert [row.data(256) for row in rows] == sorted(panel.delete_buttons)
+    canvas.selection_changed.emit()  # filled again: the old rows go without a crash
+    assert panel.existing.count() == len(rows)

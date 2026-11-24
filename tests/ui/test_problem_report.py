@@ -5,7 +5,7 @@ from __future__ import annotations
 import functools
 import getpass
 import re
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 import pytest
@@ -128,6 +128,27 @@ def test_user_names_come_from_the_login_and_the_environment(
     names = user_names(FAKE_HOME)
     assert set(names) == {FAKE_USER, "Jane", "Jane Q Doe"}
     assert names[0] == "Jane Q Doe"  # longest first, so it is replaced whole
+
+
+def test_a_windows_home_is_split_on_a_mac_too(monkeypatch: pytest.MonkeyPatch) -> None:
+    """On macOS and Linux a path does not split on a backslash (D2871)."""
+    monkeypatch.setattr(privacy, "PurePath", PurePosixPath, raising=False)
+    monkeypatch.setattr(privacy.getpass, "getuser", lambda: FAKE_USER)
+    monkeypatch.setattr(privacy, "short_path", lambda p: "C:\\Users\\JANEQD~1" if p else "")
+    for key in ("USERNAME", "USER", "LOGNAME"):
+        monkeypatch.delenv(key, raising=False)
+    assert set(user_names(FAKE_HOME)) == {FAKE_USER, "Jane Q Doe", "JANEQD~1"}
+    assert set(user_names("/Users/jane/")) == {FAKE_USER, "jane", "JANEQD~1"}
+    monkeypatch.setattr(privacy, "short_path", lambda _p: "")
+    assert home_spellings("C:\\") == home_spellings("/") == []
+
+
+def test_last_part_splits_on_both_slashes() -> None:
+    assert privacy.last_part("C:\\Users\\Jane Q Doe") == "Jane Q Doe"
+    assert privacy.last_part("C:/Users/jane/") == "jane"
+    assert privacy.last_part("/Users/jane") == "jane"
+    assert privacy.last_part("C:\\Users\\JANEQD~1\\") == "JANEQD~1"
+    assert privacy.last_part("C:\\") == privacy.last_part("/") == privacy.last_part("C:") == ""
 
 
 def test_a_unix_home_and_a_root_home(monkeypatch: pytest.MonkeyPatch) -> None:

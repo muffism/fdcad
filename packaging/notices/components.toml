@@ -13,7 +13,10 @@
 #
 # Windows facts were read from the folder build of 2026-11-20 (recorded in
 # inventory-windows.txt). macOS facts were read from the macOS arm64 wheels on PyPI;
-# no Mac build was listed (D2862).
+# no full Mac build was listed (D2862). inventory-macos.txt records the OCP part of
+# the app bundle (D2873). In FDCAD.app, PyInstaller writes each folder with a dot in
+# its name under Contents/Frameworks with __dot__ in place of the dot, so the wheel
+# folder OCP/.dylibs is OCP/__dot__dylibs. The patterns use the bundle names.
 
 [offer]
 fdcad_source = """FDCAD's source code, with the build files used to make the installers \
@@ -44,7 +47,8 @@ a file with your build of the same version and the same programming interface, k
 file name (the names with a code after the dash were given by the wheel tool `delvewheel`, \
 and the other libraries look for exactly those names).
 2. macOS: the same files are inside `FDCAD.app/Contents/Frameworks` (Qt in `PySide6/Qt/lib`, \
-Open CASCADE, FreeImage and LibRaw in `OCP/.dylibs`). After replacing a file, sign the app \
+Open CASCADE, FreeImage and LibRaw in `OCP/__dot__dylibs`, which PyInstaller names so in \
+place of the wheel's `OCP/.dylibs`). After replacing a file, sign the app \
 again with `codesign --force --deep --sign - FDCAD.app`, or macOS will not start it.
 3. The portable one file `FDCAD-portable.exe` unpacks itself to a temporary folder at every \
 start, so its libraries cannot be swapped in place. Use the installer or the folder zip, or \
@@ -91,7 +95,7 @@ copyright = [
 texts = ["python/LICENSE-windows.txt", "python/LICENSE.txt", "python/license.rst.txt"]
 files = [
     "python3*.dll", "_*.pyd", "pyexpat.pyd", "select.pyd", "unicodedata.pyd", "base_library.zip",
-    "python3.13/lib-dynload/*", "lib-dynload/*", "libpython3*.dylib", "Python",
+    "python3__dot__13/lib-dynload/*", "lib-dynload/*", "libpython3*.dylib", "Python",
 ]
 homepage = "https://www.python.org"
 source = [
@@ -300,7 +304,7 @@ copyright = [
     "and the other copyright holders named in the OCCT source files",
 ]
 texts = ["occt/LICENSE_LGPL_21.txt", "occt/OCCT_LGPL_EXCEPTION.txt"]
-files = ["cadquery_ocp.libs/TK*", "OCP/.dylibs/libTK*", "*/libTK*.dylib"]
+files = ["cadquery_ocp.libs/TK*", "OCP/__dot__dylibs/libTK*", "*/libTK*.dylib"]
 part_of = "ocp"
 homepage = "https://dev.opencascade.org"
 source = [
@@ -330,7 +334,7 @@ copyright = [
     "FreeImage, design and implementation by Floris van den Berg and Hervé Drolon, with the contributors named in the FreeImage source (the source states no copyright year)",
 ]
 texts = ["GPL-3.0.txt", "freeimage/license-gplv2.txt", "freeimage/license-fi.txt"]
-files = ["cadquery_ocp.libs/FreeImage-*", "OCP/.dylibs/libfreeimage*"]
+files = ["cadquery_ocp.libs/FreeImage-*", "OCP/__dot__dylibs/libfreeimage*"]
 part_of = "ocp"
 homepage = "https://freeimage.sourceforge.io"
 source = [
@@ -356,7 +360,7 @@ license = "LGPL-2.1-only"
 choice = "LibRaw is offered under the LGPL 2.1 or the CDDL 1.0. FDCAD uses it under the LGPL 2.1, which is compatible with the GPL; the CDDL is not."
 copyright = ["Copyright (C) 2008-2025 LibRaw LLC (http://www.libraw.org, info@libraw.org)"]
 texts = ["libraw/COPYRIGHT.txt", "libraw/LICENSE.LGPL.txt", "libraw/LICENSE.CDDL.txt"]
-files = ["cadquery_ocp.libs/raw-*", "OCP/.dylibs/libraw*"]
+files = ["cadquery_ocp.libs/raw-*", "OCP/__dot__dylibs/libraw*"]
 part_of = "ocp"
 homepage = "https://www.libraw.org"
 source = [
@@ -375,7 +379,7 @@ license = "FTL"
 choice = "FreeType is offered under the FreeType License or the GPL 2. FDCAD uses it under the FreeType License."
 copyright = ["The FreeType Project is copyright (C) 1996-2000 by David Turner, Robert Wilhelm, and Werner Lemberg. All rights reserved except as specified in the FreeType License."]
 texts = ["freetype/LICENSE.TXT.txt", "freetype/FTL.TXT.txt"]
-files = ["cadquery_ocp.libs/freetype-*", "OCP/.dylibs/libfreetype*"]
+files = ["cadquery_ocp.libs/freetype-*", "OCP/__dot__dylibs/libfreetype*"]
 part_of = "ocp"
 homepage = "https://freetype.org"
 source = ["https://download.savannah.gnu.org/releases/freetype/freetype-2.12.1.tar.xz"]
@@ -394,7 +398,7 @@ copyright = [
     "and the other authors named in LICENSE.md",
 ]
 texts = ["libjpeg-turbo/LICENSE.md.txt", "libjpeg-turbo/README.ijg.txt"]
-files = ["cadquery_ocp.libs/jpeg8-*", "OCP/.dylibs/libjpeg*"]
+files = ["cadquery_ocp.libs/jpeg8-*", "OCP/__dot__dylibs/libjpeg*"]
 part_of = "ocp"
 homepage = "https://libjpeg-turbo.org"
 source = ["https://github.com/libjpeg-turbo/libjpeg-turbo/releases/tag/3.2.0"]
@@ -410,7 +414,7 @@ copyright = ["Copyright (c) Contributors to the OpenEXR Project. All rights rese
 texts = ["openexr/LICENSE.md.txt"]
 files = [
     "cadquery_ocp.libs/OpenEXR-*", "cadquery_ocp.libs/OpenEXRCore-*", "cadquery_ocp.libs/Iex-*",
-    "cadquery_ocp.libs/IlmThread-*", "OCP/.dylibs/libOpenEXR*", "OCP/.dylibs/libIex*", "OCP/.dylibs/libIlmThread*",
+    "cadquery_ocp.libs/IlmThread-*", "OCP/__dot__dylibs/libOpenEXR*", "OCP/__dot__dylibs/libIex*", "OCP/__dot__dylibs/libIlmThread*",
 ]
 part_of = "ocp"
 homepage = "https://openexr.com"
@@ -424,7 +428,7 @@ version_note = "the version conda-forge OpenEXR 3.4.15 needs; the macOS file nam
 license = "BSD-3-Clause"
 copyright = ["Copyright Contributors to the OpenEXR Project. All rights reserved."]
 texts = ["imath/LICENSE.md.txt"]
-files = ["cadquery_ocp.libs/Imath-*", "OCP/.dylibs/libImath*"]
+files = ["cadquery_ocp.libs/Imath-*", "OCP/__dot__dylibs/libImath*"]
 part_of = "ocp"
 source = ["https://github.com/AcademySoftwareFoundation/Imath/releases/tag/v3.2.2"]
 
@@ -436,7 +440,7 @@ version_note = "inferred: the file states no version; 4.2.0 is the version the c
 license = "Apache-2.0"
 copyright = ["Copyright 2015-2026 Esri"]
 texts = ["lerc/LICENSE.txt", "lerc/NOTICE.txt"]
-files = ["cadquery_ocp.libs/Lerc-*", "OCP/.dylibs/libLerc*"]
+files = ["cadquery_ocp.libs/Lerc-*", "OCP/__dot__dylibs/libLerc*"]
 part_of = "ocp"
 source = ["https://github.com/Esri/lerc/releases/tag/v4.2.0"]
 
@@ -448,7 +452,7 @@ version_note = "inferred: the file states no version; both conda-forge OpenEXR 3
 license = "MIT"
 copyright = ["Copyright 2016 Eric Biggers", "Copyright 2024 Google LLC"]
 texts = ["libdeflate/COPYING.txt"]
-files = ["cadquery_ocp.libs/deflate-*", "OCP/.dylibs/libdeflate*"]
+files = ["cadquery_ocp.libs/deflate-*", "OCP/__dot__dylibs/libdeflate*"]
 part_of = "ocp"
 source = ["https://github.com/ebiggers/libdeflate/releases/tag/v1.25"]
 
@@ -460,7 +464,7 @@ version_note = "DLL version resource and cmsGetEncodedCMMversion"
 license = "MIT"
 copyright = ["Copyright (c) 2023 Marti Maria Saguer"]
 texts = ["lcms2/LICENSE.txt"]
-files = ["cadquery_ocp.libs/lcms2-*", "OCP/.dylibs/liblcms2*"]
+files = ["cadquery_ocp.libs/lcms2-*", "OCP/__dot__dylibs/liblcms2*"]
 part_of = "ocp"
 source = ["https://github.com/mm2/Little-CMS/releases/tag/lcms2.19.1"]
 
@@ -472,7 +476,7 @@ version_note = "DLL version resource"
 license = "0BSD"
 copyright = ["The XZ Utils authors and contributors"]
 texts = ["xz/COPYING.txt", "xz/COPYING.0BSD.txt"]
-files = ["cadquery_ocp.libs/liblzma-*", "OCP/.dylibs/liblzma*"]
+files = ["cadquery_ocp.libs/liblzma-*", "OCP/__dot__dylibs/liblzma*"]
 part_of = "ocp"
 source = ["https://github.com/tukaani-project/xz/releases/tag/v5.8.3"]
 
@@ -490,7 +494,7 @@ copyright = [
     "Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.",
 ]
 texts = ["libpng/LICENSE.txt"]
-files = ["cadquery_ocp.libs/libpng16-*", "OCP/.dylibs/libpng*"]
+files = ["cadquery_ocp.libs/libpng16-*", "OCP/__dot__dylibs/libpng*"]
 part_of = "ocp"
 source = ["https://github.com/pnggroup/libpng/releases/tag/v1.6.59"]
 
@@ -504,7 +508,7 @@ copyright = ["Copyright (c) 2010, Google Inc. All rights reserved."]
 texts = ["libwebp/COPYING.txt", "libwebp/PATENTS.txt"]
 files = [
     "cadquery_ocp.libs/libwebp-*", "cadquery_ocp.libs/libwebpmux-*", "cadquery_ocp.libs/libsharpyuv-*",
-    "OCP/.dylibs/libwebp*", "OCP/.dylibs/libsharpyuv*",
+    "OCP/__dot__dylibs/libwebp*", "OCP/__dot__dylibs/libsharpyuv*",
 ]
 part_of = "ocp"
 source = ["https://github.com/webmproject/libwebp/releases/tag/v1.6.0"]
@@ -521,7 +525,7 @@ copyright = [
     "and the other authors named in LICENSE",
 ]
 texts = ["openjpeg/LICENSE.txt"]
-files = ["cadquery_ocp.libs/openjp2-*", "OCP/.dylibs/libopenjp2*"]
+files = ["cadquery_ocp.libs/openjp2-*", "OCP/__dot__dylibs/libopenjp2*"]
 part_of = "ocp"
 source = ["https://github.com/uclouvain/openjpeg/releases/tag/v2.5.4"]
 
@@ -537,7 +541,7 @@ copyright = [
     "Copyright (c) 2019, The University of New South Wales, Sydney, Australia",
 ]
 texts = ["openjph/LICENSE.txt"]
-files = ["cadquery_ocp.libs/openjph-*", "OCP/.dylibs/libopenjph*"]
+files = ["cadquery_ocp.libs/openjph-*", "OCP/__dot__dylibs/libopenjph*"]
 part_of = "ocp"
 source = ["https://github.com/aous72/OpenJPH/releases/tag/0.31.0"]
 
@@ -549,7 +553,7 @@ version_note = "DLL version resource"
 license = "libtiff"
 copyright = ["Copyright (c) 1988-1997 Sam Leffler", "Copyright (c) 1991-1997 Silicon Graphics, Inc."]
 texts = ["libtiff/LICENSE.md.txt"]
-files = ["cadquery_ocp.libs/tiff-*", "OCP/.dylibs/libtiff*"]
+files = ["cadquery_ocp.libs/tiff-*", "OCP/__dot__dylibs/libtiff*"]
 part_of = "ocp"
 source = ["https://download.osgeo.org/libtiff/tiff-4.7.2.tar.xz"]
 
@@ -561,7 +565,7 @@ version_note = "DLL version resource"
 license = "Zlib"
 copyright = ["(C) 1995-2026 Jean-loup Gailly and Mark Adler"]
 texts = ["zlib/LICENSE.txt"]
-files = ["cadquery_ocp.libs/zlib-*", "OCP/.dylibs/libz.*"]
+files = ["cadquery_ocp.libs/zlib-*", "OCP/__dot__dylibs/libz.*"]
 part_of = "ocp"
 source = ["https://github.com/madler/zlib/releases/tag/v1.3.2"]
 
@@ -574,7 +578,7 @@ license = "BSD-3-Clause"
 choice = "Zstandard is offered under the BSD licence or the GPL 2. FDCAD uses it under the BSD licence."
 copyright = ["Copyright (c) Meta Platforms, Inc. and affiliates. All rights reserved."]
 texts = ["zstd/LICENSE.txt"]
-files = ["cadquery_ocp.libs/zstd-*", "OCP/.dylibs/libzstd*"]
+files = ["cadquery_ocp.libs/zstd-*", "OCP/__dot__dylibs/libzstd*"]
 part_of = "ocp"
 source = ["https://github.com/facebook/zstd/releases/tag/v1.5.7"]
 
@@ -609,7 +613,7 @@ version_note = "macOS file name"
 license = "BSD-2-Clause"
 copyright = ["Copyright (c) 2013 Microsoft Corp. All rights reserved."]
 texts = ["jxrlib/LICENSE.txt"]
-files = ["OCP/.dylibs/libjpegxr*", "OCP/.dylibs/libjxrglue*"]
+files = ["OCP/__dot__dylibs/libjpegxr*", "OCP/__dot__dylibs/libjxrglue*"]
 platforms = ["macos"]
 part_of = "ocp"
 source = ["http://http.debian.net/debian/pool/main/j/jxrlib/jxrlib_1.1.orig.tar.gz"]
@@ -622,7 +626,7 @@ version_note = "macOS file name"
 license = "MIT"
 copyright = ["Copyright (c) 2012 - present, Victor Zverovich and {fmt} contributors"]
 texts = ["fmt/LICENSE.txt"]
-files = ["OCP/.dylibs/libfmt*"]
+files = ["OCP/__dot__dylibs/libfmt*"]
 platforms = ["macos"]
 part_of = "ocp"
 source = ["https://github.com/fmtlib/fmt/releases/tag/12.2.0"]
@@ -635,7 +639,7 @@ version_note = "inferred: the conda-forge libcxx of the wheel build; the file na
 license = "Apache-2.0 WITH LLVM-exception"
 copyright = ["Copyright (c) the LLVM Project contributors"]
 texts = ["llvm/libcxx-LICENSE.TXT.txt"]
-files = ["OCP/.dylibs/libc++*"]
+files = ["OCP/__dot__dylibs/libc++*"]
 platforms = ["macos"]
 part_of = "ocp"
 source = ["https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.2"]
@@ -649,7 +653,7 @@ version = "9.6.2"
 license = "BSD-3-Clause"
 copyright = ["Copyright (c) 1993-2015 Ken Martin, Will Schroeder, Bill Lorensen. All rights reserved."]
 texts = ["vtk/Copyright.txt"]
-files = ["vtk.libs/vtk*", "vtkmodules/.dylibs/libvtk*", "*/libvtk*.dylib"]
+files = ["vtk.libs/vtk*", "vtkmodules/__dot__dylibs/libvtk*", "*/libvtk*.dylib"]
 homepage = "https://vtk.org"
 source = ["https://gitlab.kitware.com/vtk/vtk/-/tree/v9.6.2"]
 modified = "No. The files are those of the PyPI wheel vtk 9.6.2."
@@ -983,7 +987,7 @@ version_note = "openblas_get_config: OpenBLAS 0.3.34.106.0"
 license = "BSD-3-Clause AND BSD-3-Clause-Open-MPI"
 copyright = ["Copyright (c) 2011-2014, The OpenBLAS Project", "Copyright (c) 1992-2013 The University of Tennessee and The University of Tennessee Research Foundation, and others (LAPACK)"]
 texts = ["numpy/LICENSE-windows.txt"]
-files = ["numpy.libs/libscipy_openblas*", "numpy/.dylibs/libscipy_openblas*"]
+files = ["numpy.libs/libscipy_openblas*", "numpy/__dot__dylibs/libscipy_openblas*"]
 part_of = "numpy"
 source = ["https://github.com/OpenMathLib/OpenBLAS/releases/tag/v0.3.34", "Build: https://github.com/MacPython/openblas-libs"]
 
@@ -995,7 +999,7 @@ version_note = "the GCC used by the scipy-openblas build (gcc-10.3.0 is named in
 license = "GPL-3.0-or-later WITH GCC-exception-3.1"
 copyright = ["Copyright (C) the Free Software Foundation, Inc."]
 texts = ["numpy/LICENSE-windows.txt"]
-files = ["numpy.libs/libscipy_openblas*", "numpy/.dylibs/libgfortran*", "numpy/.dylibs/libgcc*"]
+files = ["numpy.libs/libscipy_openblas*", "numpy/__dot__dylibs/libgfortran*", "numpy/__dot__dylibs/libgcc*"]
 part_of = "numpy"
 source = ["https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=libgfortran"]
 notes = "On Windows they are linked into the OpenBLAS DLL. The GCC Runtime Library Exception lets them ship with programs under any licence."
@@ -1008,7 +1012,7 @@ version_note = "the GCC used by the scipy-openblas macOS build; FDCAD has not li
 license = "LGPL-2.1-or-later"
 copyright = ["Copyright (C) the Free Software Foundation, Inc."]
 texts = ["numpy/LICENSE-macos.txt", "LGPL-2.1.txt"]
-files = ["numpy/.dylibs/libquadmath*"]
+files = ["numpy/__dot__dylibs/libquadmath*"]
 platforms = ["macos"]
 part_of = "numpy"
 source = ["https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=libquadmath (the GCC version is not recorded; see the numpy 2.5.4 macOS wheel and https://github.com/MacPython/openblas-libs)"]

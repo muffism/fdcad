@@ -14,7 +14,7 @@ import os
 import re
 import sys
 from collections.abc import Iterable
-from pathlib import Path, PurePath
+from pathlib import Path
 
 HOME = "<home>"
 USER = "<user>"
@@ -37,9 +37,16 @@ def short_path(path: str) -> str:
     return buffer.value
 
 
+def last_part(path: str) -> str:
+    """The last folder or file name of ``path``, split on ``\\`` and ``/`` on every
+    platform, so a Windows path seen on a Mac splits too. A root gives ""."""
+    name = re.split(r"[\\/]", path.rstrip("\\/"))[-1]
+    return "" if name.endswith(":") else name
+
+
 def _forms(path: str) -> set[str]:
     path = path.rstrip("\\/")
-    if len(path) < 4 or not PurePath(path).name:
+    if len(path) < 4 or not last_part(path):
         return set()  # a root such as "/" or "C:\" is not a home folder
     return {
         path,
@@ -70,10 +77,10 @@ def user_names(home: str | None = None) -> list[str]:
         names.append(getpass.getuser())
     names += [os.environ.get(key, "") for key in ("USERNAME", "USER", "LOGNAME")]
     place = home if home is not None else str(Path.home())
-    names.append(PurePath(place.rstrip("\\/")).name)
+    names.append(last_part(place))
     short = short_path(place)
     if short:
-        names.append(PurePath(short.rstrip("\\/")).name)
+        names.append(last_part(short))
     out: list[str] = []
     for name in (n.strip() for n in names):
         if len(name) >= 2 and name.casefold() not in {o.casefold() for o in out}:
