@@ -413,6 +413,11 @@ FIX_ERRORS = "Fix the highlighted values, then press OK."
 FEATURE_UNDONE = (
     "{name} is no longer in the part because of Undo. Press Cancel, then use Redo to get it back."
 )
+#: OK on a feature that then failed to build (D2876).
+OK_NOT_APPLIED = (
+    "{name} was not applied because it failed: {error} Change a value and press OK again, "
+    "or press Cancel."
+)
 CHOOSE_SKETCH = "Choose a sketch."
 CHOOSE_AXIS = (
     "Pick the axis of revolution: a line or centerline in the sketch, "

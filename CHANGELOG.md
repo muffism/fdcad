@@ -719,6 +719,7 @@ All notable changes to FDCAD are listed here. Versions follow semantic versionin
 
 ### Changed
 
+- OK on a feature that fails to build, such as a fillet that is too large, no longer finishes the command. The feature is not applied, and the panel opens again with your values and the error, so you can change a value or press Cancel (D2876).
 - The six proposals of the 3D view review are closed (D2820 to D2826), with before and after pictures in `docs/screenshots/view_proposals_2026-11-20/`.
 - Thin lines in the 3D view are drawn more evenly at 100 and 125 percent on graphics cards with memory of their own: eight smoothing samples in place of four, where that costs a view no more than a sixteenth of the card's memory. Built in graphics, the Mac, and screens at 150 percent and up, keep four (D2820).
 - A selected face or edge, and the one under the cursor, has a thin line beside its outline, white in the light themes and black in the dark ones, so a highlight reads on a part of any colour. On a red or orange part the selection was hard to see (D2821).

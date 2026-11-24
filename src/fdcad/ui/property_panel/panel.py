@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import copy
 import math
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
 from PySide6.QtCore import QEvent, QObject, QSize, Qt, QTimer, Signal
@@ -244,8 +245,23 @@ class _Message(QLabel):
         self.hide()
 
 
+@dataclass
+class OkApplied:
+    """What OK applied: the part, the feature as applied, whether it was new, and the
+    undo stack's index before and after its command (D2876)."""
+
+    session: DocumentSession
+    feature: Feature
+    is_new: bool
+    before: int
+    after: int
+
+
 class PropertyPanel(QWidget):
     """Edits one feature at a time."""
+
+    #: The last feature OK applied, until the window has checked its build (D2876).
+    last_ok: OkApplied | None = None
 
     finished = Signal()
     #: The panel's help button: open the guide at this tool (TR291 item 1, D2018).
@@ -1593,6 +1609,7 @@ class PropertyPanel(QWidget):
         many = pattern_instances(feature)
         if many > LARGE_PATTERN and not self.confirm_large_pattern(feature.name, many):
             return  # TR142 (D962): the panel stays open to change the count
+        before = session.undo.index()
         if self.is_new:
             import contextlib
 
@@ -1609,6 +1626,11 @@ class PropertyPanel(QWidget):
             fields = {**self.values, **getattr(self.form, "fields", {})}
             push_edit(session, feature, fields)  # configuration scopes (P4.10)
         self.accepted = True
+        # What OK applied, so a feature that then fails to build can come back to the
+        # panel with its values (D2876).
+        self.last_ok = OkApplied(
+            session, copy.deepcopy(feature), self.is_new, before, session.undo.index()
+        )
         applied = (feature.id, self.is_new)
         self._close()
         self.applied.emit(*applied)  # TR221: recently edited, name a new one
